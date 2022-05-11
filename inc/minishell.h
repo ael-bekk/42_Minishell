@@ -43,4 +43,9 @@ void sig_hnd(int sig);
 void split_f(char **s, char no_splt);
 char **split(char *l, char no_splt);
 
+
+
+chat *separ_line(char *s);
+
+char **split(char *l, char no_splt);
 #endif
