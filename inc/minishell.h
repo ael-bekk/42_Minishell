@@ -8,6 +8,7 @@
 #include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "../libft/libft.h"
 
 # define BLACK "\033[0;30m"
 # define RED "\033[0;31m"
@@ -39,13 +40,12 @@ typedef struct s_cmd
     struct s_cmd    *next;
 }   t_cmd;
 
+
 void sig_hnd(int sig);
 void split_f(char **s, char no_splt);
 char **split(char *l, char no_splt);
 
 
-
 char *separ_line(char *s);
 
-char **split(char *l, char no_splt);
 #endif

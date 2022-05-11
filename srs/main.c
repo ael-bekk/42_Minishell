@@ -20,9 +20,7 @@ int main()
             exit(0);
         }
         add_history(inp);
-        char **s = split(inp, '|');
-        for(int i = 0; s[i]; i++)
-            printf("%s\n", s[i]);
+        parsing(inp);
     }
     return (0);
 }
