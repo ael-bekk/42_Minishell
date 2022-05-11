@@ -41,10 +41,10 @@ typedef struct s_cmd
 }   t_cmd;
 
 
-void sig_hnd(int sig);
-void split_f(char **s, char no_splt);
-char **split(char *l, char no_splt);
-
+void    sig_hnd(int sig);
+void    split_f(char **s, char no_splt);
+char    **split(char *l, char no_splt);
+void    parsing(char *line);
 
 char *separ_line(char *s);
 
