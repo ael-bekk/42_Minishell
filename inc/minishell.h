@@ -45,7 +45,7 @@ char **split(char *l, char no_splt);
 
 
 
-chat *separ_line(char *s);
+char *separ_line(char *s);
 
 char **split(char *l, char no_splt);
 #endif
