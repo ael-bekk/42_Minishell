@@ -52,8 +52,10 @@ char *separ_line(char *s)
 		else 
 		{
 			type = (s[i] == '\'') + 2 * (s[i] == '\"');
-				while (type && s[i] && ((s[i] == '\'' && type != 1) || (s[i] == '\"' && type != 2)))
-					str[j++] = s[i++];
+			if (type)
+				str[j++] = s[i++];
+			while (type && s[i] && ((type == 1 && s[i] != '\'') || (type == 2 && s[i] != '\"')))
+				str[j++] = s[i++];
 			str[j++] = s[i++];
 		}
 	}
