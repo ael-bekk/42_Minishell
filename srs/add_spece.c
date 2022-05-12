@@ -19,9 +19,9 @@ static	int	count_symbole(char *str)
 	i = -1;
 	a = 0;
 	while(str[++i])
-		if (str[i] == '>' || str[i] == '>')
+		if (str[i] == '>' || str[i] == '<')
 			a++;
-	return (a);
+	return (a * 2);
 }
 
 char *separ_line(char *s)
@@ -48,7 +48,7 @@ char *separ_line(char *s)
 			str[j++] = s[i++];
 			str[j++] = ' ';
 		}
-		else
+		else if(s[i] == '\'' || )
 			str[j++] = s[i++];
 	}
 	str[j] = '\0';

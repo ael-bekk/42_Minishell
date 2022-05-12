@@ -33,9 +33,8 @@
 typedef struct s_cmd
 {
     char            *here_doc;
-    char            *in_file;
-    char            **out_files;
-    int             *out_type;
+    char            **rid;
+    int             *type;
     char            **cmd;
     struct s_cmd    *next;
 }   t_cmd;
@@ -44,8 +43,12 @@ typedef struct s_cmd
 void    sig_hnd(int sig);
 void    split_f(char **s, char no_splt);
 char    **split(char *l, char no_splt);
-void    parsing(char *line);
+t_cmd    *parsing(char *line);
+t_cmd   *creat_node(void);
+t_cmd   *ft_nodelast(t_cmd *head);
+void    add_back_node(t_cmd **head, t_cmd *new);
+char    *separ_line(char *s);
 
-char *separ_line(char *s);
+
 
 #endif

@@ -14,10 +14,19 @@ t_cmd   *creat_node(void)
     return (node);
 }
 
+t_cmd	*ft_nodelast(t_cmd *head)
+{
+	if (!head)
+		return (head);
+	if (!head->next)
+		return (head);
+	return (ft_nodelast(head->next));
+}
+
 void    add_back_node(t_cmd **head, t_cmd *new)
 {
     if (!*head)
 		*head = new;
 	else
-		ft_lstlast(*head)->next = new;
+		ft_nodelast(*head)->next = new;
 }
