@@ -34,8 +34,8 @@ typedef struct s_cmd
 {
     char            **here_doc;
     char            **rid; // < > >> whith type 1 2 3 
-    int             *type;
-    char            **cmd;
+    int             *type; // (1 : <) , (2 : >) , (3 : >>) 
+    char            **cmd; // cmd , flags, args
     struct s_cmd    *next;
 }   t_cmd;
 
@@ -43,19 +43,21 @@ typedef struct s_cmd
 void    sig_hnd(int sig);
 void    split_f(char **s, char no_splt);
 char    **split(char *l, char no_splt);
-t_cmd    *parsing(char *line);
+t_cmd   *parsing(char *line, int *exit_code);
 t_cmd   *creat_node(void);
 t_cmd   *ft_nodelast(t_cmd *head);
 void    add_back_node(t_cmd **head, t_cmd *new);
 char    *separ_line(char *s);
-int    pars_error(char **s);
+int     pars_error(char **s);
 void    ft_free(char **s);
 void    ft_free_list(t_cmd **head);
-int aloccate_data(t_cmd *new, char **s);
+int     aloccate_data(t_cmd *new, char **s);
 void    insertData(t_cmd *new, char **s);
+char    *expand(char *l, char **env, int exit_code);
+char    *expand(char *l, char **env, int exit_code);
 
-
-char *handel_quote(void);
+char    *handel_quote(char *line);
+char    *delete_quote(char *str);
 
 ///functions for get_next_line/////
 char	*get_next_line(int fd);

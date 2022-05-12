@@ -30,7 +30,7 @@ static	int check_quote(char *str)
 	}
 	return (a);
 }
-static	char *delete_quote(char *str)
+char *delete_quote(char *str)
 {
 	int i;
 	int j;
@@ -43,7 +43,7 @@ static	char *delete_quote(char *str)
 	c = 0;
 	a = 0;
 	line = malloc(ft_strlen(str) + 1);
-	while (str[i])
+	while (str && str[i])
 	{
 		if ((c == 0 || c == str[i]) && (str[i] == '\'' || str[i] == '\"'))
 		{
@@ -65,25 +65,30 @@ static	char *delete_quote(char *str)
 
 }
 
-char *handel_quote(void)
+int print_quote(char *line)
+{
+	
+	if (check_quote(line) == 1)
+		ft_putstr_fd("\033[0;32mdquote> \033[0;37m", 1);
+	else if (check_quote(line) == 2)
+		ft_putstr_fd("\033[0;32mquote> \033[0;37m", 1);
+	else
+		return (0);
+	return (1);
+}
+
+char *handel_quote(char *line)
 {
 	char *str;
 	int a = 1;
-	char *line;
-	int check;
 
-	check = 0;
+	a = print_quote(line);
 	while (a)
 	{
 		str = get_next_line(0);
 		line = ft_strjoin_freed(line, str, 0);
-		if (check_quote(line) == 1)
-			write(1,"dquote> ",ft_strlen("dquote> "));
-		else if (check_quote(line) == 2)
-			write(1,"quote> ",ft_strlen("quote> "));
-		else
-			a = 0;
+		a = print_quote(line);
 	}
-	line = delete_quote(line);
+	//line = delete_quote(line);
 	return (line);
 }

@@ -15,7 +15,7 @@ int    pars(t_cmd **cmd, char **splt)
     return (0);
 }
 
-t_cmd    *parsing(char *line)
+t_cmd    *parsing(char *line, int *exit_code)
 {
     char    **s;
     char    *tmp;
@@ -31,6 +31,7 @@ t_cmd    *parsing(char *line)
         if (pars(&cmd, split(s[i], ' ')))
         {
             ft_free_list(&cmd);
+            *exit_code = 258;
             return (NULL);
         }
         //printf("%s\n", s[i]);

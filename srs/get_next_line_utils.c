@@ -60,7 +60,7 @@ char	*ft_strjoin_freed(char *s1, char *s2, int type)
 		return (NULL);
 	i = ft_strlen(s1);
 	j = ft_strlen(s2);
-	str = (char *)malloc(i + j + 1);
+	str = (char *)malloc(i + j + 2);
 	if (!str)
 		return (NULL);
 	i = 0;

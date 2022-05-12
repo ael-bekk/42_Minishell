@@ -16,6 +16,15 @@ char *new_one(char *s)
     return (new);
 }
 
+int    errors_print(char *s)
+{
+    if (s)
+        printf("minishell: parse error near `%s'\n", s);
+    else
+        printf("minishell: parse error near `newline'\n");
+    return (1);
+}
+
 int    pars_error(char **s)
 {
     int i;
@@ -24,17 +33,11 @@ int    pars_error(char **s)
     while (s[++i])
     {
         if (!s[i + 1] && (s[i][0] == '>' || s[i][0] == '<'))
-        {
-            printf("minishell: parse error near `%s'\n", s[i]);
-            return (1);
-        }
-        if ((s[i][0] == '>' || s[i][0] == '<') && (s[i + 1][0] == '>' || s[i + 1][0] == '<'))
-        {
-            printf("minishell: parse error near `%s'\n", s[i]);
-            return (1);
-        }
-        if ((s[i][0] == '\'' || s[i][0] == '\"'))
-            s[i] = new_one(s[i]);
+            return (errors_print(s[i + 1]));
+        else if ((s[i][0] == '>' || s[i][0] == '<') && (s[i + 1][0] == '>' || s[i + 1][0] == '<'))
+            return (errors_print(s[i + 1]));
+        else
+            s[i] = delete_quote(s[i]);
     }
     return (0);
 }
