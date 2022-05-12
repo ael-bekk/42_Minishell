@@ -50,5 +50,12 @@ void    add_back_node(t_cmd **head, t_cmd *new);
 char    *separ_line(char *s);
 
 
+char *handel_quote(void);
+
+///functions for get_next_line/////
+char	*get_next_line(int fd);
+char	*ft_strjoin_freed(char *s1, char *s2, int type);
+char	*ft_strchr_line(const char *s, int c);
+char	*ft_strdup_line(const char *s1);
 
 #endif
