@@ -53,4 +53,14 @@ void    ft_free(char **s);
 void    ft_free_list(t_cmd **head);
 int aloccate_data(t_cmd *new, char **s);
 void    insertData(t_cmd *new, char **s);
+
+
+char *handel_quote(void);
+
+///functions for get_next_line/////
+char	*get_next_line(int fd);
+char	*ft_strjoin_freed(char *s1, char *s2, int type);
+char	*ft_strchr_line(const char *s, int c);
+char	*ft_strdup_line(const char *s1);
+
 #endif
