@@ -28,6 +28,7 @@ char *separ_line(char *s)
 {
 	int		i;
 	int		j;
+	int		type;
 	char	*str;
 
 	i = 0;
@@ -48,8 +49,13 @@ char *separ_line(char *s)
 			str[j++] = s[i++];
 			str[j++] = ' ';
 		}
-		else if(s[i] == '\'' || )
+		else 
+		{
+			type = (s[i] == '\'') + 2 * (s[i] == '\"');
+				while (type && s[i] && ((s[i] == '\'' && type != 1) || (s[i] == '\"' && type != 2)))
+					str[j++] = s[i++];
 			str[j++] = s[i++];
+		}
 	}
 	str[j] = '\0';
 	return (str);
