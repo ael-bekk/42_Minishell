@@ -32,8 +32,8 @@
 
 typedef struct s_cmd
 {
-    char            *here_doc;
-    char            **rid;
+    char            **here_doc;
+    char            **rid; // < > >> whith type 1 2 3 
     int             *type;
     char            **cmd;
     struct s_cmd    *next;
@@ -48,7 +48,9 @@ t_cmd   *creat_node(void);
 t_cmd   *ft_nodelast(t_cmd *head);
 void    add_back_node(t_cmd **head, t_cmd *new);
 char    *separ_line(char *s);
-
-
-
+int    pars_error(char **s);
+void    ft_free(char **s);
+void    ft_free_list(t_cmd **head);
+int aloccate_data(t_cmd *new, char **s);
+void    insertData(t_cmd *new, char **s);
 #endif

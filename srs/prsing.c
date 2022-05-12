@@ -1,26 +1,18 @@
 #include "../inc/minishell.h"
 
-void    ft_free(char **s)
+int    pars(t_cmd **cmd, char **splt)
 {
-    int i;
-
-    i = -1;
-    while (s && s[++i])
-        free(s[i]);
-    free(s);
-}
-
-void    pars(t_cmd **cmd, char **splt)
-{
-    int i;
     t_cmd *new;
 
-    i = -1;
     new = creat_node();
-    while (splt && splt[++i])
-        printf("%s\n", splt[i]);
+    if (pars_error(splt) || !aloccate_data(new, splt))
+    {
+        ft_free(splt);
+        return (1);
+    }
+    insertData(new, splt);
     add_back_node(cmd, new);
-    ft_free(splt);
+    return (0);
 }
 
 t_cmd    *parsing(char *line)
@@ -36,7 +28,11 @@ t_cmd    *parsing(char *line)
         tmp = s[i];
         s[i] = separ_line(s[i]);
         free(tmp);
-        pars(&cmd, split(s[i], ' '));
+        if (pars(&cmd, split(s[i], ' ')))
+        {
+            ft_free_list(&cmd);
+            return (NULL);
+        }
         //printf("%s\n", s[i]);
     }
     return (cmd);
