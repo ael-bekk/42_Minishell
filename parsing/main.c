@@ -26,6 +26,8 @@ void    affiche(t_cmd *cmd)
 
 int execution(t_cmd *cmd)
 {
+    if (!cmd)
+        return (0);
     if (!ft_strncmp(cmd->cmd[0], "cd", 3))
     {
         if (cmd->cmd[1])
@@ -39,7 +41,9 @@ int execution(t_cmd *cmd)
         return (blt_pwd());
 
     if (!ft_strncmp(cmd->cmd[0], "env", 4))
-        return (blt_pwd());
+        return (blt_env(*cmd->env));
+    if (!ft_strncmp(cmd->cmd[0], "exit", 5))
+        return (blt_exit(&cmd->cmd[1]));
     return (0);
 }
 
@@ -48,14 +52,13 @@ int main(int ac, char **av, char **env)
     int exit_code;
     t_cmd *cmd;
     char *inp;
-    char *s;
 
     exit_code = 0;
     printf("%s", TITLE);
     while (TRUE)
     {
-        s = getcwd(NULL, 0);
-        printf("%s%s\n", BLUE, s);
+        printf("%s", BLUE);
+        blt_pwd();
         signal(SIGINT, sig_hnd);
         signal(SIGQUIT, sig_hnd2);
         inp = readline("\033[0;34m-> % \033[0;37m");
@@ -67,9 +70,8 @@ int main(int ac, char **av, char **env)
         add_history(inp);
         inp = handel_quote(inp);
         inp = expand(inp, env, exit_code, av[0]);
-        cmd = parsing(inp, &exit_code);
-        if (cmd)
-            exit_code = execution(cmd);
+        cmd = parsing(inp, &exit_code, env);
+        exit_code = execution(cmd);
         //affiche(cmd);
     }
     return (0);

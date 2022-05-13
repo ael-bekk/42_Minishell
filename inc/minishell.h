@@ -46,7 +46,7 @@ void    sig_hnd(int sig);
 void    sig_hnd2(int sig);
 void    split_f(char **s, char no_splt);
 char    **split(char *l, char no_splt);
-t_cmd   *parsing(char *line, int *exit_code);
+t_cmd   *parsing(char *line, int *exit_code, char **env);
 t_cmd   *creat_node(void);
 t_cmd   *ft_nodelast(t_cmd *head);
 void    add_back_node(t_cmd **head, t_cmd *new);
