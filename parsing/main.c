@@ -29,12 +29,7 @@ int execution(t_cmd *cmd)
     if (!cmd)
         return (0);
     if (!ft_strncmp(cmd->cmd[0], "cd", 3))
-    {
-        if (cmd->cmd[1])
-            return (blt_cd(cmd->cmd[1]));
-        else
-            return (blt_cd("/"));
-    }
+        return (blt_cd(cmd->cmd[1], *cmd->env));
     if (!ft_strncmp(cmd->cmd[0], "echo", 5))
         return (blt_echo(&cmd->cmd[1]));
     if (!ft_strncmp(cmd->cmd[0], "pwd", 4))
