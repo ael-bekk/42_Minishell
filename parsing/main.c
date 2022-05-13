@@ -44,15 +44,21 @@ int execution(t_cmd *cmd)
         return (blt_env(*cmd->env));
     if (!ft_strncmp(cmd->cmd[0], "exit", 5))
         return (blt_exit(&cmd->cmd[1]));
+    if (!ft_strncmp(cmd->cmd[0], "unset", 6))
+        return (blt_unset(&cmd->cmd[1], *cmd->env));
+    if (!ft_strncmp(cmd->cmd[0], "export", 7))
+        return (blt_export(&cmd->cmd[1], cmd->env));
     return (0);
 }
 
-int main(int ac, char **av, char **env)
+int main(int ac, char **av, char **ev)
 {
     int exit_code;
     t_cmd *cmd;
     char *inp;
+    char **env;
 
+    env = copy_data(ev, 0);
     exit_code = 0;
     printf("%s", TITLE);
     while (TRUE)

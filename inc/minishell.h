@@ -59,6 +59,8 @@ void    insertData(t_cmd *new, char **s);
 char    *expand(char *l, char **env, int exit_code, char *av);
 char    *handel_quote(char *line);
 char    *delete_quote(char *str);
+char    **copy_data(char    **s, int plus);
+int     ft_double_strlen(char **s);
 
 //
 int     blt_cd(char *path);
@@ -66,6 +68,8 @@ int     blt_echo(char **cmd);
 int     blt_pwd();
 int     blt_env(char **cmd);
 int     blt_exit(char **cmd);
+int     blt_unset(char **cmd, char **env);
+int     blt_export(char **cmd, char ***env);
 
 ///functions for get_next_line/////
 char	*get_next_line(int fd);
