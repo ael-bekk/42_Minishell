@@ -12,3 +12,12 @@ void sig_hnd(int sig)
     rl_on_new_line();
     rl_redisplay();
 }
+
+void    sig_hnd2(int sig)
+{
+    (void)sig;
+
+    printf("\r     %s  \r", rl_line_buffer);
+    rl_on_new_line();
+    rl_redisplay();
+}

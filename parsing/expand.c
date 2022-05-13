@@ -19,7 +19,7 @@ char *find_var(char *to_find, char **env)
     return (ft_strdup(""));
 }
 
-char    *expand(char *l, char **env, int exit_code)
+char    *expand(char *l, char **env, int exit_code, char *av)
 {
     char *tmp;
     char *line;
@@ -38,7 +38,7 @@ char    *expand(char *l, char **env, int exit_code)
         {
             line = ft_strjoin_freed(line, ft_substr(l, left, i - left), 1);
             if (l[i + 1] == '0')
-                line = ft_strjoin_freed(line, "Minishell", 1);
+                line = ft_strjoin_freed(line, &av[2], 1);
             else
                 line = ft_strjoin_freed(line, "", 1);
             left = ++i + 1;

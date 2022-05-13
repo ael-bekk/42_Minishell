@@ -24,6 +24,25 @@ void    affiche(t_cmd *cmd)
     }
 }
 
+int execution(t_cmd *cmd)
+{
+    if (!ft_strncmp(cmd->cmd[0], "cd", 3))
+    {
+        if (cmd->cmd[1])
+            return (blt_cd(cmd->cmd[1]));
+        else
+            return (blt_cd("/"));
+    }
+    if (!ft_strncmp(cmd->cmd[0], "echo", 5))
+        return (blt_echo(&cmd->cmd[1]));
+    if (!ft_strncmp(cmd->cmd[0], "pwd", 4))
+        return (blt_pwd());
+
+    if (!ft_strncmp(cmd->cmd[0], "env", 4))
+        return (blt_pwd());
+    return (0);
+}
+
 int main(int ac, char **av, char **env)
 {
     int exit_code;
@@ -38,6 +57,7 @@ int main(int ac, char **av, char **env)
         s = getcwd(NULL, 0);
         printf("%s%s\n", BLUE, s);
         signal(SIGINT, sig_hnd);
+        signal(SIGQUIT, sig_hnd2);
         inp = readline("\033[0;34m-> % \033[0;37m");
         if (!inp)
         {
@@ -46,10 +66,11 @@ int main(int ac, char **av, char **env)
         }
         add_history(inp);
         inp = handel_quote(inp);
-        inp = expand(inp, env, exit_code);
+        inp = expand(inp, env, exit_code, av[0]);
         cmd = parsing(inp, &exit_code);
-        //exit_code = execution(cmd);
-        affiche(cmd);
+        if (cmd)
+            exit_code = execution(cmd);
+        //affiche(cmd);
     }
     return (0);
 }

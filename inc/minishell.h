@@ -6,6 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <signal.h>
+#include <errno.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "../libft/libft.h"
@@ -36,11 +37,13 @@ typedef struct s_cmd
     char            **rid; // < > >> whith type 1 2 3 
     int             *type; // (1 : <) , (2 : >) , (3 : >>) 
     char            **cmd; // cmd , flags, args
+    char            ***env;
     struct s_cmd    *next;
 }   t_cmd;
 
 
 void    sig_hnd(int sig);
+void    sig_hnd2(int sig);
 void    split_f(char **s, char no_splt);
 char    **split(char *l, char no_splt);
 t_cmd   *parsing(char *line, int *exit_code);
@@ -53,11 +56,16 @@ void    ft_free(char **s);
 void    ft_free_list(t_cmd **head);
 int     aloccate_data(t_cmd *new, char **s);
 void    insertData(t_cmd *new, char **s);
-char    *expand(char *l, char **env, int exit_code);
-char    *expand(char *l, char **env, int exit_code);
-
+char    *expand(char *l, char **env, int exit_code, char *av);
 char    *handel_quote(char *line);
 char    *delete_quote(char *str);
+
+//
+int     blt_cd(char *path);
+int     blt_echo(char **cmd);
+int     blt_pwd();
+int     blt_env(char **cmd);
+int     blt_exit(char **cmd);
 
 ///functions for get_next_line/////
 char	*get_next_line(int fd);
