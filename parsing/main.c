@@ -70,6 +70,7 @@ int main(int ac, char **av, char **ev)
         }
         add_history(inp);
         inp = handel_quote(inp);
+        inp = handler_pipe(inp);
         inp = expand(inp, env, exit_code, av[0]);
         cmd = parsing(inp, &exit_code, &env);
         if (cmd)

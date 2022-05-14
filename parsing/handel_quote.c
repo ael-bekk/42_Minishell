@@ -48,8 +48,7 @@ char *delete_quote(char *str)
 		if ((c == 0 || c == str[i]) && (str[i] == '\'' || str[i] == '\"'))
 		{
 			c = str[i++];
-			a++;
-			if (a == 2)
+			if (++a == 2)
 			{
 				c = 0;
 				a = 0;
@@ -62,7 +61,6 @@ char *delete_quote(char *str)
 	free(str);
 	str = NULL;
 	return (line);
-
 }
 
 int print_quote(char *line)

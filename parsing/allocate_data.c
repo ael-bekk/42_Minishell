@@ -34,6 +34,5 @@ int aloccate_data(t_cmd *cmd, char **s)
         else
             cmnd++;
     }
-    //printf("%d -- %d -- %d\n", h_doc, rid, cmnd);
     return (allocateData(cmd, h_doc, rid, cmnd));
 }

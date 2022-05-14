@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../inc/minishell.h"
+
 int check_pipe(char *str)
 {
 	int i;
@@ -29,20 +31,18 @@ int check_pipe(char *str)
 	return(a);
 }
 
-char *handler_pipe(void)
+char *handler_pipe(char *line)
 {
 	char *str;
-	char *line;
 	int 	a;
 	
-	a = 1;
+	a = !check_pipe(line);
 	while (a)
 	{
+		ft_putstr_fd("pipe> ",1);
 		str = get_next_line(0);
 		line = ft_strjoin_freed(line, str, 1);
-		if (!check_pipe(line))
-			ft_putstr_fd("pipe> ",1);
-		else
+		if (check_pipe(line))
 			a = 0;
 	}
 	return (line);
