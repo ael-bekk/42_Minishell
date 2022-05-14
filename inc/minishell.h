@@ -41,7 +41,13 @@ typedef struct s_cmd
     struct s_cmd    *next;
 }   t_cmd;
 
+typedef struct s_back_up
+{
+    int p;
+}   t_back_up;
 
+
+t_back_up   *vars();
 void    sig_hnd(int sig);
 void    sig_hnd2(int sig);
 void    split_f(char **s, char no_splt);
@@ -72,6 +78,7 @@ int     blt_env(char **cmd);
 int     blt_exit(char **cmd);
 int     blt_unset(char **cmd, char **env);
 int     blt_export(char **cmd, char ***env);
+char    *handl_unclosed(char *inp);
 
 ///functions for get_next_line/////
 char	*get_next_line(int fd);
