@@ -1,21 +1,12 @@
 #include "../inc/minishell.h"
 
-int blt_echo(char **cmd)
+
+void print_all(char **cmd)
 {
     int i;
-    int n;
     int j;
 
-    j = 0;
-    n = 1;
     i = -1;
-    if (cmd[0][++i] == '-')
-    {
-        while (cmd[0][++i] && cmd[0][i] == 'n')
-            ;
-        n = cmd[0][i];
-    }
-    i = -1 * (n != 0);
     while (cmd[++i])
     {
         j = -1;
@@ -25,7 +16,32 @@ int blt_echo(char **cmd)
         if (cmd[i + 1])
             printf(" ");
     }
-    if (n)
+}
+
+int blt_echo(char **cmd)
+{
+    int i;
+    int n;
+    int nl;
+    int j;
+
+    n = 0;
+    nl = 0;
+    i = -1;
+    while (cmd[++i] && !n)
+    {
+        j = -1;
+        n = 1;
+        if (cmd[i][++j] == '-')
+        {
+            while (cmd[i][++j] && cmd[i][j] == 'n')
+                ;
+            n = cmd[i][j];
+            nl += !n;
+        }
+    }
+    print_all(&cmd[i - 1]);
+    if (!nl)
         printf("\n");
     return (0);
 }
