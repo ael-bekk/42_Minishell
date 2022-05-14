@@ -1,5 +1,12 @@
 #include "../inc/minishell.h"
 
+t_back_up   *vars()
+{
+    static t_back_up backup;
+
+    return (&backup);
+}
+
 void    affiche(t_cmd *cmd)
 { 
     while (cmd)
@@ -68,7 +75,11 @@ int main(int ac, char **av, char **ev)
             exit(0);
         }
         add_history(inp);
+<<<<<<< HEAD
 		inp = check_full(inp);
+=======
+        inp = handl_unclosed(inp);
+>>>>>>> 0a3f6aef2d3854e68db6a0256346cf8a80384edf
         inp = expand(inp, env, exit_code, av[0]);
         cmd = parsing(inp, &exit_code, &env);
         if (cmd)
