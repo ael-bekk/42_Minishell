@@ -89,6 +89,7 @@ char *handel_quote(char *line)
 		line = ft_strjoin_freed(line, str, 0);
 		a = print_quote(line);
 	}
+	
 	//line = delete_quote(line);
 	return (line);
 }

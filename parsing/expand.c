@@ -21,7 +21,6 @@ char *find_var(char *to_find, char **env)
 
 char    *expand(char *l, char **env, int exit_code, char *av)
 {
-    char *tmp;
     char *line;
     int i;
     int left;
@@ -36,7 +35,7 @@ char    *expand(char *l, char **env, int exit_code, char *av)
                 ;
         if (l[i] == '$' && ft_isdigit(l[i + 1]))
         {
-            line = ft_strjoin_freed(line, ft_substr(l, left, i - left), 1);
+            line = ft_strjoin_freed2(line, ft_substr(l, left, i - left), 1);
             if (l[i + 1] == '0')
                 line = ft_strjoin_freed(line, &av[2], 1);
             else
@@ -45,23 +44,22 @@ char    *expand(char *l, char **env, int exit_code, char *av)
         }
         else if (l[i] == '$' && l[i + 1] == '?')
         {
-            line = ft_strjoin_freed(line, ft_substr(l, left, i - left), 1);
-            line = ft_strjoin_freed(line, ft_itoa(exit_code), 1);
+            line = ft_strjoin_freed2(line, ft_substr(l, left, i - left), 1);
+            line = ft_strjoin_freed2(line, ft_itoa(exit_code), 1);
             left = ++i + 1;
         }
         else if (l[i] == '$' && (l[i + 1] == '\'' || l[i + 1] == '\"' || l[i + 1] == '_' || ft_isalpha(l[i + 1])))
         {
-            line = ft_strjoin_freed(line, ft_substr(l, left, i - left), 1);
+            line = ft_strjoin_freed2(line, ft_substr(l, left, i - left), 1);
             left = ++i;
             while (l[i] && (ft_isalnum(l[i]) || l[i] == '_'))
                 i++;
-            tmp = find_var(ft_substr(l, left, i - left), env);
+            line = ft_strjoin_freed2(line, find_var(ft_substr(l, left, i - left), env), 1);
             left = i;
-            line = ft_strjoin_freed(line, tmp, 1);
             i--;
         }
     }
-    line = ft_strjoin_freed(line, ft_substr(l, left, i - left), 1);
+    line = ft_strjoin_freed2(line, ft_substr(l, left, i - left), 1);
     free(l);
     return (line);
 }

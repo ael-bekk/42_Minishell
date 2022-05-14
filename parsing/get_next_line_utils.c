@@ -56,25 +56,47 @@ char	*ft_strjoin_freed(char *s1, char *s2, int type)
 
 	if (!s1)
 		s1 = ft_strdup_line("");
-	if (!s1 || !s2)
+	if (!s2)
 		return (NULL);
-	i = ft_strlen(s1);
-	j = ft_strlen(s2);
-	str = (char *)malloc(i + j + 2);
+	str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 2);
 	if (!str)
 		return (NULL);
-	i = 0;
+	i = -1;
 	j = 0;
-	while (s1[i])
-	{
+	while (s1[++i])
 		str[i] = s1[i];
-		i++;
-	}
 	if (type == 0 && s1[0] != '\0')
 		str[i++] = '\n';
 	while (s2[j])
 		str[i++] = s2[j++];
 	str[i] = '\0';
 	free(s1);
+	return (str);
+}
+
+char	*ft_strjoin_freed2(char *s1, char *s2, int type)
+{
+	size_t		i;
+	size_t		j;
+	char		*str;
+
+	if (!s1)
+		return (s2);
+	if (!s2)
+		return (s1);
+	str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 2);
+	if (!str)
+		return (NULL);
+	i = -1;
+	j = 0;
+	while (s1[++i])
+		str[i] = s1[i];
+	if (type == 0 && s1[0] != '\0')
+		str[i++] = '\n';
+	while (s2[j])
+		str[i++] = s2[j++];
+	str[i] = '\0';
+	free(s1);
+	free(s2);
 	return (str);
 }

@@ -46,7 +46,7 @@ void    sig_hnd(int sig);
 void    sig_hnd2(int sig);
 void    split_f(char **s, char no_splt);
 char    **split(char *l, char no_splt);
-t_cmd   *parsing(char *line, int *exit_code, char **env);
+t_cmd   *parsing(char *line, int *exit_code, char ***env);
 t_cmd   *creat_node(void);
 t_cmd   *ft_nodelast(t_cmd *head);
 void    add_back_node(t_cmd **head, t_cmd *new);
@@ -77,5 +77,6 @@ char	*get_next_line(int fd);
 char	*ft_strjoin_freed(char *s1, char *s2, int type);
 char	*ft_strchr_line(const char *s, int c);
 char	*ft_strdup_line(const char *s1);
+char	*ft_strjoin_freed2(char *s1, char *s2, int type);
 
 #endif

@@ -20,7 +20,7 @@ int blt_echo(char **cmd)
     {
         j = -1;
         while (cmd[i][++j])
-            if (cmd[i][j] != '\n' || n)
+            //if (cmd[i][j] != '\n' || n)
                 printf("%c", cmd[i][j]);
         if (cmd[i + 1])
             printf(" ");

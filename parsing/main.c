@@ -71,8 +71,10 @@ int main(int ac, char **av, char **ev)
         add_history(inp);
         inp = handel_quote(inp);
         inp = expand(inp, env, exit_code, av[0]);
-        cmd = parsing(inp, &exit_code, env);
-        exit_code = execution(cmd);
+        cmd = parsing(inp, &exit_code, &env);
+        if (cmd)
+            exit_code = execution(cmd);
+        ft_free_list(&cmd);
         //affiche(cmd);
     }
     return (0);

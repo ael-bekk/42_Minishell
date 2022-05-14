@@ -59,6 +59,7 @@ char *separ_line(char *s)
 			str[j++] = s[i++];
 		}
 	}
+	free(s);
 	str[j] = '\0';
 	return (str);
 }
