@@ -23,6 +23,8 @@ int check_pipe(char *str)
 	{
 		if (str[i] == '|' && i++)
 		{
+			if (!str[i])
+				return (0);
 			a = 0;
 			while (str[i] && str[i] != '|' && str[i] != ' ' && i++)
 				a = 1;
