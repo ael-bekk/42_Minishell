@@ -11,6 +11,7 @@ void sig_hnd(int sig)
     printf("\n%s%s\n", BLUE, s);
     rl_on_new_line();
     rl_redisplay();
+    free(s);
 }
 
 void    sig_hnd2(int sig)
