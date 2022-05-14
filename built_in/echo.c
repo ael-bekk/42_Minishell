@@ -25,14 +25,14 @@ int blt_echo(char **cmd)
     int nl;
     int j;
 
-    n = 0;
+    n = (cmd && cmd[0] && cmd[0][0] != '-' && cmd[0][1] != 'n');
     nl = 0;
     i = -1;
     while (cmd[++i] && !n)
     {
         j = -1;
         n = 1;
-        if (cmd[i][++j] == '-')
+        if (cmd[i][++j] == '-' && cmd[i][++j] == 'n')
         {
             while (cmd[i][++j] && cmd[i][j] == 'n')
                 ;
@@ -40,7 +40,7 @@ int blt_echo(char **cmd)
             nl += !n;
         }
     }
-    print_all(&cmd[i - 1]);
+    print_all(&cmd[i - (i != 0)]);
     if (!nl)
         printf("\n");
     return (0);

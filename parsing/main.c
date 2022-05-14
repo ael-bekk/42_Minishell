@@ -75,8 +75,9 @@ int main(int ac, char **av, char **ev)
         cmd = parsing(inp, &exit_code, &env);
         if (cmd)
             exit_code = execution(cmd);
-        ft_free_list(&cmd);
         //affiche(cmd);
+        ft_free_list(&cmd);
+        
     }
     return (0);
 }
