@@ -23,6 +23,8 @@ t_cmd    *parsing(char *line, int *exit_code, char ***env)
     t_cmd   *cmd;
 
     cmd = NULL;
+	if (!line)
+		return (NULL);
     s = split(line, '|');
     for(int i = 0; s && s[i]; i++)
     {

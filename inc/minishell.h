@@ -63,7 +63,9 @@ char    **copy_data(char    **s, int plus);
 int     ft_double_strlen(char **s);
 char	*find_var(char *to_find, char **env);
 char	*handler_pipe(char *line);
-
+char	*check_full(char *line);
+int		check_quote(char *str);
+int		print_quote(char *str);
 //
 int     blt_cd(char *path, char **env);
 int     blt_echo(char **cmd);

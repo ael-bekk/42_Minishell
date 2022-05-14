@@ -28,6 +28,8 @@ char    *expand(char *l, char **env, int exit_code, char *av)
     left = 0;
     i = -1;
     line = NULL;
+	if (!l)
+		return(NULL);
     while (l[++i])
     {
         if (l[i] == '\'')

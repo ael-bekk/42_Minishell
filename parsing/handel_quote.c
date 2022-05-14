@@ -6,17 +6,19 @@
 /*   By: amounadi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 18:24:48 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/12 18:28:53 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/05/14 23:19:00 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static	int check_quote(char *str)
+int check_quote(char *str)
 {
 	int i = 0;
 	int a = 0;
 	char c;
+	if (!str)
+		return (0);
 	while(str[i])
 	{
 		if (!a && (str[i] == '\"' || str[i] == '\''))
@@ -30,6 +32,7 @@ static	int check_quote(char *str)
 	}
 	return (a);
 }
+
 char *delete_quote(char *str)
 {
 	int i;
@@ -75,19 +78,36 @@ int print_quote(char *line)
 	return (1);
 }
 
+
 char *handel_quote(char *line)
 {
 	char *str;
 	int a = 1;
+	int q;
 
+	if (!line)
+		return(NULL);
 	a = print_quote(line);
+	q = check_quote(line);
 	while (a)
 	{
 		str = get_next_line(0);
+		if (!str)
+		{
+			if (q == 1)
+				printf("unexpected EOF while looking for matching `\"\'\n");
+			if (q == 2)
+				printf("unexpected EOF while looking for matching `\'\'\n");
+			printf("syntax error: unexpected end of file \n");
+			free(line);
+			return (NULL);
+		}
+	//	if (str)
+	//		printf("\r%s", str);
 		line = ft_strjoin_freed(line, str, 0);
+		q = check_quote(line);
 		a = print_quote(line);
 	}
-	
 	//line = delete_quote(line);
 	return (line);
 }

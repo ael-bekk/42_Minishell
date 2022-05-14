@@ -34,7 +34,6 @@ int execution(t_cmd *cmd)
         return (blt_echo(&cmd->cmd[1]));
     if (!ft_strncmp(cmd->cmd[0], "pwd", 4))
         return (blt_pwd());
-
     if (!ft_strncmp(cmd->cmd[0], "env", 4))
         return (blt_env(*cmd->env));
     if (!ft_strncmp(cmd->cmd[0], "exit", 5))
@@ -69,15 +68,13 @@ int main(int ac, char **av, char **ev)
             exit(0);
         }
         add_history(inp);
-        inp = handel_quote(inp);
-        inp = handler_pipe(inp);
+		inp = check_full(inp);
         inp = expand(inp, env, exit_code, av[0]);
         cmd = parsing(inp, &exit_code, &env);
         if (cmd)
             exit_code = execution(cmd);
         //affiche(cmd);
-        ft_free_list(&cmd);
-        
+        ft_free_list(&cmd); 
     }
     return (0);
 }
