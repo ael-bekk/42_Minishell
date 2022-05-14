@@ -61,7 +61,8 @@ char    *handel_quote(char *line);
 char    *delete_quote(char *str);
 char    **copy_data(char    **s, int plus);
 int     ft_double_strlen(char **s);
-char *find_var(char *to_find, char **env);
+char	*find_var(char *to_find, char **env);
+char	*handler_pipe(void)
 
 //
 int     blt_cd(char *path, char **env);
