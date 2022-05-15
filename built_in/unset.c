@@ -1,6 +1,6 @@
 #include "../inc/minishell.h"
 
-int is_valid_var2(char *s, char **env)
+int is_valid_var2(char *s)
 {
     int i;
 
@@ -14,31 +14,52 @@ int is_valid_var2(char *s, char **env)
     return (0);
 }
 
-// int blt_unset(char **cmd, char **env)
-// {
-//     int i;
-//     int j;
-//     int res;
+void	ft_lstdel_from_list(t_list **lst, t_list *to_del)
+{
+    t_list *tmp;
 
-//     res = 0;
-//     i = -1;
-//     while (cmd && cmd[++i])
-//     {
-//         j = -1;
-//         res += !is_valid_var2(cmd[i], env);
-//         while (env && env[++j] && is_valid_var2(cmd[i], env))
-//         {
-//             if (!ft_strncmp(cmd[i], env[j], strlen(cmd[i])) && env[j][strlen(cmd[i])] == '=')
-//             {
-//                 free(env[j]);
-//                 env[j] = NULL;
-//                 while (env[++j])
-//                     env[j - 1] = env[j];
-//                 env[--j] = NULL;
-//             }
-//         }
-//         if (!is_valid_var2(cmd[i], env))
-//             printf("Minishell: export: `%s': not a valid identifier\n", cmd[i]);
-//     }
-//     return (res != 0);
-// }
+    tmp = *lst;
+    if (*lst && *lst == to_del)
+    {
+	    *lst = (*lst)->next;
+        ft_lstdelone(tmp, free);
+    }
+    else if (*lst)
+    {
+        while (tmp->next)
+        {
+            if (tmp->next == to_del)
+            {
+                tmp->next = tmp->next->next;
+                break ;
+            }
+            tmp = tmp->next;
+        }
+        ft_lstdelone(to_del, free);
+    }
+}
+
+int blt_unset(char **cmd)
+{
+    int     i;
+    int     res;
+    t_list  *env;
+    t_list  *tmp;
+
+    i = -1;
+    while (cmd && cmd[++i])
+    {
+        env = glob.env;
+        res = !is_valid_var2(cmd[i]);
+        while (env && !res)
+        {
+            if (!ft_strncmp(cmd[i], env->key, strlen(cmd[i])) && strlen(cmd[i]) == strlen(env->key))
+                ft_lstdel_from_list(&glob.env, env);
+            env = env->next;
+        }
+        if (res)
+            printf("Minishell: export: `%s': not a valid identifier\n", cmd[i]);
+        glob.exit_code = glob.exit_code || res;
+    }
+    return (glob.exit_code);
+}

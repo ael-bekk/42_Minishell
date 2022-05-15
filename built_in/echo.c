@@ -4,44 +4,38 @@
 void print_all(char **cmd)
 {
     int i;
-    int j;
 
     i = -1;
-    while (cmd[++i])
+    while (cmd && cmd[++i])
     {
-        j = -1;
-        while (cmd[i][++j])
-                printf("%c", cmd[i][j]);
+        printf("%s", cmd[i]);
         if (cmd[i + 1])
             printf(" ");
     }
 }
 
+int nl_echo(char *s)
+{
+    int i;
+
+    i = 0;
+    while (s && s[0] == '-' && s[++i])
+        if (s[i] != 'n')
+            return (0);
+    if (s && !s[i])
+        return (1);
+    return (0);
+}
+
 int blt_echo(char **cmd)
 {
     int i;
-    int n;
-    int nl;
-    int j;
 
-    n = (cmd && cmd[0] && cmd[0][0] != '-' && cmd[0][1] != 'n');
-    nl = 0;
     i = 0;
-    while (!n && cmd[i])
-    {
-        j = -1;
-        n = 1;
-        if (cmd[i][++j] == '-' && cmd[i][++j] == 'n')
-        {
-            while (cmd[i][++j] && cmd[i][j] == 'n')
-                ;
-            n = cmd[i][j];
-            nl += !n;
-        }
+    while (cmd && cmd[i] && nl_echo(cmd[i]))
         i++;
-    }
-    print_all(&cmd[i - !!nl]);
-    if (!nl)
+    print_all(&cmd[i]);
+    if (!nl_echo(cmd[0]))
         printf("\n");
     return (0);
 }

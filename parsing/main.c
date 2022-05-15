@@ -38,8 +38,8 @@ int execution(t_cmd *cmd)
         return (blt_env());
     if (!ft_strncmp(cmd->cmd[0], "exit", 5))
         return (blt_exit(&cmd->cmd[1]));
-    // if (!ft_strncmp(cmd->cmd[0], "unset", 6))
-    //     return (blt_unset(&cmd->cmd[1]));
+    if (!ft_strncmp(cmd->cmd[0], "unset", 6))
+        return (blt_unset(&cmd->cmd[1]));
     // if (!ft_strncmp(cmd->cmd[0], "export", 7))
     //     return (blt_export(&cmd->cmd[1]));
     return (0);
@@ -47,12 +47,11 @@ int execution(t_cmd *cmd)
 
 int main(int ac, char **av, char **ev)
 {
-    int exit_code;
     t_cmd *cmd;
     char *inp;
 
     copy_data_env(ev);
-    exit_code = 0;
+    glob.exit_code = 0;
     printf("%s", TITLE);
     while (TRUE)
     {
@@ -73,7 +72,7 @@ int main(int ac, char **av, char **ev)
         inp = expand(inp, av[0]);
         cmd = parsing(inp);
         if (cmd)
-            exit_code = execution(cmd);
+            glob.exit_code = execution(cmd);
         //affiche(cmd);
         ft_free_list(&cmd); 
     }
