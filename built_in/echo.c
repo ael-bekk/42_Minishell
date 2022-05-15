@@ -11,7 +11,6 @@ void print_all(char **cmd)
     {
         j = -1;
         while (cmd[i][++j])
-            //if (cmd[i][j] != '\n' || n)
                 printf("%c", cmd[i][j]);
         if (cmd[i + 1])
             printf(" ");
@@ -27,8 +26,8 @@ int blt_echo(char **cmd)
 
     n = (cmd && cmd[0] && cmd[0][0] != '-' && cmd[0][1] != 'n');
     nl = 0;
-    i = -1;
-    while (cmd[++i] && !n)
+    i = 0;
+    while (!n && cmd[i])
     {
         j = -1;
         n = 1;
@@ -39,8 +38,9 @@ int blt_echo(char **cmd)
             n = cmd[i][j];
             nl += !n;
         }
+        i++;
     }
-    print_all(&cmd[i - (i != 0)]);
+    print_all(&cmd[i - !!n]);
     if (!nl)
         printf("\n");
     return (0);

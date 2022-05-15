@@ -1,25 +1,21 @@
 #include "../inc/minishell.h"
 
-char *find_var(char *to_find, char **env)
+char *find_var(char *to_find)
 {
-    int i;
+    t_list *env;
     char *tmp;
 
-    i = -1;
-    while (env && env[++i])
+    env = glob.env;
+    while (env)
     {
-        if (!ft_strncmp(to_find, env[i], strlen(to_find)) && env[i][strlen(to_find)] == '=')
-        {
-            tmp = ft_substr(env[i], strlen(to_find) + 1, strlen(env[i]));
-            free(to_find);
-            return (tmp);
-        }
+        if (!ft_strncmp(to_find, env->key, strlen(env->key) + 1))
+            return (ft_strdup(env->value));
+        env = env->next;
     }
-    free(to_find);
     return (ft_strdup(""));
 }
 
-char    *expand(char *l, char **env, int exit_code, char *av)
+char    *expand(char *l, int exit_code, char *av)
 {
     char *line;
     int i;
@@ -28,9 +24,7 @@ char    *expand(char *l, char **env, int exit_code, char *av)
     left = 0;
     i = -1;
     line = NULL;
-	if (!l)
-		return(NULL);
-    while (l[++i])
+    while (l && l[++i])
     {
         if (l[i] == '\'')
             while (l[++i] && l[i] != '\'')
@@ -56,7 +50,7 @@ char    *expand(char *l, char **env, int exit_code, char *av)
             left = ++i;
             while (l[i] && (ft_isalnum(l[i]) || l[i] == '_'))
                 i++;
-            line = ft_strjoin_freed2(line, find_var(ft_substr(l, left, i - left), env), 1);
+            line = ft_strjoin_freed2(line, find_var(ft_substr(l, left, i - left)), 1);
             left = i;
             i--;
         }

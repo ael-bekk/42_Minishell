@@ -1,15 +1,5 @@
 #include "../inc/minishell.h"
 
-// void sig_h(int sig)
-// {
-//     if (sig == SIGINT)
-//     {
-//         printf("\n");
-//         close(0);
-//         close(1);
-//     }
-// }
-
 char *print_data(int fd)
 {
     char buff[1024];
@@ -38,7 +28,6 @@ char *handl_unclosed(char *inp)
         glob.p = fork();
         if (!glob.p)
         {
-            //signal(SIGINT, sig_h);
             inp = check_full(inp);
             write(p1[1], inp, ft_strlen(inp));
             close(p1[0]);
@@ -47,6 +36,7 @@ char *handl_unclosed(char *inp)
         }
         wait(NULL);
         close(p1[1]);
+        free(inp);
         inp = print_data(p1[0]);
         close(p1[0]);
     }

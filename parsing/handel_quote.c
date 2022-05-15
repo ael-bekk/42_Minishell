@@ -82,7 +82,11 @@ char *handel_quote(char *line)
 		else
 			str = readline(QUOTE);
 		if (!str)
+		{
+			printf(" bash: unexpected EOF while looking for matching `");
+			printf("%c'\nbash: syntax error: unexpected end of file\n", (char)((a == 2) * '\'' + (a == 1) * '\"'));
 			return (NULL);
+		}
 		line = ft_strjoin_freed(line, str, 0);
 		a = check_quote(line);
 	}

@@ -62,13 +62,13 @@ typedef struct s_cmd
     char            **rid; // < > >> whith type 1 2 3 
     int             *type; // (1 : <) , (2 : >) , (3 : >>) 
     char            **cmd; // cmd , flags, args
-    char            ***env;
     struct s_cmd    *next;
 }   t_cmd;
 
 typedef struct s_glob
 {
     int p;
+    t_list *env;
 }   t_glob;
 
 //****************************************************************************//
@@ -85,7 +85,7 @@ void    sig_hnd(int sig);
 void    sig_hnd2(int sig);
 void    split_f(char **s, char no_splt);
 char    **split(char *l, char no_splt);
-t_cmd   *parsing(char *line, int *exit_code, char ***env);
+t_cmd   *parsing(char *line, int *exit_code);
 t_cmd   *creat_node(void);
 t_cmd   *ft_nodelast(t_cmd *head);
 void    add_back_node(t_cmd **head, t_cmd *new);
@@ -95,22 +95,28 @@ void    ft_free(char **s);
 void    ft_free_list(t_cmd **head);
 int     aloccate_data(t_cmd *new, char **s);
 void    insertData(t_cmd *new, char **s);
-char    *expand(char *l, char **env, int exit_code, char *av);
+char    *expand(char *l, int exit_code, char *av);
 char    *handel_quote(char *line);
 char    *delete_quote(char *str);
 char    **copy_data(char    **s, int plus);
 int     ft_double_strlen(char **s);
-char	*find_var(char *to_find, char **env);
+char	*find_var(char *to_find);
 char	*handler_pipe(char *line);
 char	*check_full(char *line);
 int		check_quote(char *str);
 int		print_quote(char *str);
 char    *handl_unclosed(char *inp);
 int check_pipe(char *str);
+int ft_double_strlen(char **s);
+
 
 ///functions for get_next_line/////
 char	*ft_strjoin_freed(char *s1, char *s2, int type);
 char	*ft_strchr_line(const char *s, int c);
 char	*ft_strjoin_freed2(char *s1, char *s2, int type);
+
+
+int     equal_place(char *s);
+void    copy_data_env(char **ev);
 
 #endif

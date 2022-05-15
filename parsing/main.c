@@ -28,20 +28,20 @@ int execution(t_cmd *cmd)
 {
     if (!cmd || !cmd->cmd[0])
         return (0);
-    if (!ft_strncmp(cmd->cmd[0], "cd", 3))
-        return (blt_cd(cmd->cmd[1], cmd->env));
+    // if (!ft_strncmp(cmd->cmd[0], "cd", 3))
+    //     return (blt_cd(cmd->cmd[1]));
     if (!ft_strncmp(cmd->cmd[0], "echo", 5))
         return (blt_echo(&cmd->cmd[1]));
     if (!ft_strncmp(cmd->cmd[0], "pwd", 4))
         return (blt_pwd());
     if (!ft_strncmp(cmd->cmd[0], "env", 4))
-        return (blt_env(*cmd->env));
+        return (blt_env());
     if (!ft_strncmp(cmd->cmd[0], "exit", 5))
         return (blt_exit(&cmd->cmd[1]));
-    if (!ft_strncmp(cmd->cmd[0], "unset", 6))
-        return (blt_unset(&cmd->cmd[1], *cmd->env));
-    if (!ft_strncmp(cmd->cmd[0], "export", 7))
-        return (blt_export(&cmd->cmd[1], cmd->env));
+    // if (!ft_strncmp(cmd->cmd[0], "unset", 6))
+    //     return (blt_unset(&cmd->cmd[1]));
+    // if (!ft_strncmp(cmd->cmd[0], "export", 7))
+    //     return (blt_export(&cmd->cmd[1]));
     return (0);
 }
 
@@ -50,9 +50,8 @@ int main(int ac, char **av, char **ev)
     int exit_code;
     t_cmd *cmd;
     char *inp;
-    char **env;
 
-    env = copy_data(ev, 0);
+    copy_data_env(ev);
     exit_code = 0;
     printf("%s", TITLE);
     while (TRUE)
@@ -71,8 +70,8 @@ int main(int ac, char **av, char **ev)
         inp = handl_unclosed(inp);
         if (inp)
             add_history(inp);
-        inp = expand(inp, env, exit_code, av[0]);
-        cmd = parsing(inp, &exit_code, &env);
+        inp = expand(inp, exit_code, av[0]);
+        cmd = parsing(inp, &exit_code);
         if (cmd)
             exit_code = execution(cmd);
         //affiche(cmd);

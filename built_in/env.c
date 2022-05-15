@@ -1,11 +1,15 @@
 #include "../inc/minishell.h"
 
-int    blt_env(char **cmd)
+void    affich_env(void *data)
 {
-    int i;
+    t_list *d;
 
-    i = -1;
-    while (cmd[++i])
-        printf("%s\n", cmd[i]);
+    d = data;
+    printf("%s=%s\n", d->key, d->value);
+}
+
+int    blt_env()
+{
+    ft_lstiter(glob.env, &affich_env);
     return (0);
 }
