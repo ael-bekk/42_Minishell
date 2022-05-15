@@ -16,7 +16,7 @@ int    pars(t_cmd **cmd, char **splt)
     return (0);
 }
 
-t_cmd    *parsing(char *line, int *exit_code)
+t_cmd    *parsing(char *line)
 {
     char    **s;
     t_cmd   *cmd;
@@ -32,7 +32,7 @@ t_cmd    *parsing(char *line, int *exit_code)
         {
             ft_free_list(&cmd);
             ft_free(s);
-            *exit_code = 258;
+            glob.exit_code = 258;
             return (NULL);
         }
         //printf("%s\n", s[i]);

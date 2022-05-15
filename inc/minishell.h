@@ -68,6 +68,7 @@ typedef struct s_cmd
 typedef struct s_glob
 {
     int p;
+    int exit_code;
     t_list *env;
 }   t_glob;
 
@@ -85,7 +86,7 @@ void    sig_hnd(int sig);
 void    sig_hnd2(int sig);
 void    split_f(char **s, char no_splt);
 char    **split(char *l, char no_splt);
-t_cmd   *parsing(char *line, int *exit_code);
+t_cmd   *parsing(char *line);
 t_cmd   *creat_node(void);
 t_cmd   *ft_nodelast(t_cmd *head);
 void    add_back_node(t_cmd **head, t_cmd *new);
@@ -95,7 +96,7 @@ void    ft_free(char **s);
 void    ft_free_list(t_cmd **head);
 int     aloccate_data(t_cmd *new, char **s);
 void    insertData(t_cmd *new, char **s);
-char    *expand(char *l, int exit_code, char *av);
+char    *expand(char *l, char *av);
 char    *handel_quote(char *line);
 char    *delete_quote(char *str);
 char    **copy_data(char    **s, int plus);

@@ -44,7 +44,7 @@ char *handler_pipe(char *line)
 		str = readline("\033[0;32mpipe> \033[0;37m");
 		if (!str)
 		{
-			printf("Minishell: syntax error: unexpected end of file\n");
+			ft_putstr_fd("Minishell: syntax error: unexpected end of file\n", 2);
 			free(line);
 			return (NULL);
 		}

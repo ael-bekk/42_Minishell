@@ -40,7 +40,7 @@ int blt_echo(char **cmd)
         }
         i++;
     }
-    print_all(&cmd[i - !!n]);
+    print_all(&cmd[i - !!nl]);
     if (!nl)
         printf("\n");
     return (0);

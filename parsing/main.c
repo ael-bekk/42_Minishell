@@ -70,8 +70,8 @@ int main(int ac, char **av, char **ev)
         inp = handl_unclosed(inp);
         if (inp)
             add_history(inp);
-        inp = expand(inp, exit_code, av[0]);
-        cmd = parsing(inp, &exit_code);
+        inp = expand(inp, av[0]);
+        cmd = parsing(inp);
         if (cmd)
             exit_code = execution(cmd);
         //affiche(cmd);

@@ -20,8 +20,8 @@ void    copy_data_env(char **ev)
     while (lent--)
     {
         eq_plc = equal_place(ev[lent]);
-        ft_lstadd_front(&glob.env, 
-            ft_lstnew(ft_substr(ev[lent], 0, eq_plc - 1), 
+        ft_lstadd_front(&glob.env,
+            ft_lstnew(ft_substr(ev[lent], 0, eq_plc - 1),
             ft_substr(ev[lent], eq_plc + 1, ft_strlen(ev[lent]))));
     }
 }

@@ -15,7 +15,7 @@ char *find_var(char *to_find)
     return (ft_strdup(""));
 }
 
-char    *expand(char *l, int exit_code, char *av)
+char    *expand(char *l, char *av)
 {
     char *line;
     int i;
@@ -41,7 +41,7 @@ char    *expand(char *l, int exit_code, char *av)
         else if (l[i] == '$' && l[i + 1] == '?')
         {
             line = ft_strjoin_freed2(line, ft_substr(l, left, i - left), 1);
-            line = ft_strjoin_freed2(line, ft_itoa(exit_code), 1);
+            line = ft_strjoin_freed2(line, ft_itoa(glob.exit_code), 1);
             left = ++i + 1;
         }
         else if (l[i] == '$' && (l[i + 1] == '\'' || l[i + 1] == '\"' || l[i + 1] == '_' || ft_isalpha(l[i + 1])))

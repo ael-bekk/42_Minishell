@@ -83,8 +83,9 @@ char *handel_quote(char *line)
 			str = readline(QUOTE);
 		if (!str)
 		{
-			printf(" bash: unexpected EOF while looking for matching `");
-			printf("%c'\nbash: syntax error: unexpected end of file\n", (char)((a == 2) * '\'' + (a == 1) * '\"'));
+			ft_putstr_fd(" bash: unexpected EOF while looking for matching `", 2);
+			ft_putchar_fd(((a == 2) * '\'' + (a == 1) * '\"'), 2);
+			ft_putstr_fd("'\nbash: syntax error: unexpected end of file\n", 2);
 			return (NULL);
 		}
 		line = ft_strjoin_freed(line, str, 0);
