@@ -1,6 +1,6 @@
 #include "../inc/minishell.h"
 
-char *find_var(char *to_find)
+char *find_var(char *key)
 {
     t_list *env;
     char *tmp;
@@ -8,7 +8,7 @@ char *find_var(char *to_find)
     env = glob.env;
     while (env)
     {
-        if (!ft_strncmp(to_find, env->key, strlen(env->key) + 1))
+        if (!ft_strncmp(key, env->key, strlen(env->key) + 1))
             return (ft_strdup(env->value));
         env = env->next;
     }
@@ -18,6 +18,7 @@ char *find_var(char *to_find)
 char    *expand(char *l, char *av)
 {
     char *line;
+    char *tmp;
     int i;
     int left;
 
@@ -50,7 +51,9 @@ char    *expand(char *l, char *av)
             left = ++i;
             while (l[i] && (ft_isalnum(l[i]) || l[i] == '_'))
                 i++;
-            line = ft_strjoin_freed2(line, find_var(ft_substr(l, left, i - left)), 1);
+            tmp = ft_substr(l, left, i - left);
+            line = ft_strjoin_freed2(line, find_var(tmp), 1);
+            free(tmp);
             left = i;
             i--;
         }

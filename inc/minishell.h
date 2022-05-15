@@ -9,6 +9,7 @@
 #include <errno.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <sys/utsname.h>
 
 //****************************************************************************//
 //                     Including relative header files                        //
@@ -16,6 +17,7 @@
 
 #include "../libft/libft.h"
 #include "./built_in.h"
+#include "../get_next_line/get_next_line.h"
 
 //****************************************************************************//
 //                           Add some colors colors                           //
@@ -67,9 +69,11 @@ typedef struct s_cmd
 
 typedef struct s_glob
 {
-    int p;
-    int exit_code;
-    t_list *env;
+    char    *PS1;
+    char    *COMPUTER;
+    int     p;
+    int     exit_code;
+    t_list  *env;
 }   t_glob;
 
 //****************************************************************************//
@@ -79,36 +83,46 @@ typedef struct s_glob
 t_glob  glob;
 
 //****************************************************************************//
-//                                 Extra func                                 //
+//                             signal_hanling                                 //
 //****************************************************************************//
 
 void    sig_hnd(int sig);
 void    sig_hnd2(int sig);
+
+
 void    split_f(char **s, char no_splt);
 char    **split(char *l, char no_splt);
+
 t_cmd   *parsing(char *line);
+
 t_cmd   *creat_node(void);
 t_cmd   *ft_nodelast(t_cmd *head);
 void    add_back_node(t_cmd **head, t_cmd *new);
+
 char    *separ_line(char *s);
+
 int     pars_error(char **s);
+
 void    ft_free(char **s);
 void    ft_free_list(t_cmd **head);
+
 int     aloccate_data(t_cmd *new, char **s);
 void    insertData(t_cmd *new, char **s);
+
 char    *expand(char *l, char *av);
 char    *handel_quote(char *line);
 char    *delete_quote(char *str);
-char    **copy_data(char    **s, int plus);
+
 int     ft_double_strlen(char **s);
-char	*find_var(char *to_find);
+
+char	*find_var(char *key);
+
 char	*handler_pipe(char *line);
 char	*check_full(char *line);
 int		check_quote(char *str);
 int		print_quote(char *str);
 char    *handl_unclosed(char *inp);
 int check_pipe(char *str);
-int ft_double_strlen(char **s);
 
 
 ///functions for get_next_line/////

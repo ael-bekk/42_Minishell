@@ -35,7 +35,8 @@ int blt_echo(char **cmd)
     while (cmd && cmd[i] && nl_echo(cmd[i]))
         i++;
     print_all(&cmd[i]);
-    if (!nl_echo(cmd[0]))
-        printf("\n");
+    if (nl_echo(cmd[0]))
+        printf("\033[0;106m%%\033[0m");
+    printf("\n");
     return (0);
 }

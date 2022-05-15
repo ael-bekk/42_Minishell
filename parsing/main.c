@@ -28,8 +28,8 @@ int execution(t_cmd *cmd)
 {
     if (!cmd || !cmd->cmd[0])
         return (0);
-    // if (!ft_strncmp(cmd->cmd[0], "cd", 3))
-    //     return (blt_cd(cmd->cmd[1]));
+    if (!ft_strncmp(cmd->cmd[0], "cd", 3))
+        return (blt_cd(cmd->cmd[1]));
     if (!ft_strncmp(cmd->cmd[0], "echo", 5))
         return (blt_echo(&cmd->cmd[1]));
     if (!ft_strncmp(cmd->cmd[0], "pwd", 4))
@@ -40,8 +40,8 @@ int execution(t_cmd *cmd)
         return (blt_exit(&cmd->cmd[1]));
     if (!ft_strncmp(cmd->cmd[0], "unset", 6))
         return (blt_unset(&cmd->cmd[1]));
-    // if (!ft_strncmp(cmd->cmd[0], "export", 7))
-    //     return (blt_export(&cmd->cmd[1]));
+    if (!ft_strncmp(cmd->cmd[0], "export", 7))
+        return (blt_export(&cmd->cmd[1]));
     return (0);
 }
 
@@ -60,7 +60,7 @@ int main(int ac, char **av, char **ev)
         blt_pwd();
         signal(SIGINT, sig_hnd);
         signal(SIGQUIT, sig_hnd2);
-        inp = readline("\033[0;34m-> % \033[0;37m");
+        inp = readline("\033[0;34m~> \033[0;36m% \033[0;37m");
         if (!inp)
         {
             printf("exit\n");
