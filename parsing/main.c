@@ -74,12 +74,9 @@ int main(int ac, char **av, char **ev)
             printf("exit\n");
             exit(0);
         }
-        add_history(inp);
-<<<<<<< HEAD
-		inp = check_full(inp);
-=======
         inp = handl_unclosed(inp);
->>>>>>> 0a3f6aef2d3854e68db6a0256346cf8a80384edf
+        if (inp)
+            add_history(inp);
         inp = expand(inp, env, exit_code, av[0]);
         cmd = parsing(inp, &exit_code, &env);
         if (cmd)

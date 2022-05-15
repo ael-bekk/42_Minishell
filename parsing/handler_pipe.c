@@ -41,15 +41,14 @@ char *handler_pipe(char *line)
 	a = !check_pipe(line);
 	while (a)
 	{
-		ft_putstr_fd("pipe> ",1);
-		str = get_next_line(0);
+		str = readline("\033[0;32mpipe> \033[0;37m");
 		if (!str)
 		{
 			printf("Minishell: syntax error: unexpected end of file\n");
 			free(line);
 			return (NULL);
 		}
-		line = ft_strjoin_freed(line, str, 1);
+		line = ft_strjoin_freed(line, str, 0);
 		if (check_pipe(line))
 			a = 0;
 	}
@@ -65,6 +64,7 @@ char *check_full(char *line)
 	v = !check_pipe(line) ||  check_quote(line);
 	while (v)
 	{
+		//line = handel_quote2(line);
 		line = handel_quote(line);
 		line = handler_pipe(line);
 		v = !check_pipe(line) || check_quote(line);

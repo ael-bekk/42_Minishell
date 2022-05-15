@@ -30,6 +30,8 @@
 
 # define TRUE 1
 # define FALSE 0
+# define DQUOTE "\033[0;32mdquote> \033[0;37m"
+# define QUOTE "\033[0;32mquote> \033[0;37m"
 
 typedef struct s_cmd
 {
@@ -83,10 +85,8 @@ int     blt_export(char **cmd, char ***env);
 char    *handl_unclosed(char *inp);
 
 ///functions for get_next_line/////
-char	*get_next_line(int fd);
 char	*ft_strjoin_freed(char *s1, char *s2, int type);
 char	*ft_strchr_line(const char *s, int c);
-char	*ft_strdup_line(const char *s1);
 char	*ft_strjoin_freed2(char *s1, char *s2, int type);
 
 #endif
