@@ -3,17 +3,14 @@
 void sig_hnd(int sig)
 {
     char *s;
-    t_back_up *backup;
 
-    backup = vars();
     (void)sig;
-    if (backup->p)
+    if (!glob.p)
     {
         printf("\n");
-        kill(backup->p, SIGKILL);
-        backup->p = 0;
+        exit(1);
     }
-    else
+    else if (glob.p == -1)
     {
         printf("\r\033[0;34m-> %% \033[0;37m%s  ", rl_line_buffer);
         rl_replace_line("", 0);

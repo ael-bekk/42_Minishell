@@ -1,12 +1,5 @@
 #include "../inc/minishell.h"
 
-t_back_up   *vars()
-{
-    static t_back_up backup;
-
-    return (&backup);
-}
-
 void    affiche(t_cmd *cmd)
 { 
     while (cmd)
@@ -33,10 +26,10 @@ void    affiche(t_cmd *cmd)
 
 int execution(t_cmd *cmd)
 {
-    if (!cmd)
+    if (!cmd || !cmd->cmd[0])
         return (0);
     if (!ft_strncmp(cmd->cmd[0], "cd", 3))
-        return (blt_cd(cmd->cmd[1], *cmd->env));
+        return (blt_cd(cmd->cmd[1], cmd->env));
     if (!ft_strncmp(cmd->cmd[0], "echo", 5))
         return (blt_echo(&cmd->cmd[1]));
     if (!ft_strncmp(cmd->cmd[0], "pwd", 4))
@@ -64,6 +57,7 @@ int main(int ac, char **av, char **ev)
     printf("%s", TITLE);
     while (TRUE)
     {
+        glob.p = -1;
         printf("%s", BLUE);
         blt_pwd();
         signal(SIGINT, sig_hnd);

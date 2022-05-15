@@ -9,7 +9,17 @@
 #include <errno.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+
+//****************************************************************************//
+//                     Including relative header files                        //
+//****************************************************************************//
+
 #include "../libft/libft.h"
+#include "./built_in.h"
+
+//****************************************************************************//
+//                           Add some colors colors                           //
+//****************************************************************************//
 
 # define BLACK "\033[0;30m"
 # define RED "\033[0;31m"
@@ -19,6 +29,11 @@
 # define PURPLE "\033[0;35m"
 # define CYAN "\033[0;36m"
 # define WHITE "\033[0;37m"
+
+//****************************************************************************//
+//                                    Title                                   //
+//****************************************************************************//
+
 # define TITLE "------------------------------------------------------------------------------------------\n\
             ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     \n\
             ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     \n\
@@ -28,10 +43,18 @@
             ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝\n\
                                                                    \n"
 
+//****************************************************************************//
+//                               Some defines                                 //
+//****************************************************************************//
+
 # define TRUE 1
 # define FALSE 0
 # define DQUOTE "\033[0;32mdquote> \033[0;37m"
 # define QUOTE "\033[0;32mquote> \033[0;37m"
+
+//****************************************************************************//
+//                                  Stracters                                 //
+//****************************************************************************//
 
 typedef struct s_cmd
 {
@@ -43,13 +66,21 @@ typedef struct s_cmd
     struct s_cmd    *next;
 }   t_cmd;
 
-typedef struct s_back_up
+typedef struct s_glob
 {
     int p;
-}   t_back_up;
+}   t_glob;
 
+//****************************************************************************//
+//                               One golob var                                //
+//****************************************************************************//
 
-t_back_up   *vars();
+t_glob  glob;
+
+//****************************************************************************//
+//                                 Extra func                                 //
+//****************************************************************************//
+
 void    sig_hnd(int sig);
 void    sig_hnd2(int sig);
 void    split_f(char **s, char no_splt);
@@ -74,15 +105,8 @@ char	*handler_pipe(char *line);
 char	*check_full(char *line);
 int		check_quote(char *str);
 int		print_quote(char *str);
-//
-int     blt_cd(char *path, char **env);
-int     blt_echo(char **cmd);
-int     blt_pwd();
-int     blt_env(char **cmd);
-int     blt_exit(char **cmd);
-int     blt_unset(char **cmd, char **env);
-int     blt_export(char **cmd, char ***env);
 char    *handl_unclosed(char *inp);
+int check_pipe(char *str);
 
 ///functions for get_next_line/////
 char	*ft_strjoin_freed(char *s1, char *s2, int type);

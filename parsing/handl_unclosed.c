@@ -31,25 +31,24 @@ char *handl_unclosed(char *inp)
 {
     int i;
     int p1[2];
-    t_back_up *backup;
 
-    backup = vars();
-    pipe(p1);
-    if (!backup->p)
-        backup->p = fork();
-    if (!backup->p)
+    if (!check_pipe(inp) ||  check_quote(inp))
     {
-        //signal(SIGINT, sig_h);
-        inp = check_full(inp);
-        write(p1[1], inp, ft_strlen(inp));
-        close(p1[0]);
+        pipe(p1);
+        glob.p = fork();
+        if (!glob.p)
+        {
+            //signal(SIGINT, sig_h);
+            inp = check_full(inp);
+            write(p1[1], inp, ft_strlen(inp));
+            close(p1[0]);
+            close(p1[1]);
+            exit(1);
+        }
+        wait(NULL);
         close(p1[1]);
-        exit(1);
+        inp = print_data(p1[0]);
+        close(p1[0]);
     }
-    wait(NULL);
-    backup->p = 0;
-    close(p1[1]);
-    inp = print_data(p1[0]);
-    close(p1[0]);
     return (inp);
 }
