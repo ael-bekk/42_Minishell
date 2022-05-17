@@ -10,12 +10,10 @@ int ft_double_strlen(char **s)
     return (i);
 }
 
-t_list  *find_var2(char *key)
+t_list  *find_var2(char *key, t_list *env)
 {
-    t_list *env;
     char *tmp;
 
-    env = glob.env;
     while (env)
     {
         if (!ft_strncmp(key, env->key, strlen(env->key) + 1))
@@ -53,7 +51,7 @@ int is_valid_var(char *s)
     return (0);
 }
 
-int blt_export(char **cmd)
+int blt_export(char **cmd, t_list **g)
 {
     t_list  *node;
     int     i;
@@ -70,9 +68,12 @@ int blt_export(char **cmd)
         {
             p = equal_place(cmd[i]);
             cmd[i][p - (type == 1)] = 0;
-            node = find_var2(cmd[i]);
+            node = find_var2(cmd[i], *g);
             if (!node)
-                ft_lstadd_back(&glob.env, ft_lstnew(ft_strdup(cmd[i]), ft_strdup(&cmd[i][p + 1])));
+            {
+                ft_lstadd_back(g, ft_lstnew(ft_strdup(cmd[i]), ft_strdup(&cmd[i][p + 1])));
+                type = 0;
+            }
         }
         if (type == 1 && node)
             node->value = ft_strjoin_freed(node->value, &cmd[i][p + 1], 1);

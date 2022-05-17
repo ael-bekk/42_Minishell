@@ -7,9 +7,9 @@
 #include <unistd.h>
 #include <signal.h>
 #include <errno.h>
+#include <fcntl.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include <sys/utsname.h>
 
 //****************************************************************************//
 //                     Including relative header files                        //
@@ -69,11 +69,13 @@ typedef struct s_cmd
 
 typedef struct s_glob
 {
-    char    *PS1;
-    char    *COMPUTER;
+    int     no_nl;
+    int     not_set_new_prompet;
     int     p;
     int     exit_code;
+    t_list  *local;
     t_list  *env;
+    char    **c_env;
 }   t_glob;
 
 //****************************************************************************//
@@ -115,7 +117,7 @@ char    *delete_quote(char *str);
 
 int     ft_double_strlen(char **s);
 
-char	*find_var(char *key);
+char	*find_var(char *key, t_list *env);
 
 char	*handler_pipe(char *line);
 char	*check_full(char *line);
@@ -129,6 +131,7 @@ int check_pipe(char *str);
 char	*ft_strjoin_freed(char *s1, char *s2, int type);
 char	*ft_strchr_line(const char *s, int c);
 char	*ft_strjoin_freed2(char *s1, char *s2, int type);
+
 
 
 int     equal_place(char *s);

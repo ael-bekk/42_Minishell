@@ -1,11 +1,9 @@
 #include "../inc/minishell.h"
 
-char *find_var(char *key)
+char *find_var(char *key, t_list *env)
 {
-    t_list *env;
     char *tmp;
 
-    env = glob.env;
     while (env)
     {
         if (!ft_strncmp(key, env->key, strlen(env->key) + 1))
@@ -21,13 +19,16 @@ char    *expand(char *l, char *av)
     char *tmp;
     int i;
     int left;
+    int in_dquote = 0;
 
     left = 0;
     i = -1;
     line = NULL;
     while (l && l[++i])
     {
-        if (l[i] == '\'')
+        if (l[i] == '\"')
+            in_dquote = !in_dquote;
+        if (l[i] == '\'' && !in_dquote)
             while (l[++i] && l[i] != '\'')
                 ;
         if (l[i] == '$' && ft_isdigit(l[i + 1]))
@@ -52,7 +53,7 @@ char    *expand(char *l, char *av)
             while (l[i] && (ft_isalnum(l[i]) || l[i] == '_'))
                 i++;
             tmp = ft_substr(l, left, i - left);
-            line = ft_strjoin_freed2(line, find_var(tmp), 1);
+            line = ft_strjoin_freed2(line, find_var(tmp, glob.env), 1);
             free(tmp);
             left = i;
             i--;

@@ -1,80 +1,121 @@
 #include "../inc/minishell.h"
 
-#include <fcntl.h>
-
-char *deppace_name(char *s)
+void    change_pwd()
 {
-    char *c;
-    int l;
-    int r;
+    char *e[2];
 
-    r = 0;
-    while (s && s[r] && s[r] != '>')
-        r++;
-    l = ++r;
-    while (s && s[r] && s[r] != '<')
-        r++;
-    c = ft_substr(s, l, r - l);
-    free(s);
-    return (c);
+    e[0] = ft_strjoin_freed2(ft_strdup("PWD="), getcwd(NULL, 0), 1);
+    e[1] = NULL;
+    blt_export(e, &glob.env);
+    free(e[0]);
 }
 
-int cherch_file()
+void    change_old_pwd(char *s)
 {
-    int fd;
-    char *s;
-    char *env[2];
+    char *e[2];
 
-    fd = open("/Library/Preferences/SystemConfiguration/preferences.plist", O_RDONLY);
-    if (fd == -1)
-        return (0);
+    e[0] = ft_strjoin_freed2(ft_strdup("OLDPWD="), s, 1);
+    e[1] = NULL;
+    blt_export(e, &glob.env);
+    free(e[0]);
+}
 
-    s = get_next_line11(fd);
-    while (s)
+int handle_tilde(char *path, char *ss)
+{
+    t_list    *s;
+
+    if (!path || (path[0] == '~' && !path[1]))
     {
-        if (ft_strnstr(s, "ComputerName", ft_strlen(s)))
+        s = find_var2("HOME", glob.env);
+        if (s && chdir(s->value) == -1)
         {
-            env[0] = ft_strjoin_freed2(ft_strdup("COMPUTER="), deppace_name(get_next_line11(fd)), 1);
-            glob.COMPUTER = env[0];
-            env[1] = NULL;
-            blt_export(env);
-            printf("%s", s);
-            free(s);
-            break ;
+            printf("Minishell: cd: %s: %s\n", s->value, strerror(errno));
+            glob.exit_code = 1;
+            free(ss);
+            return (1);
         }
-        free(s);
-        s = get_next_line11(fd);
+        change_old_pwd(ss);
+        change_pwd();
+        return (1);
     }
     return (0);
 }
 
-#include <time.h>
+int handle_minus(char *path, char *ss)
+{
+    t_list    *s;
+
+    if (path[0] == '-' && !path[1])
+    {
+        s = find_var2("OLDPWD", glob.env);
+        if (s && chdir(s->value) == -1)
+        {
+            printf("Minishell: cd: %s: %s\n", s->value, strerror(errno));
+            glob.exit_code = 1;
+            free(ss);
+            return (1);
+        }
+        else if (!s)
+        {
+            printf("Minishell: cd: OLDPWD not set\n");
+            glob.exit_code = 1;
+            free(ss);
+            return (1);
+        }
+        change_old_pwd(ss);
+        change_pwd();
+        return (1);
+    }
+    return (0);
+}
+
+int handle_dot(char *path, char *ss)
+{
+    t_list  *s;
+    char    *pwd;
+
+    if (path[0] == '.' && !path[1])
+    {
+        pwd = getcwd(NULL, 0);
+        if (!ft_strncmp(path, ".", 2) && !pwd)
+        {
+            printf("cd: error retrieving current directory: getcwd: cannot ");
+            printf("access parent directories: No such file or directory\n");
+            glob.exit_code = 1;
+            free(ss);
+            free(pwd);
+            return (1);
+        }
+        else if (!pwd)
+        {
+            free(pwd);
+            return (1);
+        }
+        free(pwd);
+    }
+    return (0);
+}
 
 int blt_cd(char *path)
 {
-    int all;
+    char *s;
 
-    if (!glob.COMPUTER)
-        cherch_file();
-    all = 0;
-    if (!path || (path[0] == '~' && !path[1]))
-    {
-        path = find_var("HOME");
-        all = 1;
-    }
-    else if (!ft_strncmp(path, ".", 2))
-    {
-        printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory");
-        return (1);
-    }
-    else if (chdir(path) == -1)
+    glob.exit_code = 0;
+    s = getcwd(NULL, 0);
+    if (handle_tilde(path, s))
+        return (glob.exit_code);
+    if (handle_minus(path, s))
+        return (glob.exit_code);
+    if (handle_dot(path, s))
+        return (glob.exit_code);
+    if (chdir(path) == -1)
     {
         printf("Minishell: cd: %s: %s\n", path, strerror(errno));
-        if (all)
-            free(path);
+        free(s);
+        glob.exit_code = 1;
         return (1);
     }
-    if (all)
-            free(path);
-    return (0);
+    change_pwd();
+    change_old_pwd(s);
+    return (glob.exit_code);
 }

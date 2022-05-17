@@ -1,8 +1,25 @@
 #include "../inc/minishell.h"
 
+int last_new_line()
+{
+    int i;
+    int last;
+    int new;
+
+    i = -1;
+    last = 0;
+    new = 0;
+    while (rl_line_buffer[++i])
+        if (rl_line_buffer[i] == '\n')
+        {
+            last = new;
+            new = i + 1;
+        }
+    return (last);
+}
+
 void sig_hnd(int sig)
 {
-    char *s;
 
     (void)sig;
     if (!glob.p)
@@ -12,13 +29,15 @@ void sig_hnd(int sig)
     }
     else if (glob.p == -1)
     {
-        printf("\r\033[0;34m~> %s%% \033[0;37m%s  ", CYAN, rl_line_buffer);
+        if (last_new_line())
+            printf("\r\033[0m%s  ", &rl_line_buffer[last_new_line() + 1]);
+        else
+            printf("\r\033[0;34m~> %s%% \033[0m%s  ", CYAN, rl_line_buffer);
         rl_replace_line("", 0);
-        s = getcwd(NULL, 0);
-        printf("\n%s%s\n", BLUE, s);
+        printf("\n");
+        print_prompet();
         rl_on_new_line();
         rl_redisplay();
-        free(s);
     }
 }
 
