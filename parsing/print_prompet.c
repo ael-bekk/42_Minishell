@@ -7,7 +7,7 @@ void    print_prompet()
 
     if (glob.no_nl)
     {
-        printf("\033[0;106m%%\033[0m\n");
+        printf("\033[0;90m\033[0;106m%%\033[0m\n");
         glob.no_nl = 0;
     }
     printf("\033[1;32m");

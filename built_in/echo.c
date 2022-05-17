@@ -1,6 +1,5 @@
 #include "../inc/minishell.h"
 
-
 void print_all(char **cmd)
 {
     int i;
