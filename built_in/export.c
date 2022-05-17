@@ -31,7 +31,7 @@ int is_valid_var(char *s)
     i = 0;
     if (!ft_isalpha(s[0]))
     {
-        printf("Minishell: export: `%s': not a valid identifier\n", s);
+        printf("%s: export: `%s': not a valid identifier\n", glob.av[0], s);
         return (0);
     }
     while (s[i] && (ft_isalnum(s[i]) || s[i] == '_'))
@@ -42,7 +42,7 @@ int is_valid_var(char *s)
         return (1);
     if (s[i] == '=')
         return (2);
-    printf("Minishell: export: `");
+    printf("%s: export: `", glob.av[0]);
     p_m = (s[i] == '=');
     i = 0;
     while (s[i] && ((s[i] != '=' && p_m) || !p_m))

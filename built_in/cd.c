@@ -29,7 +29,7 @@ int handle_tilde(char *path, char *ss)
         s = find_var2("HOME", glob.env);
         if (s && chdir(s->value) == -1)
         {
-            printf("Minishell: cd: %s: %s\n", s->value, strerror(errno));
+            printf("%s: cd: %s: %s\n", glob.av[0], s->value, strerror(errno));
             glob.exit_code = 1;
             free(ss);
             return (1);
@@ -50,14 +50,14 @@ int handle_minus(char *path, char *ss)
         s = find_var2("OLDPWD", glob.env);
         if (s && chdir(s->value) == -1)
         {
-            printf("Minishell: cd: %s: %s\n", s->value, strerror(errno));
+            printf("%s: cd: %s: %s\n", glob.av[0], s->value, strerror(errno));
             glob.exit_code = 1;
             free(ss);
             return (1);
         }
         else if (!s)
         {
-            printf("Minishell: cd: OLDPWD not set\n");
+            printf("%s: cd: OLDPWD not set\n", glob.av[0]);
             glob.exit_code = 1;
             free(ss);
             return (1);
@@ -110,7 +110,7 @@ int blt_cd(char *path)
         return (glob.exit_code);
     if (chdir(path) == -1)
     {
-        printf("Minishell: cd: %s: %s\n", path, strerror(errno));
+        printf("%s: cd: %s: %s\n", glob.av[0], path, strerror(errno));
         free(s);
         glob.exit_code = 1;
         return (1);

@@ -58,7 +58,7 @@ int blt_unset(char **cmd)
             env = env->next;
         }
         if (res)
-            printf("Minishell: export: `%s': not a valid identifier\n", cmd[i]);
+            printf("%s: export: `%s': not a valid identifier\n", glob.av[0], cmd[i]);
         glob.exit_code = glob.exit_code || res;
     }
     return (glob.exit_code);

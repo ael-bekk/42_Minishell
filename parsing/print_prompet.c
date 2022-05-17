@@ -16,7 +16,7 @@ void    print_prompet()
     {
         home = find_var2("HOME", glob.env);
         pwd = getcwd(NULL, 0);
-        if (home && ft_strnstr(pwd, home->value, ft_strlen(home->value)))
+        if (pwd && home && ft_strnstr(pwd, home->value, ft_strlen(home->value)))
             printf(" [~%s]\n", &pwd[ft_strlen(home->value)]);
         else if (pwd)
             printf(" [%s]\n", pwd);

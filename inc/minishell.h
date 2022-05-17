@@ -69,6 +69,7 @@ typedef struct s_cmd
 
 typedef struct s_glob
 {
+    char    **av;
     int     no_nl;
     int     not_set_new_prompet;
     int     p;

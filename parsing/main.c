@@ -50,7 +50,7 @@ int main(int ac, char **av, char **ev)
     t_cmd *cmd;
     char *inp;
 
-    
+    glob.av = av;
     copy_data_env(ev);
     prompet();
     glob.exit_code = 0;
