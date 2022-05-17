@@ -15,7 +15,9 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# define LONG_MAX 9223372036854775807
+# include <limits.h>
+# define TRUE 1
+# define BUFFER_SIZE 1024
 
 typedef struct s_list
 {
@@ -62,7 +64,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
-// part 3 *Bonus*
+// part 3 *linked_list*
 t_list	*ft_lstnew(void *key, void *value);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
@@ -71,5 +73,16 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
+
+// part 4 *get_next_line*
+void	*ft_free11(char **s);
+char	*read_buff11(int fd, char **buff);
+char	*read_line11(int fd, char **buff);
+char	*get_next_line11(int fd);
+
+int		find_new_line11(char *s);
+char	*ft_strjoin11(char *s1, char *s2);
+char	*ft_substr11(char *s, int end);
+void	ft_new_buff11(char **buff, int start);
 
 #endif

@@ -17,7 +17,6 @@
 
 #include "../libft/libft.h"
 #include "./built_in.h"
-#include "../get_next_line/get_next_line.h"
 
 //****************************************************************************//
 //                           Add some colors colors                           //
@@ -57,6 +56,14 @@
 //****************************************************************************//
 //                                  Stracters                                 //
 //****************************************************************************//
+
+typedef struct s_fcmd
+{
+    int             in;
+    int             out;
+    char            **cmd; // cmd , flags, args
+    struct s_cmd    *next;
+}   t_fcmd;
 
 typedef struct s_cmd
 {
