@@ -1,15 +1,5 @@
 #include "../inc/minishell.h"
 
-int ft_double_strlen(char **s)
-{
-    int i;
-
-    i = 0;
-    while (s && s[i])
-        i++;
-    return (i);
-}
-
 t_list  *find_var2(char *key, t_list *env)
 {
     char *tmp;

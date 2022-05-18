@@ -74,6 +74,12 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
+// part 3 *linked_list*
+int     ft_double_strlen(char **s);
+char	*ft_strjoin_freed(char *s1, char *s2, int type);
+char	*ft_strchr_line(const char *s, int c);
+char	*ft_strjoin_freed2(char *s1, char *s2, int type);
+
 // part 4 *get_next_line*
 void	*ft_free11(char **s);
 char	*read_buff11(int fd, char **buff);

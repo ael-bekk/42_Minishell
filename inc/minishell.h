@@ -57,16 +57,10 @@
 //                                  Stracters                                 //
 //****************************************************************************//
 
-typedef struct s_fcmd
+typedef struct s_cmd
 {
     int             in;
     int             out;
-    char            **cmd; // cmd , flags, args
-    struct s_cmd    *next;
-}   t_fcmd;
-
-typedef struct s_cmd
-{
     char            **here_doc;
     char            **rid; // < > >> whith type 1 2 3 
     int             *type; // (1 : <) , (2 : >) , (3 : >>) 
@@ -76,14 +70,15 @@ typedef struct s_cmd
 
 typedef struct s_glob
 {
-    char    **av;
     int     no_nl;
     int     not_set_new_prompet;
     int     p;
     int     exit_code;
+    char    **av;
+    char    **exec_env;
     t_list  *local;
     t_list  *env;
-    char    **c_env;
+    
 }   t_glob;
 
 //****************************************************************************//
@@ -123,8 +118,6 @@ char    *expand(char *l, char *av);
 char    *handel_quote(char *line);
 char    *delete_quote(char *str);
 
-int     ft_double_strlen(char **s);
-
 char	*find_var(char *key, t_list *env);
 
 char	*handler_pipe(char *line);
@@ -135,10 +128,6 @@ char    *handl_unclosed(char *inp);
 int check_pipe(char *str);
 
 
-///functions for get_next_line/////
-char	*ft_strjoin_freed(char *s1, char *s2, int type);
-char	*ft_strchr_line(const char *s, int c);
-char	*ft_strjoin_freed2(char *s1, char *s2, int type);
 
 
 
