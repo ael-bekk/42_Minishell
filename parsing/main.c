@@ -69,7 +69,7 @@ int main(int ac, char **av, char **ev)
             exit(0);
         }
         inp = handl_unclosed(inp);
-        if (inp)
+        if (inp && inp[0])
             add_history(inp);
         inp = expand(inp, av[0]);
         cmd = parsing(inp);
