@@ -45,20 +45,6 @@ int cherch_file()
     return (0);
 }
 
-// void    affich_p(void *data)
-// {
-//     t_list *d;
-
-//     d = data;
-//     printf("%s=%s\n", d->key, d->value);
-// }
-
-// int    blt_p()
-// {
-//     ft_lstiter(glob.local, &affich_p);
-//     return (0);
-// }
-
 void    prompet_user(t_list *tmp)
 {
     if (tmp)

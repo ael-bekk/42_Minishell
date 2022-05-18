@@ -94,6 +94,17 @@ t_glob  glob;
 void    sig_hnd(int sig);
 void    sig_hnd2(int sig);
 
+//****************************************************************************//
+//                                   prompt                                   //
+//****************************************************************************//
+char    *deppace_name(char *s)
+void    prompet_user(t_list *tmp)
+void    prompet_computername(t_list *tmp)
+int     cherch_file();
+void    prompet();
+void    print_prompet();
+
+
 
 void    split_f(char **s, char no_splt);
 char    **split(char *l, char no_splt);
