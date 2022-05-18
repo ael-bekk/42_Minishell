@@ -22,10 +22,10 @@ void sig_hnd(int sig)
 {
 
     (void)sig;
-    if (!glob.p)
+    if (glob.p != -1)
     {
+        close(0);
         printf("\n");
-        exit(1);
     }
     else if (glob.p == -1)
     {

@@ -22,7 +22,7 @@ int aloccate_data(t_cmd *cmd, char **s)
     int i;
 
     h_doc = 0;
-    rid = 0;    
+    rid = 0;
     cmnd = 0;
     i = -1;
     while (s && s[++i])

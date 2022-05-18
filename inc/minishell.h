@@ -71,14 +71,12 @@ typedef struct s_cmd
 typedef struct s_glob
 {
     int     no_nl;
-    int     not_set_new_prompet;
     int     p;
     int     exit_code;
     char    **av;
     char    **exec_env;
     t_list  *local;
     t_list  *env;
-    
 }   t_glob;
 
 //****************************************************************************//
@@ -97,29 +95,31 @@ void    sig_hnd2(int sig);
 //****************************************************************************//
 //                                   prompt                                   //
 //****************************************************************************//
-char    *deppace_name(char *s)
-void    prompet_user(t_list *tmp)
-void    prompet_computername(t_list *tmp)
+char    *deppace_name(char *s);
+void    prompet_user(t_list *tmp);
+void    prompet_computername(t_list *tmp);
 int     cherch_file();
 void    prompet();
 void    print_prompet();
 
+//****************************************************************************//
+//                                 t_list data                                //
+//****************************************************************************//
+t_cmd   *parsing(char *line);
+t_cmd   *creat_node(void);
+t_cmd   *ft_nodelast(t_cmd *head);
+void    copy_data_env(char **ev);
 
 
 void    split_f(char **s, char no_splt);
 char    **split(char *l, char no_splt);
 
-t_cmd   *parsing(char *line);
-
-t_cmd   *creat_node(void);
-t_cmd   *ft_nodelast(t_cmd *head);
 void    add_back_node(t_cmd **head, t_cmd *new);
 
 char    *separ_line(char *s);
 
 int     pars_error(char **s);
 
-void    ft_free(char **s);
 void    ft_free_list(t_cmd **head);
 
 int     aloccate_data(t_cmd *new, char **s);
@@ -136,13 +136,12 @@ char	*check_full(char *line);
 int		check_quote(char *str);
 int		print_quote(char *str);
 char    *handl_unclosed(char *inp);
-int check_pipe(char *str);
+int     check_pipe(char *str);
 
 
 
 
 
 int     equal_place(char *s);
-void    copy_data_env(char **ev);
 
 #endif

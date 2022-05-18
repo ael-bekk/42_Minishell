@@ -36,8 +36,8 @@ int    pars_error(char **s)
             return (errors_print(s[i + 1]));
         else if ((s[i][0] == '>' || s[i][0] == '<') && (s[i + 1][0] == '>' || s[i + 1][0] == '<'))
             return (errors_print(s[i + 1]));
-        else
-            s[i] = delete_quote(s[i]);
-    }
+        // else
+        //     s[i] = delete_quote(s[i]);
+             }
     return (0);
 }

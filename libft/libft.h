@@ -64,6 +64,14 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
+// part ~
+int     ft_double_strlen(char **s);
+char	*ft_strjoin_freed(char *s1, char *s2, int type);
+char	*ft_strchr_line(const char *s, int c);
+char	*ft_strjoin_freed2(char *s1, char *s2, int type);
+char    **ft_str_double_join(char ***s1, char ***s2);
+void    ft_free(char **s);
+
 // part 3 *linked_list*
 t_list	*ft_lstnew(void *key, void *value);
 void	ft_lstadd_front(t_list **lst, t_list *new);
@@ -73,12 +81,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
-
-// part 3 *linked_list*
-int     ft_double_strlen(char **s);
-char	*ft_strjoin_freed(char *s1, char *s2, int type);
-char	*ft_strchr_line(const char *s, int c);
-char	*ft_strjoin_freed2(char *s1, char *s2, int type);
 
 // part 4 *get_next_line*
 void	*ft_free11(char **s);

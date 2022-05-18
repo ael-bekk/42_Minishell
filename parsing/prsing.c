@@ -35,7 +35,6 @@ t_cmd    *parsing(char *line)
             glob.exit_code = 258;
             return (NULL);
         }
-        //printf("%s\n", s[i]);
     }
     free(line);
     ft_free(s);

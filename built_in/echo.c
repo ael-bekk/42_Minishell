@@ -21,11 +21,10 @@ int nl_echo(char *s)
     while (s && s[0] == '-'&& s[++i])
         if (s[i] != 'n')
             return (0);
-    if (s && s[1] && !s[i])
+    if (s && s[1] == 'n' && !s[i])
         return (1);
     return (0);
 }
-
 int blt_echo(char **cmd)
 {
     int i;

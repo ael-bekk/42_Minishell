@@ -46,6 +46,7 @@ char *delete_quote(char *str)
 	j = 0;
 	c = 0;
 	a = 0;
+	
 	if (!str)
 		return (NULL);
 	line = malloc(ft_strlen(str) + 1);
@@ -63,9 +64,8 @@ char *delete_quote(char *str)
 		else
 			line[j++] = str[i++];
 	}
-	line[j++] = '\0';
+	line[j] = '\0';
 	free(str);
-	str = NULL;
 	return (line);
 }
 

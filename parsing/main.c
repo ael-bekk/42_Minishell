@@ -73,9 +73,10 @@ int main(int ac, char **av, char **ev)
             add_history(inp);
         inp = expand(inp, av[0]);
         cmd = parsing(inp);
+        // affiche(cmd);
         if (cmd)
             glob.exit_code = execution(cmd);
-        //affiche(cmd);
+        
         ft_free_list(&cmd); 
     }
     return (0);

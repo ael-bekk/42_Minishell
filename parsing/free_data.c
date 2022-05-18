@@ -1,15 +1,5 @@
 #include "../inc/minishell.h"
 
-void    ft_free(char **s)
-{
-    int i;
-
-    i = -1;
-    while (s && s[++i])
-        free(s[i]);
-    free(s);
-}
-
 void    ft_free_list(t_cmd **head)
 {
     t_cmd *tmp;

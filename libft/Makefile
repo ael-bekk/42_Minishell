@@ -1,6 +1,6 @@
 NAME	= libft.a
 
-SRCS	= 	utils.c ft_strlen_double.c \
+SRCS	= 	utils.c ft_strlen_double.c ft_str_double_join.c ft_free.c\
 			ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 			ft_tolower.c ft_toupper.c  ft_atoi.c ft_itoa.c ft_calloc.c \
 			ft_memset.c ft_bzero.c ft_memcpy.c ft_memcpy.c ft_memmove.c \
