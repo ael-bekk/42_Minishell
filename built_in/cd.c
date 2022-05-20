@@ -81,7 +81,7 @@ int handle_dot(char *path, char *ss)
         {
             printf("cd: error retrieving current directory: getcwd: cannot ");
             printf("access parent directories: No such file or directory\n");
-            glob.exit_code = 1;
+            glob.exit_code = 0;
             free(ss);
             free(pwd);
             return (1);

@@ -13,7 +13,7 @@ char *find_var(char *key, t_list *env)
     return (ft_strdup(""));
 }
 
-char    *expand(char *l, char *av)
+char    *expand(char *l)
 {
     char *line;
     char *tmp;
@@ -35,7 +35,7 @@ char    *expand(char *l, char *av)
         {
             line = ft_strjoin_freed2(line, ft_substr(l, left, i - left), 1);
             if (l[i + 1] == '0')
-                line = ft_strjoin_freed(line, &av[2], 1);
+                line = ft_strjoin_freed(line, &glob.av[0][2], 1);
             else
                 line = ft_strjoin_freed(line, "", 1);
             left = ++i + 1;

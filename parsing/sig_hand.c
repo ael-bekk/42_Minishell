@@ -24,17 +24,22 @@ void sig_hnd(int sig)
     (void)sig;
     if (glob.p != -1)
     {
+        glob.exit_code = 130;
+        glob.no_init = 1;
+        printf("\r");
+        printf("%s%s  \n", glob.herd, rl_line_buffer);
+        rl_redisplay();
         close(0);
-        printf("\n");
     }
     else if (glob.p == -1)
     {
-        if (last_new_line())
+        if (last_new_line() && !glob.no_init)
             printf("\r\033[0m%s  ", &rl_line_buffer[last_new_line() + 1]);
-        else
+        else if (!glob.no_init)
             printf("\r\033[0;34m~> %s%% \033[0m%s  ", CYAN, rl_line_buffer);
+        if (!glob.no_init)
+            printf("\n");
         rl_replace_line("", 0);
-        printf("\n");
         print_prompet();
         rl_on_new_line();
         rl_redisplay();

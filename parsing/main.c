@@ -42,7 +42,22 @@ int execution(t_cmd *cmd)
         return (blt_unset(&cmd->cmd[1]));
     if (!ft_strncmp(cmd->cmd[0], "export", 7))
         return (blt_export(&cmd->cmd[1], &glob.env));
-    return (0);
+    return (glob.exit_code);
+}
+
+void    clear_line(char *inp)
+{
+    int i;
+    int j;
+
+    i = -1;
+    j = 0;
+    if (!inp)
+        return ;
+    while (inp[++i])
+        if (inp[i] != '$' || (inp[i + 1] != '\"' && inp[i + 1] != '\''))
+            inp[j++] = inp[i];
+    inp[j] = '\0';
 }
 
 int main(int ac, char **av, char **ev)
@@ -53,7 +68,6 @@ int main(int ac, char **av, char **ev)
     glob.av = av;
     copy_data_env(ev);
     prompet();
-    glob.exit_code = 0;
     printf("%s", TITLE);
     while (TRUE)
     {
@@ -62,21 +76,22 @@ int main(int ac, char **av, char **ev)
         signal(SIGINT, sig_hnd);
         signal(SIGQUIT, sig_hnd2);
         inp = readline("\033[0;34m~> \033[0;36m% \033[0m");
-        printf("%s", WHITE);
         if (!inp)
         {
             printf("exit\n");
             exit(0);
         }
+        glob.no_init = 0;
         inp = handl_unclosed(inp);
         if (inp && inp[0])
             add_history(inp);
-        inp = expand(inp, av[0]);
+        clear_line(inp);
         cmd = parsing(inp);
-        // affiche(cmd);
-        if (cmd)
+        if (cmd && !define_cmd(cmd))
+        {
             glob.exit_code = execution(cmd);
-        
+        }
+        //affiche(cmd);
         ft_free_list(&cmd); 
     }
     return (0);

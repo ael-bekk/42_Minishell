@@ -5,6 +5,7 @@ t_cmd   *creat_node(void)
     t_cmd *node;
 
     node = (t_cmd *)malloc(sizeof(t_cmd));
+    node->use = 1;
     node->here_doc = NULL;
     node->rid = NULL;
     node->type = NULL;

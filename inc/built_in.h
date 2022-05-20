@@ -10,7 +10,4 @@ int     blt_unset(char **cmd);
 int     blt_export(char **cmd, t_list **g);
 
 
-t_list  *find_var2(char *key, t_list *env);
-
-
 #endif

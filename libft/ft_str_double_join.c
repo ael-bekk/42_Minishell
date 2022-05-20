@@ -19,5 +19,7 @@ char    **ft_str_double_join(char ***s1, char ***s2)
     new[i + l1] = NULL;
     ft_free(*s1);
     ft_free(*s2);
+    *s1 = NULL;
+    *s2 = NULL;
     return (new);
 }

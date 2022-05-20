@@ -5,7 +5,7 @@ int is_valid_var2(char *s)
     int i;
 
     i = 0;
-    if (!ft_isalpha(s[0]))
+    if (!ft_isalpha(s[0]) && s[i] != '_')
         return (0);
     while (s[i] && (ft_isalnum(s[i]) || s[i] == '_'))
         i++;
