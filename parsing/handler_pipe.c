@@ -25,7 +25,7 @@ int check_pipe(char *str)
 	{
 		if (str[i] == '|')
 			a = 0;
-		else  if (str[i] != ' ')
+		else  if (str[i] != ' ' && str[i] != '\n')
 			a = 1;
 	}
 	return(a);
