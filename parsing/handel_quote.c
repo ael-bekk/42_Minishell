@@ -77,18 +77,27 @@ char *handel_quote(char *line)
 	a = check_quote(line);
 	while (a)
 	{
+		free(glob.herd);
+		glob.herd = NULL;
 		if (a == 1)
-			str = readline(DQUOTE);	
+			glob.herd = ft_strdup(DQUOTE);
 		else
-			str = readline(QUOTE);
+			glob.herd = ft_strdup(QUOTE);
+		str = readline(glob.herd);	
 		if (!str)
 		{
-			ft_putstr_fd(" bash: unexpected EOF while looking for matching `", 2);
-			ft_putchar_fd(((a == 2) * '\'' + (a == 1) * '\"'), 2);
-			ft_putstr_fd("'\nbash: syntax error: unexpected end of file\n", 2);
+			if (!glob.no_init)
+			{
+				ft_putstr_fd("\033[4;31m bash: unexpected EOF while looking for matching `", 2);
+				ft_putchar_fd(((a == 2) * '\'' + (a == 1) * '\"'), 2);
+				ft_putstr_fd("'\nbash: syntax error: unexpected end of file\033[0m\n", 2);
+			}
+			glob.no_init = 1;
+			free(line);
+			free(str);
 			return (NULL);
 		}
-		line = ft_strjoin_freed(line, str, 0);
+		line = ft_strjoin_freed2(line, str, 0);
 		a = check_quote(line);
 	}
 	return (line);

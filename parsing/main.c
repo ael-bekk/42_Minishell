@@ -45,21 +45,6 @@ int execution(t_cmd *cmd)
     return (glob.exit_code);
 }
 
-void    clear_line(char *inp)
-{
-    int i;
-    int j;
-
-    i = -1;
-    j = 0;
-    if (!inp)
-        return ;
-    while (inp[++i])
-        if (inp[i] != '$' || (inp[i + 1] != '\"' && inp[i + 1] != '\''))
-            inp[j++] = inp[i];
-    inp[j] = '\0';
-}
-
 int main(int ac, char **av, char **ev)
 {
     t_cmd *cmd;
@@ -71,6 +56,7 @@ int main(int ac, char **av, char **ev)
     printf("%s", TITLE);
     while (TRUE)
     {
+        glob.nb_cmd = 0;
         glob.p = -1;
         print_prompet();
         signal(SIGINT, sig_hnd);
@@ -88,9 +74,7 @@ int main(int ac, char **av, char **ev)
         clear_line(inp);
         cmd = parsing(inp);
         if (cmd && !define_cmd(cmd))
-        {
             glob.exit_code = execution(cmd);
-        }
         //affiche(cmd);
         ft_free_list(&cmd); 
     }

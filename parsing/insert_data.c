@@ -23,7 +23,7 @@ void    insertData(t_cmd *new, char **s)
             new->rid[r++] = expand(ft_strdup(s[++i]));
             if (!new->rid[r - 1] || !new->rid[r - 1][0])
             {
-                printf("%s: %s: ambiguous redirect\n", &glob.av[0][2], s[i]);
+                printf("\033[4;31m  %s: %s: ambiguous redirect\033[0m\n", &glob.av[0][2], s[i]);
                 new->use = 0;
             }
             else

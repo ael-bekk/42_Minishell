@@ -43,6 +43,7 @@ int open_files(t_cmd *cmd, int (*t[4])(t_cmd *, char *))
             t[cmd->type[i]](cmd, cmd->rid[i]);
         cmd = cmd->next;
     }
+    glob.exit_code = !!glob.exit_code;
     return (0);
 }
 
@@ -56,10 +57,10 @@ int    define_cmd(t_cmd *cmd)
     t[3] = appand_file;
     glob.exit_code = 0;
     if (open_pipes(cmd))
-        return (0);
+        return (glob.exit_code);
     if (read_from_here_doc(cmd))
-        return (0);
+        return (glob.exit_code);
     if (open_files(cmd, t))
-        return (0);
+        return (glob.exit_code);
     return (glob.exit_code);
 }

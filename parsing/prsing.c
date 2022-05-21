@@ -12,6 +12,7 @@ int    pars(t_cmd **cmd, char **splt)
     }
     insertData(new, splt);
     add_back_node(cmd, new);
+    glob.nb_cmd++;
     ft_free(splt);
     return (0);
 }

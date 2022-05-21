@@ -77,5 +77,4 @@ void    prompet()
         ft_lstnew(ft_strdup("PS1"),
         ft_strjoin_freed2(ft_strjoin_freed(ft_strdup(tmp->value), "@", 1),
         ft_strdup(find_var2("COMPUTER", glob.local)->value), 1)));
-    //blt_p();
 }

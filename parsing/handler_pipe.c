@@ -39,16 +39,21 @@ char *handler_pipe(char *line)
 	if (!line)
 		return (NULL);	
 	a = !check_pipe(line);
+	free(glob.herd);
+	glob.herd = ft_strdup("\033[0;32mpipe> \033[0;37m");
 	while (a)
 	{
-		str = readline("\033[0;32mpipe> \033[0;37m");
+		str = readline(glob.herd);
 		if (!str)
 		{
-			ft_putstr_fd("Minishell: syntax error: unexpected end of file\n", 2);
+			if (!glob.no_init)
+				ft_putstr_fd("\033[4;31m Minishell: syntax error: unexpected end of file\n\033[0m", 2);
+			glob.no_init = 1;
 			free(line);
+			free(str);
 			return (NULL);
 		}
-		line = ft_strjoin_freed(line, str, 0);
+		line = ft_strjoin_freed2(line, str, 0);
 		if (check_pipe(line))
 			a = 0;
 	}
@@ -64,7 +69,6 @@ char *check_full(char *line)
 	v = !check_pipe(line) ||  check_quote(line);
 	while (v)
 	{
-		//line = handel_quote2(line);
 		line = handel_quote(line);
 		line = handler_pipe(line);
 		v = !check_pipe(line) || check_quote(line);

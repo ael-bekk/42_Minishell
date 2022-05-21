@@ -9,5 +9,4 @@ int     blt_exit(char **cmd);
 int     blt_unset(char **cmd);
 int     blt_export(char **cmd, t_list **g);
 
-
 #endif

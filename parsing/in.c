@@ -32,7 +32,6 @@ int    here_doc(t_cmd *cmd, char *limiter)
     int i;
     int p[2];
     char *line;
-    char *aff;
     int cont;
 
     glob.p = dup(0);
@@ -42,26 +41,30 @@ int    here_doc(t_cmd *cmd, char *limiter)
     cmd->in = p[0];
     line = NULL;
     cont = FALSE;
-    aff = ft_strdup("");
+    free(glob.herd);
+    glob.herd = ft_strdup("");
     i = -1;
-    while (++i < glob.pip)
-        aff = ft_strjoin11(aff, ft_strdup("pipe "));
-    aff = ft_strjoin11(aff, ft_strdup("heredoc> \033[0m"));
-    glob.herd = aff;
+    while (++i < glob.nb_cmd - 1)
+        glob.herd = ft_strjoin11(glob.herd, ft_strdup("pipe "));
+    glob.herd = ft_strjoin11(glob.herd, ft_strdup("heredoc> \033[0m"));
     while (cont == FALSE)
     {
-        line = readline(aff);
+        line = readline(glob.herd);
         if (line)
             cont = match_strings(line, limiter, ft_strlen(limiter), 0);
         else
+        {
+            glob.no_init = 1;
+            free(line);
             break;
+        }
         if (cont == FALSE)
             write(p[1], line, ft_strlen(line));
         free(line);
     }
-    free(aff);
     close(p[1]);
     dup(glob.p);
     close(glob.p);
+    glob.p = -1 * !glob.no_init;
     return (glob.exit_code);
 }
