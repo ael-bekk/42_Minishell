@@ -53,7 +53,7 @@ char *handler_pipe(char *line)
 			free(str);
 			return (NULL);
 		}
-		line = ft_strjoin_freed2(line, str, 0);
+		line = ft_strjoin_freed2(line, str, 1);
 		if (check_pipe(line))
 			a = 0;
 	}

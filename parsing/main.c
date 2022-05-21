@@ -24,32 +24,12 @@ void    affiche(t_cmd *cmd)
     }
 }
 
-int execution(t_cmd *cmd)
-{
-    if (!cmd || !cmd->cmd[0])
-        return (0);
-    if (!ft_strncmp(cmd->cmd[0], "cd", 3))
-        return (blt_cd(cmd->cmd[1]));
-    if (!ft_strncmp(cmd->cmd[0], "echo", 5))
-        return (blt_echo(&cmd->cmd[1]));
-    if (!ft_strncmp(cmd->cmd[0], "pwd", 4))
-        return (blt_pwd());
-    if (!ft_strncmp(cmd->cmd[0], "env", 4))
-        return (blt_env());
-    if (!ft_strncmp(cmd->cmd[0], "exit", 5))
-        return (blt_exit(&cmd->cmd[1]));
-    if (!ft_strncmp(cmd->cmd[0], "unset", 6))
-        return (blt_unset(&cmd->cmd[1]));
-    if (!ft_strncmp(cmd->cmd[0], "export", 7))
-        return (blt_export(&cmd->cmd[1], &glob.env));
-    return (glob.exit_code);
-}
-
 int main(int ac, char **av, char **ev)
 {
     t_cmd *cmd;
     char *inp;
 
+    glob.exec_env = ev;
     glob.av = av;
     copy_data_env(ev);
     prompet();

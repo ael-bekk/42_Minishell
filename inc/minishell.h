@@ -61,6 +61,7 @@
 
 typedef struct s_glob
 {
+    pid_t   pid_cmd;
     int     nb_cmd;
     int     no_init;
     char    *herd;
@@ -108,5 +109,9 @@ int    appand_file(t_cmd *cmd, char *s);
 int    out_file(t_cmd *cmd, char *s);
 int    define_cmd(t_cmd *cmd);
 int    errors_return(char *s);
+
+
+int execution(t_cmd *cmd);
+
 
 #endif

@@ -3,7 +3,7 @@
 int    errors_return(char *s)
 {
     char *er;
-    
+
     er = strerror(errno);
     glob.exit_code = errno;
     ft_putstr_fd("\033[4;31m", 2);

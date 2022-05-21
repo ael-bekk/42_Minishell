@@ -59,7 +59,10 @@ int    here_doc(t_cmd *cmd, char *limiter)
             break;
         }
         if (cont == FALSE)
+        {
             write(p[1], line, ft_strlen(line));
+            write(p[1], "\n", 1);
+        }
         free(line);
     }
     close(p[1]);

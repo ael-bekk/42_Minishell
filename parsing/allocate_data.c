@@ -34,5 +34,7 @@ int aloccate_data(t_cmd *cmd, char **s)
         else
             cmnd++;
     }
+    if (!cmnd)
+        cmd->use = 0;
     return (allocateData(cmd, h_doc, rid, cmnd));
 }
