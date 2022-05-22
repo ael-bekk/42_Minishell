@@ -14,7 +14,10 @@ void    insertData(t_cmd *new, char **s)
     while (s && s[++i])
     {
         if (s[i][0] == '<' && s[i][1] == '<')
-            new->here_doc[h++] = delete_quote(ft_strdup(s[++i]));
+        {
+            new->t_type = ft_strchr(s[++i], '\'') || ft_strchr(s[i], '\"');
+            new->here_doc[h++] = delete_quote(ft_strdup(s[i]));
+        }
         else if ((s[i][0] == '>' || s[i][0] == '<'))
         {
             new->type[r] = (s[i][0] == '<')

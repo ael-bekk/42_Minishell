@@ -22,7 +22,12 @@ void sig_hnd(int sig)
 {
 
     (void)sig;
-    if (glob.p != -1)
+    if (!glob.pid && glob.p == -2)
+    {
+        printf("\n");
+        glob.exit_code = 130;
+    }
+    if (glob.p != -1 && glob.p != -2)
     {
         glob.exit_code = 130;
         glob.no_init = 1;

@@ -61,6 +61,7 @@
 
 typedef struct s_glob
 {
+    pid_t   pid;
     pid_t   pid_cmd;
     int     nb_cmd;
     int     no_init;

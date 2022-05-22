@@ -10,8 +10,8 @@ int    open_pipes(t_cmd *cmd)
         if (pipe(p) == ERROR_SYS_CALL)
             return (errors_return("pipe"));
         cmd->out = p[1];
+        cmd->next->in = p[0];
         cmd = cmd->next;
-        cmd->in = p[0];
     }
     cmd->out = STDOUT_FILENO;
     return (0);
