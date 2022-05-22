@@ -46,13 +46,12 @@ char *delete_quote(char *str)
 	j = 0;
 	c = 0;
 	a = 0;
-	
 	if (!str)
 		return (NULL);
 	line = malloc(ft_strlen(str) + 1);
 	while (str && str[i])
 	{
-		if ((c == 0 || c == str[i]) && (str[i] == '\'' || str[i] == '\"'))
+		if ((c == 0 || c == str[i]) && (str[i] == '\'' || str[i] == '\"' || str[i] == -2))
 		{
 			c = str[i++];
 			if (++a == 2)
