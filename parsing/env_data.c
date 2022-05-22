@@ -39,7 +39,7 @@ char	**list_to_str(void)
 	{
 		str[i] = ft_strjoin_freed(ft_strdup(head->key), "=", 1);
 		str[i] = ft_strjoin_freed(str[i],head->value, 1);
-        str[i] = ft_strjoin_freed(str[i],"\n", 1);
+        	str[i] = ft_strjoin_freed(str[i],"\n", 1);
 		head = head->next;
 		i++;
 	}
