@@ -56,7 +56,7 @@ int main(int ac, char **av, char **ev)
         if (cmd && !define_cmd(cmd))
             glob.exit_code = execution(cmd);
         //affiche(cmd);
-        ft_free_list(&cmd); 
+        ft_free_list(&cmd);
     }
     return (0);
 }

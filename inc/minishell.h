@@ -113,5 +113,6 @@ int    errors_return(char *s);
 
 int execution(t_cmd *cmd);
 
+char	**list_to_str(void);
 
 #endif

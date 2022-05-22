@@ -74,6 +74,9 @@ int check_path(char **str, t_list *path)
 
 void    exec_cmd(t_cmd *cmd)
 {
+    char **env;
+
+    env = list_to_str();
     glob.pid_cmd = fork();
     if (glob.pid_cmd == 0)
     {
@@ -85,7 +88,7 @@ void    exec_cmd(t_cmd *cmd)
             close(cmd->out);
         if (ft_strchr(cmd->cmd[0], '/') || check_path(&cmd->cmd[0], find_var2("PATH", glob.env)))
         {
-            if(execve(cmd->cmd[0], cmd->cmd, glob.exec_env) == -1)
+            if(execve(cmd->cmd[0], cmd->cmd,env) == -1)
                 exit(errors_return(cmd->cmd[0]));
         }
         else
