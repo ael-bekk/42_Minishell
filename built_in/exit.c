@@ -7,7 +7,6 @@ int    blt_exit(char **cmd)
     i = -1;
     if (!cmd[0])
         exit(127);
-
     while (cmd[0][++i])
     {
         if (!ft_isdigit(cmd[0][i]))
