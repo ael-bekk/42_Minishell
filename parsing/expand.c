@@ -23,8 +23,8 @@ void    f1(char **line, char *l, int *ll, int *r)
     i = *r;
     tmp = ft_strdup(" ");
     tmp[0] = -2;
-    *line = ft_strjoin_freed2(*line, ft_strdup(tmp), 1);
     *line = ft_strjoin_freed2(*line, ft_substr(l, left, i - left), 1);
+    *line = ft_strjoin_freed2(*line, ft_strdup(tmp), 1);
     if (l[i + 1] == '0')
         *line = ft_strjoin_freed(*line, &glob.av[0][2], 1);
     else
@@ -40,14 +40,20 @@ void    f2(char **line, char *l, int *ll, int *r)
 {
     int i;
     int left;
+    char *tmp;
 
     i = *r;
     left = *ll;
+    tmp = ft_strdup(" ");
+    tmp[0] = -2;
     *line = ft_strjoin_freed2(*line, ft_substr(l, left, i - left), 1);
+    *line = ft_strjoin_freed2(*line, ft_strdup(tmp), 1);
     *line = ft_strjoin_freed2(*line, ft_itoa(glob.exit_code), 1);
+    *line = ft_strjoin_freed2(*line, ft_strdup(tmp), 1);
     left = ++i + 1;
     *r = i;
     *ll = left;
+    free(tmp);
 }
 
 void    f3(char **line, char *l, int *ll, int *r)
