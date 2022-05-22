@@ -36,10 +36,19 @@ void    f1(char **line, char *l, int *ll, int *r)
     free(tmp);
 }
 
-// void    f1()
-// {
+void    f2(char **line, char *l, int *ll, int *r)
+{
+    int i;
+    int left;
 
-// }
+    i = *r;
+    left = *ll;
+    *line = ft_strjoin_freed2(*line, ft_substr(l, left, i - left), 1);
+    *line = ft_strjoin_freed2(*line, ft_itoa(glob.exit_code), 1);
+    left = ++i + 1;
+    *r = i;
+    *ll = left;
+}
 
 void    f3(char **line, char *l, int *ll, int *r)
 {
@@ -91,11 +100,7 @@ char    *expand(char *l)
         if (l[i] == '$' && ft_isdigit(l[i + 1]))
             f1(&line, l, &left, &i);
         else if (l[i] == '$' && l[i + 1] == '?')
-        {
-            line = ft_strjoin_freed2(line, ft_substr(l, left, i - left), 1);
-            line = ft_strjoin_freed2(line, ft_itoa(glob.exit_code), 1);
-            left = ++i + 1;
-        }
+            f2(&line, l, &left, &i);
         else if (l[i] == '$' && (l[i + 1] == '\'' || l[i + 1] == '\"' || l[i + 1] == '_' || ft_isalpha(l[i + 1])))
             f3(&line, l, &left, &i);
     }
