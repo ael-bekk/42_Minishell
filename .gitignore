@@ -20,6 +20,7 @@
 *.obj
 *.elf
 
+
 # Linker output
 *.ilk
 *.map
@@ -57,3 +58,4 @@
 
 
 *.swp
+*.json
