@@ -1,22 +1,32 @@
 #include "../inc/minishell.h"
 
-int     blt_pwd(t_cmd *cmd)
+int ft_print_error()
+{
+    ft_putstr_fd("pwd: too many arguments\n", 2);
+    glob.exit_code = 1;
+    return (1);
+}
+
+int     blt_pwd(char *p, int fd_out)
 {
     char    *s;
     t_list  *l;
+
+    if (p)
+        return (ft_print_error());
     s = getcwd(NULL, 0);
     if (s)
     {
-        ft_putstr_fd(s,cmd->out);
-        ft_putstr_fd("\n",cmd->out);
+        ft_putstr_fd(s, fd_out);
+        ft_putstr_fd("\n", fd_out);
     }
     else
     {
         l = find_var2("PWD", glob.env);
         if (l)
         {
-            ft_putstr_fd(l->value,cmd->out);
-            ft_putstr_fd("\n",cmd->out);
+            ft_putstr_fd(l->value, fd_out);
+            ft_putstr_fd("\n", fd_out);
         }
         return (1);
     }

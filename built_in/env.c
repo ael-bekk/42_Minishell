@@ -1,24 +1,25 @@
 #include "../inc/minishell.h"
 
-int    blt_env(t_cmd *cmd)
+int    blt_env(char *s, int fd_out)
 {
-    char **env;
-    int i;
+    t_list *lst;
 
-    i = 0;
-    env = list_to_str();
-    if (cmd->cmd[1])
+    if (s)
     {
-        ft_putstr_fd("env: ",2);
-        ft_putstr_fd(cmd->cmd[1],2);
-        ft_putstr_fd(": No such file or directory\n",2);
-        glob.exit_code = 127;
-        return (127);
+        ft_putstr_fd("env: ", 2);
+        ft_putstr_fd(s, 2);
+        ft_putstr_fd(": No such file or directory\n", 2);
+        glob.exit_code = 1;
+        return (1);
     }
-    while(env[i])
-    {
-        ft_putstr_fd(env[i++],cmd->out);
-        ft_putstr_fd("\n",cmd->out);
-    }
+    lst = glob.env;
+	while (lst)
+	{
+		ft_putstr_fd(lst->key, fd_out);
+        ft_putstr_fd("=", fd_out);
+        ft_putstr_fd(lst->value, fd_out);
+        ft_putstr_fd("\n", fd_out);
+		lst = lst->next;
+	}
     return (0);
 }

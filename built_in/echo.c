@@ -1,15 +1,15 @@
 #include "../inc/minishell.h"
 
-void print_all(char **cmd ,t_cmd *c)
+void print_all(char **cmd, int fd_out)
 {
     int i;
 
     i = -1;
     while (cmd && cmd[++i])
     {
-        ft_putstr_fd(cmd[i],c->out);
+        ft_putstr_fd(cmd[i], fd_out);
         if (cmd[i + 1])
-            ft_putstr_fd(" ",c->out);
+            ft_putstr_fd(" ", fd_out);
     }
 }
 
@@ -25,22 +25,17 @@ int nl_echo(char *s)
         return (1);
     return (0);
 }
-int blt_echo(t_cmd *cmd)
+int blt_echo(char **cmd, int fd_out)
 {
     int i;
 
-    i = 1;
-    if (!cmd->cmd[1])
-    {
-        ft_putstr_fd("\n",cmd->out);
-        return (0);
-    }
-    while (cmd->cmd[1] && cmd->cmd[i] && nl_echo(cmd->cmd[i]))
+    i = 0;
+    while (cmd && cmd[i] && nl_echo(cmd[i]))
         i++;
-    print_all(&cmd->cmd[i],cmd);
-    if (!nl_echo(cmd->cmd[1]) && (cmd->cmd[i] || !i))
-        ft_putstr_fd("\n",cmd->out);
-    /*else if (cmd->cmd[i] && cmd->cmd[i][ft_strlen(cmd->cmd[i]) - 1] != '\n' && nl_echo(cmd->cmd[1]))
-            ft_putstr_fd("%\n",cmd->out);*/
+    print_all(&cmd[i], fd_out);
+    if (!nl_echo(cmd[0]) && (cmd[i] || !i))
+        ft_putstr_fd("\n", fd_out);
+    else if (cmd[i] && cmd[i][ft_strlen(cmd[i]) - 1] != '\n' && nl_echo(cmd[0]))
+        glob.no_nl = 1;
     return (0);
 }

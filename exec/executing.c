@@ -1,4 +1,5 @@
 #include "../inc/minishell.h"
+
 int check_built(char *cmd)
 {
     int		i;
@@ -26,11 +27,11 @@ int exec_built(t_cmd *cmd)
     if (!ft_strncmp(cmd->cmd[0], "cd", 3))
         return (blt_cd(cmd->cmd[1]));
     if (!ft_strncmp(cmd->cmd[0], "echo", 5))
-        return (blt_echo(cmd));
+        return (blt_echo(&cmd->cmd[1], cmd->out));
     if (!ft_strncmp(cmd->cmd[0], "pwd", 4))
-        return (blt_pwd(cmd));
+        return (blt_pwd(cmd->cmd[1], cmd->out));
     if (!ft_strncmp(cmd->cmd[0], "env", 4))
-        return (blt_env(cmd));
+        return (blt_env(cmd->cmd[1], cmd->out));
     if (!ft_strncmp(cmd->cmd[0], "exit", 5))
         return (blt_exit(&cmd->cmd[1]));
     if (!ft_strncmp(cmd->cmd[0], "unset", 6))
