@@ -12,8 +12,8 @@ int    blt_env(t_cmd *cmd)
         ft_putstr_fd("env: ",2);
         ft_putstr_fd(cmd->cmd[1],2);
         ft_putstr_fd(": No such file or directory\n",2);
-        return (127);
         glob.exit_code = 127;
+        return (127);
     }
     while(env[i])
     {
