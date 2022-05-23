@@ -63,4 +63,10 @@ void    f1(char **line, char *l, int *ll, int *r);
 void    f2(char **line, char *l, int *ll, int *r);
 void    f3(char **line, char *l, int *ll, int *r);
 
+//****************************************************************************//
+//                              || and &&                                    //
+//****************************************************************************//
+
+char *or_and(char *line);
+
 #endif

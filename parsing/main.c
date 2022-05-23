@@ -24,6 +24,11 @@ void    affiche(t_cmd *cmd)
     }
 }
 
+// int mini_cmd(char *line)
+// {
+
+// }
+
 int main(int ac, char **av, char **ev)
 {
     t_cmd *cmd;
@@ -50,7 +55,9 @@ int main(int ac, char **av, char **ev)
         inp = handl_unclosed(inp);
         if (inp && inp[0])
             add_history(inp);
+
         clear_line(inp);
+
         cmd = parsing(inp);
         if (cmd && !define_cmd(cmd))
             glob.exit_code = execution(cmd);

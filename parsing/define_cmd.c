@@ -36,10 +36,10 @@ int open_files(t_cmd *cmd, int (*t[4])(t_cmd *, char *))
 {
     int i;
 
-    while (cmd && glob.p == -1)
+    while (cmd && glob.p == -1 && !glob.exit_code)
     {
         i = -1;
-        while (cmd->rid[++i] && glob.p == -1)
+        while (cmd->rid[++i] && glob.p == -1 && !glob.exit_code)
             t[cmd->type[i]](cmd, cmd->rid[i]);
         cmd = cmd->next;
     }
