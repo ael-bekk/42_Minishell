@@ -30,13 +30,13 @@ t_list  *find_var2(char *key, t_list *env)
     return (NULL);
 }
 
-int is_valid_var(char *s)
+int is_valid_var(char *s, int type)
 {
     int i;
     int p_m;
 
     i = 0;
-    if (!ft_isalpha(s[0]))
+    if (!ft_isalpha(s[0]) && s[0] != '_')
     {
         printf("%s: export: `%s': not a valid identifier\n", glob.av[0], s);
         return (0);
@@ -44,7 +44,7 @@ int is_valid_var(char *s)
     while (s[i] && (ft_isalnum(s[i]) || s[i] == '_'))
         i++;
     if (!s[i])
-        return (0);
+        return (type);
     if (s[i] == '+' && s[i + 1] == '=')
         return (1);
     if (s[i] == '=')
@@ -58,7 +58,7 @@ int is_valid_var(char *s)
     return (0);
 }
 
-int blt_export(char **cmd, t_list **g,int fd)
+int blt_export(char **cmd, t_list **g, int fd, int tp)
 {
     t_list  *node;
     int     i;
@@ -68,32 +68,31 @@ int blt_export(char **cmd, t_list **g,int fd)
 
     i = -1;
     ret = 0;
-	if (!cmd[0])
+	if (!cmd[0] && tp == 2)
 	{
 		print_export(fd);
 		return(0);
 	}
     while (cmd && cmd[++i])
     {
-        type = is_valid_var(cmd[i]);
-        if (type)
+        type = is_valid_var(cmd[i], tp);
+        if (type && type < 3)
         {
             p = equal_place(cmd[i]);
             cmd[i][p - (type == 1)] = 0;
             node = find_var2(cmd[i], *g);
-            if (!node)
-            {
-                ft_lstadd_back(g, ft_lstnew(ft_strdup(cmd[i]), ft_strdup(&cmd[i][p + 1])));
-                type = 0;
-            }
         }
-        if (type == 1 && node)
+        if (!node)
+            ft_lstadd_back(g, ft_lstnew(ft_strdup(cmd[i]), ft_strdup(&cmd[i][p + 1])));
+        else if (type == 1 && node)
             node->value = ft_strjoin_freed(node->value, &cmd[i][p + 1], 1);
-        if (type == 2 && node)
+        else if (type == 2 && node)
         {
             free(node->value);
             node->value = ft_strdup(&cmd[i][p + 1]);
         }
+        if (type && type < 3)
+            cmd[i][p - (type == 1)] = '=' * (type == 2) + '+' * (type == 1);
         ret += !type;
     }
     return (ret != 0);

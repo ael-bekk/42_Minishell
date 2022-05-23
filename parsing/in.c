@@ -59,7 +59,7 @@ int    here_doc(t_cmd *cmd, char *limiter)
             break;
         }
         if (!cmd->t_type)
-            line = expand(line);
+            line = delete_quote2(expand2(line));
         if (cont == FALSE)
         {
             write(p[1], line, ft_strlen(line));

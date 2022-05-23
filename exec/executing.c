@@ -37,7 +37,8 @@ int exec_built(t_cmd *cmd)
     if (!ft_strncmp(cmd->cmd[0], "unset", 6))
         return (blt_unset(&cmd->cmd[1]));
     if (!ft_strncmp(cmd->cmd[0], "export", 7))
-        return (blt_export(&cmd->cmd[1], &glob.env, cmd->out));
+        return (blt_export(&cmd->cmd[1], &glob.env, cmd->out, 3)
+           || blt_export(&cmd->cmd[1], &glob.local, cmd->out, 2));
     return (glob.exit_code);
 }
 

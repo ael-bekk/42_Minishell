@@ -31,7 +31,7 @@ int cherch_file()
         {
             env[0] = ft_strjoin_freed2(ft_strdup("COMPUTER="), deppace_name(get_next_line11(fd)), 1);
             env[1] = NULL;
-            blt_export(env, &glob.local, 1);
+            blt_export(env, &glob.local, 1, 2);
             free(env[0]);
             free(s);
             close(fd);
@@ -45,34 +45,17 @@ int cherch_file()
     return (0);
 }
 
-void    prompet_user(t_list *tmp)
-{
-    if (tmp)
-        ft_lstadd_back(&glob.local,
-        ft_lstnew(ft_strdup("USER"), ft_strdup(tmp->value)));
-    else
-        ft_lstadd_back(&glob.local,
-        ft_lstnew(ft_strdup("USER"), ft_strdup("USER")));
-}
-
-void    prompet_computername(t_list *tmp)
-{
-    if (tmp)
-        ft_lstadd_back(&glob.local,
-            ft_lstnew(ft_strdup("COMPUTER"), ft_strdup(tmp->value)));
-    else
-        ft_lstadd_back(&glob.local,
-            ft_lstnew(ft_strdup("COMPUTER"), ft_strdup("COMPUTER")));
-}
-
 void    prompet()
 {
     t_list *tmp;
 
-    tmp = find_var2("USER", glob.env);
     if (!cherch_file())
-        prompet_computername(tmp);
-    prompet_user(tmp);
+        ft_lstadd_back(&glob.local,
+            ft_lstnew(ft_strdup("COMPUTER"), ft_strdup("COMPUTER")));
+    if (!find_var2("USER", glob.local))
+        ft_lstadd_back(&glob.local,
+            ft_lstnew(ft_strdup("USER"), ft_strdup("USER")));
+    tmp = find_var2("USER", glob.local);
     ft_lstadd_back(&glob.local,
         ft_lstnew(ft_strdup("PS1"),
         ft_strjoin_freed2(ft_strjoin_freed(ft_strdup(tmp->value), "@", 1),

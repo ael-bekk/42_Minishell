@@ -31,8 +31,8 @@ int main(int ac, char **av, char **ev)
 
     glob.av = av;
     copy_data_env(ev);
-    prompet();
     printf("%s", TITLE);
+    prompet();
     while (TRUE)
     {
         glob.nb_cmd = 0;

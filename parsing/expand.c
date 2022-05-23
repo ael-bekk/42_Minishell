@@ -100,14 +100,16 @@ char    *expand(char *l)
     {
         if (l[i] == '\"')
             in_dquote = !in_dquote;
+
         if (l[i] == '\'' && !in_dquote)
             while (l[++i] && l[i] != '\'')
                 ;
+        
         if (l[i] == '$' && ft_isdigit(l[i + 1]))
             f1(&line, l, &left, &i);
         else if (l[i] == '$' && l[i + 1] == '?')
             f2(&line, l, &left, &i);
-        else if (l[i] == '$' && (l[i + 1] == '\'' || l[i + 1] == '\"' || l[i + 1] == '_' || ft_isalpha(l[i + 1])))
+        else if (l[i] == '$' && (((l[i + 1] == '\'' || l[i + 1] == '\"') && !in_dquote) || l[i + 1] == '_' || ft_isalpha(l[i + 1])))
             f3(&line, l, &left, &i);
     }
     line = ft_strjoin_freed2(line, ft_substr(l, left, i - left), 1);

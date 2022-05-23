@@ -7,6 +7,6 @@ int     blt_pwd(char *s, int fd_out);
 int     blt_env(char *s, int fd_out);
 int     blt_exit(char **cmd);
 int     blt_unset(char **cmd);
-int     blt_export(char **cmd, t_list **g, int fd);
+int     blt_export(char **cmd, t_list **g, int fd, int type);
 
 #endif

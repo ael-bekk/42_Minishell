@@ -13,22 +13,8 @@ int equal_place(char *s)
 
 void    copy_data_env(char **ev)
 {
-    int eq_plc;
-    int lent;
-
-    lent = ft_double_strlen(ev);
-    while (lent--)
-    {
-        eq_plc = equal_place(ev[lent]);
-        
-        ft_lstadd_front(&glob.env,
-            ft_lstnew(ft_substr(ev[lent], 0, eq_plc),
-            ft_substr(ev[lent], eq_plc + 1, ft_strlen(ev[lent]))));
-
-        ft_lstadd_front(&glob.local,
-            ft_lstnew(ft_substr(ev[lent], 0, eq_plc),
-            ft_substr(ev[lent], eq_plc + 1, ft_strlen(ev[lent]))));
-    }
+    blt_export(ev, &glob.env, 1, 3);
+    blt_export(ev, &glob.local, 1, 2);
 }
 
 char	**list_to_str(t_list *head)

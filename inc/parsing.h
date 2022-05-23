@@ -58,5 +58,9 @@ int		print_quote(char *str);
 char    *handl_unclosed(char *inp);
 int     check_pipe(char *str);
 char    *expand(char *l);
+char    *expand2(char *l);
+void    f1(char **line, char *l, int *ll, int *r);
+void    f2(char **line, char *l, int *ll, int *r);
+void    f3(char **line, char *l, int *ll, int *r);
 
 #endif

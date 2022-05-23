@@ -57,6 +57,13 @@ int blt_unset(char **cmd)
                 ft_lstdel_from_list(&glob.env, env);
             env = env->next;
         }
+        env = glob.local;
+        while (env && !res)
+        {
+            if (!ft_strncmp(cmd[i], env->key, strlen(cmd[i])) && strlen(cmd[i]) == strlen(env->key))
+                ft_lstdel_from_list(&glob.local, env);
+            env = env->next;
+        }
         if (res)
             printf("%s: export: `%s': not a valid identifier\n", glob.av[0], cmd[i]);
         glob.exit_code = glob.exit_code || res;
