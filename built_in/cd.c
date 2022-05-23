@@ -6,7 +6,7 @@ void    change_pwd()
 
     e[0] = ft_strjoin_freed2(ft_strdup("PWD="), getcwd(NULL, 0), 1);
     e[1] = NULL;
-    blt_export(e, &glob.env);
+    blt_export(e, &glob.env, 1);
     free(e[0]);
 }
 
@@ -16,7 +16,7 @@ void    change_old_pwd(char *s)
 
     e[0] = ft_strjoin_freed2(ft_strdup("OLDPWD="), s, 1);
     e[1] = NULL;
-    blt_export(e, &glob.env);
+    blt_export(e, &glob.env, 1);
     free(e[0]);
 }
 

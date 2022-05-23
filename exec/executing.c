@@ -37,7 +37,7 @@ int exec_built(t_cmd *cmd)
     if (!ft_strncmp(cmd->cmd[0], "unset", 6))
         return (blt_unset(&cmd->cmd[1]));
     if (!ft_strncmp(cmd->cmd[0], "export", 7))
-        return (blt_export(&cmd->cmd[1], &glob.env));
+        return (blt_export(&cmd->cmd[1], &glob.env, cmd->out));
     return (glob.exit_code);
 }
 
@@ -111,7 +111,7 @@ int execution(t_cmd *cmd)
 
     glob.p = -2;
     ft_free(glob.exec_env);
-    glob.exec_env = list_to_str();
+    glob.exec_env = list_to_str(glob.env);
     up_to = 1;
     if (glob.nb_cmd == 1 && cmd->use && check_built(cmd->cmd[0]))
         glob.exit_code = exec_built(cmd);

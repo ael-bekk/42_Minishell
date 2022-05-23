@@ -1,5 +1,22 @@
 #include "../inc/minishell.h"
 
+void	print_export(int fd)
+{
+		char **str;
+        int i;
+
+        i = -1;
+        str = list_to_str(glob.local);
+        ft_sort_arry(str);
+        while(str[++i])
+        {
+            ft_putstr_fd("declare -x ",fd);
+            ft_putstr_fd(str[i],fd);
+            ft_putstr_fd("\n",fd);
+        }
+        ft_free(str);
+}
+
 t_list  *find_var2(char *key, t_list *env)
 {
     char *tmp;
@@ -41,7 +58,7 @@ int is_valid_var(char *s)
     return (0);
 }
 
-int blt_export(char **cmd, t_list **g)
+int blt_export(char **cmd, t_list **g,int fd)
 {
     t_list  *node;
     int     i;
@@ -51,6 +68,11 @@ int blt_export(char **cmd, t_list **g)
 
     i = -1;
     ret = 0;
+	if (!cmd[0])
+	{
+		print_export(fd);
+		return(0);
+	}
     while (cmd && cmd[++i])
     {
         type = is_valid_var(cmd[i]);
