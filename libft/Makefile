@@ -10,7 +10,7 @@ SRCS	= 	utils.c ft_strlen_double.c ft_str_double_join.c ft_free.c\
 			ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 			ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c \
 			ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c \
-			get_next_line.c get_next_line_utils.c
+			get_next_line.c get_next_line_utils.c ft_strcmp.c
 
 OBJS	= $(SRCS:.c=.o)
 

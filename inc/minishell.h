@@ -114,6 +114,7 @@ int    errors_return(char *s);
 
 int execution(t_cmd *cmd);
 
-char	**list_to_str(void);
+char	**list_to_str(t_list *head);
+void    ft_sort_arry(char **str);
 
 #endif

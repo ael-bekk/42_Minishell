@@ -31,7 +31,7 @@ int cherch_file()
         {
             env[0] = ft_strjoin_freed2(ft_strdup("COMPUTER="), deppace_name(get_next_line11(fd)), 1);
             env[1] = NULL;
-            blt_export(env, &glob.local);
+            blt_export(env, &glob.local, 1);
             free(env[0]);
             free(s);
             close(fd);
