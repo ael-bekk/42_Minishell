@@ -104,18 +104,18 @@ void    print_prompet();
 //                                 befor exec                                 //
 //****************************************************************************//
 
-int    in_file(t_cmd *cmd, char *s);
-int    here_doc(t_cmd *cmd, char *limiter);
-int    appand_file(t_cmd *cmd, char *s);
-int    out_file(t_cmd *cmd, char *s);
-int    define_cmd(t_cmd *cmd);
-int    errors_return(char *s);
+int     in_file(t_cmd *cmd, char *s);
+int     here_doc(t_cmd *cmd, char *limiter);
+int     appand_file(t_cmd *cmd, char *s);
+int     out_file(t_cmd *cmd, char *s);
+int     define_cmd(t_cmd *cmd);
+int     errors_return(char *s);
+int     errors_return_red(char *s, t_cmd *cmd);
 
+int     execution(t_cmd *cmd);
 
-int execution(t_cmd *cmd);
-
-char	**list_to_str(t_list *head);
+char    **list_to_str(t_list *head);
 void    ft_sort_arry(char **str);
-char *delete_quote2(char *str);
+char    *delete_quote2(char *str);
 
 #endif

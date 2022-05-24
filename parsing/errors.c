@@ -1,5 +1,17 @@
 #include "../inc/minishell.h"
 
+int errors_return_red(char *s, t_cmd *cmd)
+{
+    ft_putstr_fd("\033[4;31m  ", 2);
+    ft_putstr_fd(&glob.av[0][2], 2);
+    ft_putstr_fd(": ", 2);
+    ft_putstr_fd(s, 2);
+    ft_putstr_fd(": ambiguous redirect\033[0m\n", 2);
+    cmd->use = 0;
+    glob.exit_code = 1;
+    return (1);
+}
+
 int    errors_return(char *s)
 {
     char *er;

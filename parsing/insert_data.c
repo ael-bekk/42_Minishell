@@ -57,16 +57,23 @@ void    insertData(t_cmd *new, char **s)
             new->type[r] = (s[i][0] == '<')
                 + 2 * (s[i][0] == '>' && !s[i][1])
                 + 3 * (s[i][0] == '>' && s[i][1] == '>');
-            new->rid[r++] = expand(ft_strdup(s[++i]));
+            new->rid[r++] = delete_quote2(delete_quote(expand(ft_strdup(s[++i]))));
             if (!new->rid[r - 1] || !new->rid[r - 1][0])
             {
-                printf("\033[4;31m  %s: %s: ambiguous redirect\033[0m\n", &glob.av[0][2], s[i]);
-                new->use = 0;
+                free(new->rid[r - 1]);
+                new->rid[r - 1] = ft_strdup(" ");
+                new->rid[r - 1][0] = -3;
+                new->rid[r - 1] = ft_strjoin_freed(new->rid[r - 1], s[i], 1);
             }
-            else
-                new->rid[r - 1] = delete_quote2(delete_quote(expand(new->rid[r - 1])));
         }
         else
+        {
             new->cmd[c++] = delete_quote2(delete_quote(expand(ft_strdup(s[i]))));
+            if (!ft_strrchr(s[i], '\"') && !ft_strrchr(s[i], '\'') && (!new->cmd[c - 1] || !new->cmd[c - 1][0]))
+            {
+                free(new->cmd[--c]);
+                new->cmd[c] = NULL;
+            }
+        }
     }
 }

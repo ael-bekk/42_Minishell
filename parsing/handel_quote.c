@@ -36,36 +36,30 @@ int check_quote(char *str)
 
 char *delete_quote(char *str)
 {
+	int	quote;
+	int	in_expanded;
 	int i;
 	int j;
-	char c;
-	char *line;
-	int a;
 
-	i = 0;
+	i = -1;
 	j = 0;
-	c = 0;
-	a = 0;
-	if (!str)
-		return (NULL);
-	line = malloc(ft_strlen(str) + 1);
-	while (str && str[i])
+	quote = 0;
+	in_expanded = 0;
+	while (str && str[++i])
 	{
-		if ((c == 0 || c == str[i]) && (str[i] == '\'' || str[i] == '\"' || str[i] == -2))
+		if (str[i] == -2)
 		{
-			c = str[i++];
-			if (++a == 2)
-			{
-				c = 0;
-				a = 0;
-			}
+			in_expanded = !in_expanded;
+			str[j++] = str[i];
 		}
+		else if ((str[i] == '\'' || str[i] == '\"' || str[i] == -2) && (str[i] == quote || !quote) && !in_expanded)
+			quote = str[i] * !quote;
 		else
-			line[j++] = str[i++];
+			str[j++] = str[i];
 	}
-	line[j] = '\0';
-	free(str);
-	return (line);
+	if (str)
+		str[j] = '\0';	
+	return (str);
 }
 
 char *handel_quote(char *line)
