@@ -67,6 +67,8 @@ void    f3(char **line, char *l, int *ll, int *r);
 //                              || and &&                                    //
 //****************************************************************************//
 
-char *or_and(char *line);
+char    *or_and(char *line);
+char    *handler_or_and(char *line);
+int     check_or_and(char *str);
 
 #endif
