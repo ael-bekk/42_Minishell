@@ -63,15 +63,20 @@ char *handler_pipe(char *line)
 char *check_full(char *line)
 {
 	int v;
+	int a;
 	
 	if (!line)
 		return (NULL);
 	v = !check_pipe(line) ||  check_quote(line);
+	if (!v)
+		a = handler_or_and(line);
 	while (v)
 	{
 		line = handel_quote(line);
 		line = handler_pipe(line);
 		v = !check_pipe(line) || check_quote(line);
+		if (!v)
+			a = handler_or_and(line);
 	}
 	return (line);
 }
