@@ -30,13 +30,15 @@ char *handler_or_and(char *line)
 	char *str;
 	int 	a;
 
-	if (!line)
+	if (!line || !line[0])
 		return (NULL);	
 	a = check_or_and(line);
 	free(glob.herd);
-    	if (a == 0)
-		glob.herd = ft_strdup("\033[0;32cmdand> \033[0;37m");
-	glob.herd = ft_strdup("\033[0;32cmdor> \033[0;37m");
+    glob.herd = NULL;
+    if (a == 0)
+        glob.herd = ft_strdup("cmdand> \033[0;37m");
+	else if (a == -1)
+        glob.herd = ft_strdup("cmdor> \033[0;37m");
 	while (a == -1 || a == 0)
 	{
 		str = readline(glob.herd);
@@ -50,18 +52,18 @@ char *handler_or_and(char *line)
 			return (NULL);
 		}
 		line = ft_strjoin_freed2(line, str, 1);
-		a = check_or_and(line))
+		a = check_or_and(line);
         	if (a == 0 || a == -1)
         		free(glob.herd);
        		if (a == 0)
-			glob.herd = ft_strdup("\033[0;32cmdand> \033[0;37m");
-		else if(a == -1)
-			glob.herd = ft_strdup("\033[0;32cmdor> \033[0;37m");
+			    glob.herd = ft_strdup("cmdand> \033[0;37m");
+		    else if(a == -1)
+			    glob.herd = ft_strdup("cmdor> \033[0;37m");
 	}
 	return (line);
 }
 
-
+/*
 char *or_and(char *line)
 {
     	int i;
@@ -92,3 +94,4 @@ char *or_and(char *line)
 	if ((!glob.exit_code && check == 1) || ((glob.exit_code || a == 0) && check == 2))
 		mini_cmd((line + a));
 }
+*/

@@ -36,7 +36,7 @@ char *separ_line(char *s)
 	str = malloc(ft_strlen(s) + count_symbole(s) + 1);
 	while(s[i])
 	{
-		if((s[i] == '>' && s[i+1] == '>') || (s[i] == '<' && s[i+1] == '<'))
+		if(s[i + 1] && ((s[i] == '>' && s[i+1] == '>') || (s[i] == '<' && s[i+1] == '<')))
 		{
 			str[j++] = ' ';
 			str[j++] = s[i++];

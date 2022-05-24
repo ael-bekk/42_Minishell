@@ -24,11 +24,60 @@ int check_pipe(char *str)
 	while (str[++i])
 	{
 		if (str[i] == '|')
+		{
 			a = 0;
+			if ((str[i + 1] && str[i + 1] == '|') || ( str[i - 1] && str[i - 1] == '|'))
+				a = 1;
+		}
 		else  if (str[i] != ' ' && str[i] != '\n')
 			a = 1;
 	}
 	return(a);
+}
+
+
+int	check_all2(char a, char s , int i, int y)
+{
+
+	if(a == '|' && s == '&')
+		return(0); 
+	if (a == '&' && s == '|')
+		return (0);
+	return (1);
+}
+
+int check_all(char *line)
+{
+	int i;
+	int a;
+	int y;
+	int lent;
+	
+	i = 0;
+	if (!line)
+		return (0);
+	lent =ft_strlen(line);
+	while(i < lent)
+	{
+		while(line[i] && (line[i] == '\n' || line[i] == ' '))
+			i++;
+		if (line[i + 1]  && line[i] && (line[i] == '|' || (line[i] == '&' && line[i + 1] !='&')))
+		{
+			a = line[i];
+			i++;
+			y = i;
+			while(line[i] && (line[i] == '\n' || line[i] == ' '))
+				i++;
+			if(line[i] && !check_all2(a, line[i], i, y))
+			{
+				ft_putstr_fd("Minishell : syntax error near unexpected token \n",2);
+				glob.exit_code = 258;
+				return (0);
+			}
+		}
+		i++;
+	}
+	return (1);
 }
 
 char *handler_pipe(char *line)
@@ -40,6 +89,7 @@ char *handler_pipe(char *line)
 		return (NULL);	
 	a = !check_pipe(line);
 	free(glob.herd);
+	glob.herd = NULL;
 	glob.herd = ft_strdup("\033[0;32mpipe> \033[0;37m");
 	while (a)
 	{
@@ -74,7 +124,11 @@ char *check_full(char *line)
 	{
 		line = handel_quote(line);
 		line = handler_pipe(line);
+		if (!check_all(line))
+			return (NULL);
 		line = handler_or_and(line);
+		if (!check_all(line))
+			return (NULL);
 		v = !check_pipe(line) || check_quote(line);
 		if (!v)
 			a = check_or_and(line);

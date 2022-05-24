@@ -1,6 +1,6 @@
 #include "../inc/minishell.h"
 #include <dirent.h>
-
+/*
 int is_matching(char *dir, char *to_search, int it_1, int it_2)
 {
     if (!dir[it_1] && !to_search[it_2])
@@ -97,7 +97,7 @@ int main(int ac, char **av)
     
     return (0);
 }
-
+*/
 // #include "../inc/minishell.h"
 // #include <dirent.h>
 
