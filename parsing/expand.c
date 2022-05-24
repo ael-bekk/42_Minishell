@@ -104,7 +104,6 @@ char    *expand(char *l)
         if (l[i] == '\'' && !in_dquote)
             while (l[++i] && l[i] != '\'')
                 ;
-        
         if (l[i] == '$' && ft_isdigit(l[i + 1]))
             f1(&line, l, &left, &i);
         else if (l[i] == '$' && l[i + 1] == '?')

@@ -4,18 +4,21 @@ void    clear_line(char *inp)
 {
     int i;
     int j;
-    int in_dquote;
+    char in_quote;
 
-    in_dquote = 0;
     i = -1;
     j = 0;
     if (!inp)
         return ;
-    while (inp[++i])
+    while (++i < ft_strlen(inp))
     {
-        if (inp[i] == '\"')
-            in_dquote = !in_dquote;
-        if (inp[i] != '$' || (inp[i + 1] != '\"' && inp[i + 1] != '\'') || in_dquote)
+        if (inp[i] == '\"' || inp[i] == '\'')
+        {
+            in_quote = inp[i];
+            while (++i < ft_strlen(inp) && in_quote != inp[i])
+                inp[j++] = inp[i];
+        }
+        else if (inp[i] != '$' || (inp[i + 1] != '\"' && inp[i + 1] != '\''))
             inp[j++] = inp[i];
     }
     inp[j] = '\0';

@@ -81,6 +81,7 @@ typedef struct s_glob
 //****************************************************************************//
 
 t_glob  glob;
+char    *line;
 
 //****************************************************************************//
 //                             signal_hanling                                 //
@@ -117,5 +118,6 @@ int     execution(t_cmd *cmd);
 char    **list_to_str(t_list *head);
 void    ft_sort_arry(char **str);
 char    *delete_quote2(char *str);
+void    wild(char *ll);
 
 #endif

@@ -24,14 +24,19 @@ void    affiche(t_cmd *cmd)
     }
 }
 
-// int mini_cmd(char *line)
-// {
+void    mini_cmd(char *line)
+{
+    t_cmd *cmd;
 
-// }
+    cmd = parsing(line);
+    if (cmd && !define_cmd(cmd))
+        glob.exit_code = execution(cmd);
+    ft_free_list(&cmd);
+}
 
 int main(int ac, char **av, char **ev)
 {
-    t_cmd *cmd;
+
     char *inp;
 
     glob.av = av;
@@ -51,19 +56,12 @@ int main(int ac, char **av, char **ev)
             printf("exit\n");
             exit(0);
         }
-        
         glob.no_init = 0;
         inp = handl_unclosed(inp);
         if (inp && inp[0])
             add_history(inp);
-
-        clear_line(inp);
-
-        cmd = parsing(inp);
-        if (cmd && !define_cmd(cmd))
-            glob.exit_code = execution(cmd);
-        //affiche(cmd);
-        ft_free_list(&cmd);
+        or_and(inp);
+        free(inp);
     }
     return (0);
 }

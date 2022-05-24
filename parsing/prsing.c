@@ -37,7 +37,6 @@ t_cmd    *parsing(char *line)
             return (NULL);
         }
     }
-    free(line);
     ft_free(s);
     return (cmd);
 }
