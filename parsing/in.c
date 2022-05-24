@@ -4,6 +4,8 @@ int    in_file(t_cmd *cmd, char *s)
 {
     if (cmd->in)
         close(cmd->in);
+    if (!s || s[0] == -3)
+        return (errors_return_red(&s[1], cmd));
     cmd->in = open(s, O_RDONLY);
     if (cmd->in == ERROR_SYS_CALL)
     {

@@ -51,6 +51,7 @@ int main(int ac, char **av, char **ev)
             printf("exit\n");
             exit(0);
         }
+        
         glob.no_init = 0;
         inp = handl_unclosed(inp);
         if (inp && inp[0])

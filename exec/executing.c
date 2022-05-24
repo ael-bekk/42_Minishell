@@ -67,7 +67,9 @@ int check_path(char **str, t_list *path)
         }
         free(p);
     }
-    ft_putstr_fd("Error: command not found\n", 2);
+    ft_putstr_fd("Error: ", 2);
+    ft_putstr_fd(*str, 2);
+    ft_putstr_fd(": command not found\n", 2);
     glob.exit_code = 127;
     return (0);
 }

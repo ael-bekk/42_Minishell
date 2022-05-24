@@ -1,5 +1,12 @@
 #include "../inc/minishell.h"
 
+void    init_data(char **s, int len)
+{
+    s[len] = NULL;
+    while (len--)
+        s[len] = NULL;
+}
+
 int    allocateData(t_cmd *cmd, int h_doc, int rid, int cmnd)
 {
     cmd->here_doc = (char **)malloc(sizeof(char *) * (h_doc + 1));
@@ -8,9 +15,9 @@ int    allocateData(t_cmd *cmd, int h_doc, int rid, int cmnd)
     cmd->cmd = (char **)malloc(sizeof(char *) * (cmnd + 1));
     if (!cmd->here_doc || !cmd->rid || !cmd->cmd || !cmd->type)
         return (0);
-    cmd->here_doc[h_doc] = NULL;
-    cmd->rid[rid] = NULL;
-    cmd->cmd[cmnd] = NULL;
+    init_data(cmd->here_doc, h_doc);
+    init_data(cmd->rid, rid);
+    init_data(cmd->cmd, cmnd);
     return (1);
 }
 
