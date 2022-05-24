@@ -27,7 +27,6 @@ int check_dir(char *path)
     closedir(dir);
     return (1);
 }
-char *line;
 
 int search_in_dir(char *d, char **pfix_sfix, char **n_f, int l)
 {
@@ -65,7 +64,7 @@ int search_in_dir(char *d, char **pfix_sfix, char **n_f, int l)
     return (0);
 }
 
-char    main(int ac, char **av)
+void    wild(char *ll)
 {
     int i;
     char *path;
@@ -73,22 +72,25 @@ char    main(int ac, char **av)
     char c[2];
     char **s;
 
+    line = NULL;
+    if (!ft_strchr(ll, '*'))
+        return ;
     i = -1;
     c[1] = 0;
     path = ft_strdup(".");
     p_s_fix[0] = ft_strdup("");
-    s = ft_split(av[1], '/');
-    if (av[1][0] == '/')
+    s = ft_split(ll, '/');
+    if (ll[0] == '/')
         path[0] = '/';
     
-    if (av[1][ft_strlen(av[1]) - 1] == '/')
+    if (ll[ft_strlen(ll) - 1] == '/')
         p_s_fix[1] = ft_strdup("/ ");
     else
         p_s_fix[1] = ft_strdup(" ");
     
-    while (av[1][++i] == '/' || av[1][i] == '.')
+    while (ll[++i] == '/' || ll[i] == '.')
     {
-        c[0] = av[1][i];
+        c[0] = ll[i];
         p_s_fix[0] = ft_strjoin_freed(p_s_fix[0], c, 1);
     }
     i = 0;
@@ -99,6 +101,5 @@ char    main(int ac, char **av)
         i++;
     }
     search_in_dir(path, p_s_fix, &s[i], 0);
-    printf("%s\n", line);
-    return (0);
+    free(line);
 }

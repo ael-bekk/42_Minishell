@@ -66,6 +66,12 @@ void    insertData(t_cmd *new, char **s)
                 new->rid[r - 1][0] = -3;
                 new->rid[r - 1] = ft_strjoin_freed(new->rid[r - 1], s[i], 1);
             }
+            wild(delete_quote(ft_strdup(s[i])));
+            if (line)
+            {
+                free(new->rid[r - 1]);
+                new->rid[r - 1] = line;
+            }
         }
         else
         {
@@ -74,6 +80,12 @@ void    insertData(t_cmd *new, char **s)
             {
                 free(new->cmd[--c]);
                 new->cmd[c] = NULL;
+            }
+            wild(delete_quote(ft_strdup(s[i])));
+            if (line)
+            {
+                free(new->rid[r - 1]);
+                new->rid[r - 1] = line;
             }
         }
     }
