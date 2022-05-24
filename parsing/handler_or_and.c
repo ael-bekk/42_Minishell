@@ -63,17 +63,23 @@ char *handler_or_and(char *line)
 	return (line);
 }
 
-/*
-char *or_and(char *line)
+
+void	or_and(char *line)
 {
 	int i;
 	int a;
 	int check;
 	int lent;
 
+<<<<<<< HEAD
     a = 0;
     i = 0;
     check = 1;
+=======
+	a = 0;
+	i = 0;
+	check = 1;
+>>>>>>> eda21a23ec270a1059b9c840cee6164560e0e2fa
 	lent = ft_strlen(line);
 	while(i < lent)
 	{
@@ -82,6 +88,7 @@ char *or_and(char *line)
 		{
 			if(line[i + 1] && ((line[i] == '&' && line[i + 1] == '&') || (line[i] == '|' && line[i + 1] == '|')))
         	{
+<<<<<<< HEAD
          		line[i] = '\0';
 				if ((!glob.exit_code && check == 1) || ((glob.exit_code || a == 0) && check == 2))
 				    mini_cmd((line + a));
@@ -91,8 +98,18 @@ char *or_and(char *line)
 			i++;
         }
 				
+=======
+				line[i] = '\0';
+				if ((!glob.exit_code && check == 1) || ((glob.exit_code || a == 0) && check == 2) || !a)
+					mini_cmd((line + a));
+				check = (line[i + 1] == '&') + 2 * (line[i+1] == '|');
+				a = ++i + 1;
+			}
+			i++;
+        }
+>>>>>>> eda21a23ec270a1059b9c840cee6164560e0e2fa
     }
 	if ((!glob.exit_code && check == 1) || ((glob.exit_code || a == 0) && check == 2))
 		mini_cmd((line + a));
 }
-*/
+
