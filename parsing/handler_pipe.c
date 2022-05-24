@@ -69,14 +69,15 @@ char *check_full(char *line)
 		return (NULL);
 	v = !check_pipe(line) ||  check_quote(line);
 	if (!v)
-		a = handler_or_and(line);
-	while (v)
+		a = check_or_and(line);
+	while (v || a == -1 || a == 0)
 	{
 		line = handel_quote(line);
 		line = handler_pipe(line);
+		line = handler_or_and(line);
 		v = !check_pipe(line) || check_quote(line);
 		if (!v)
-			a = handler_or_and(line);
+			a = check_or_and(line);
 	}
 	return (line);
 }
