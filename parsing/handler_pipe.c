@@ -19,8 +19,12 @@ int check_pipe(char *str)
 
 	i = -1;
 	a = 1;
-	if (!str)
+	if (!str || str[0] == '|')
+	{
+		ft_putstr_fd("parse error near `|' \n",2);
+		glob.exit_code  = 1;
 		return(1);
+	}
 	while (str[++i])
 	{
 		if (str[i] == '|')
