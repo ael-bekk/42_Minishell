@@ -121,7 +121,6 @@ char    **list_to_str(t_list *head);
 void    ft_sort_arry(char **str);
 char    *delete_quote2(char *str);
 void    wild(char *ll);
-int     check_all(char *line);
 void    p_error(char c);
 
 #endif
