@@ -122,8 +122,13 @@ int execution(t_cmd *cmd)
     {
         while(cmd)
         {
-            if (cmd->use)
+            if (cmd->use && cmd->cmd[0] && cmd->cmd[0][0])
                 exec_cmd(cmd, cmd2);
+            else if (cmd->use && cmd->cmd[0] && !cmd->cmd[0][0])
+            {
+                ft_putstr_fd("Error: : command not found\n", 2);
+                glob.exit_code = 127;
+            }
             if (!cmd->next && !cmd->use)
                 up_to = 0;
             cmd = cmd->next;

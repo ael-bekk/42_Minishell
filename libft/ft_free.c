@@ -6,6 +6,9 @@ void    ft_free(char **s)
 
     i = -1;
     while (s && s[++i])
+    {
         free(s[i]);
+        s[i] = NULL;
+    }
     free(s);
 }

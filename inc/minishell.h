@@ -61,6 +61,10 @@
 
 typedef struct s_glob
 {
+    char    *line[100000000];
+    int     line_c;
+    int     cmd;
+    int     red;
     pid_t   pid;
     pid_t   pid_cmd;
     int     nb_cmd;
@@ -72,6 +76,8 @@ typedef struct s_glob
     int     exit_code;
     char    **av;
     char    **exec_env;
+    int     error;
+    int     count;
     t_list  *local;
     t_list  *env;
 }   t_glob;
@@ -81,7 +87,6 @@ typedef struct s_glob
 //****************************************************************************//
 
 t_glob  glob;
-char    *line;
 
 //****************************************************************************//
 //                             signal_hanling                                 //
@@ -119,6 +124,6 @@ char    **list_to_str(t_list *head);
 void    ft_sort_arry(char **str);
 char    *delete_quote2(char *str);
 void    wild(char *ll);
-int     check_all(char *line);
+void    p_error(char c);
 
 #endif

@@ -9,7 +9,7 @@ int check_or_and(char *str)
 	a = 0;
 	if (!str)
 		return(1);
-	while (str[++i])
+	while (str[++i] && !glob.error)
 	{
 		if (a == 1 && str[i + 1] && ((str[i] == '|' &&  str[i + 1] == '|') || (str[i] == '&' &&  str[i + 1] == '&')))
 		{
@@ -20,7 +20,14 @@ int check_or_and(char *str)
 				i++;
 		}
 		else  if (str[i] != ' ' && str[i] != '\n')
+		{
+			if (str[i] == '|' || str[i] == '&')
+			{
+				p_error(str[i]);
+				glob.error = 1;	
+			}
 			a = 1;
+		}
 	}
 	return(a);
 }
@@ -39,7 +46,7 @@ char *handler_or_and(char *line)
         glob.herd = ft_strdup("cmdand> \033[0;37m");
 	else if (a == -1)
         glob.herd = ft_strdup("cmdor> \033[0;37m");
-	while (a == -1 || a == 0)
+	while ((a == -1 || a == 0) && !glob.error)
 	{
 		str = readline(glob.herd);
 		if (!str)
@@ -74,6 +81,8 @@ void	or_and(char *line)
 	a = 0;
 	i = 0;
 	check = 1;
+	if (!line)
+		return ;
 	lent = ft_strlen(line);
 	while(i < lent)
 	{
@@ -91,7 +100,9 @@ void	or_and(char *line)
 			i++;
         }
     }
-	if ((!glob.exit_code && check == 1) || ((glob.exit_code || a == 0) && check == 2))
+	if (!a && glob.exit_code)
+		mini_cmd((line + a));
+	else if ((!glob.exit_code && check == 1) || ((glob.exit_code || a == 0) && check == 2))
 		mini_cmd((line + a));
 }
 

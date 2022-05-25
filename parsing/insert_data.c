@@ -67,10 +67,13 @@ void    insertData(t_cmd *new, char **s)
                 new->rid[r - 1] = ft_strjoin_freed(new->rid[r - 1], s[i], 1);
             }
             wild(delete_quote(ft_strdup(s[i])));
-            if (line)
+            if (glob.line_c)
             {
                 free(new->rid[r - 1]);
-                new->rid[r - 1] = line;
+                new->rid[r - 1] = NULL;
+                new->rid = ft_str_double_join(&(new->rid), glob.line, glob.red, glob.line_c);
+                r = ft_double_strlen(new->rid);
+                glob.line_c = 0;
             }
         }
         else
@@ -82,10 +85,13 @@ void    insertData(t_cmd *new, char **s)
                 new->cmd[c] = NULL;
             }
             wild(delete_quote(ft_strdup(s[i])));
-            if (line)
+            if (glob.line_c)
             {
-                free(new->rid[r - 1]);
-                new->rid[r - 1] = line;
+                free(new->cmd[c - 1]);
+                new->cmd[c - 1] = NULL;
+                new->cmd = ft_str_double_join(&(new->cmd), glob.line, glob.cmd, glob.line_c);
+                c = ft_double_strlen(new->cmd);
+                glob.line_c = 0;
             }
         }
     }

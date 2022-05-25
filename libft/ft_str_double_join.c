@@ -1,25 +1,30 @@
 #include "libft.h"
 
-char    **ft_str_double_join(char ***s1, char ***s2)
+void    init_data2(char **s, int len)
+{
+    while (len--)
+        s[len] = NULL;
+}
+
+char    **ft_str_double_join(char ***s1, char **s2, int l1, int l2)
 {
     int     i;
-    int     l1;
-    int     l2;
+    int     j;
     char    **new;
-
-    l1 = ft_double_strlen(*s1);
-    l2 = ft_double_strlen(*s1);
+    
     new = (char **)malloc(sizeof(char *) * (l1 + l2 + 1));
+    init_data2(new, l1 + l2 + 1);
     i = -1;
-    while (++i < l1)
-        new[i] = (*s1)[i];
+    j = 0;
+    while (++i < l1 && (*s1)[i])
+        new[j++] = (*s1)[i];
     i = -1;
     while (++i < l2)
-        new[i + l1] = (*s2)[i];
-    new[i + l1] = NULL;
-    ft_free(*s1);
-    ft_free(*s2);
+    {
+        new[j++] = s2[i];
+        s2[i] = NULL;
+    }
+    free(*s1);
     *s1 = NULL;
-    *s2 = NULL;
     return (new);
 }

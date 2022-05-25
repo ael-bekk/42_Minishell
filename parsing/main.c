@@ -45,7 +45,9 @@ int main(int ac, char **av, char **ev)
     prompet();
     while (TRUE)
     {
+        glob.error = 0;
         glob.nb_cmd = 0;
+        glob.count = 0;
         glob.p = -1;
         print_prompet();
         signal(SIGINT, sig_hnd);
@@ -61,6 +63,7 @@ int main(int ac, char **av, char **ev)
         if (inp && inp[0])
             add_history(inp);
         or_and(inp);
+        // mini_cmd(inp);
         free(inp);
     }
     return (0);

@@ -69,7 +69,7 @@ int     ft_double_strlen(char **s);
 char	*ft_strjoin_freed(char *s1, char *s2, int type);
 char	*ft_strchr_line(const char *s, int c);
 char	*ft_strjoin_freed2(char *s1, char *s2, int type);
-char    **ft_str_double_join(char ***s1, char ***s2);
+char    **ft_str_double_join(char ***s1, char **s2, int l1, int l2);
 void    ft_free(char **s);
 int		ft_strcmp(char*s1, char*s2);
 
