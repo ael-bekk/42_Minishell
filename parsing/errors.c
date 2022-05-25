@@ -61,3 +61,13 @@ int    pars_error(char **s)
     }
     return (0);
 }
+void    p_error(char c)
+{
+    if (!glob.error)
+    {
+        ft_putstr_fd("parse error near `",2);
+        ft_putchar_fd(c,2);
+        ft_putstr_fd("'\n",2);
+    }    
+
+}

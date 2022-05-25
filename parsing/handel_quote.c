@@ -68,7 +68,7 @@ char *handel_quote(char *line)
 	int a = 1;
 
 	a = check_quote(line);
-	while (a)
+	while (a && !glob.error)
 	{
 		free(glob.herd);
 		glob.herd = NULL;
