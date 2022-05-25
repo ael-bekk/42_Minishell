@@ -23,8 +23,8 @@ void    f1(char **line, char *l, int *ll, int *r)
     i = *r;
     tmp = ft_strdup(" ");
     tmp[0] = -2;
-    *line = ft_strjoin_freed2(*line, ft_substr(l, left, i - left), 1);
-    *line = ft_strjoin_freed2(*line, ft_strdup(tmp), 1);
+    *line = ft_strjoin11(*line, ft_substr(l, left, i - left));
+    *line = ft_strjoin11(*line, ft_strdup(tmp));
     if (l[i + 1] == '0')
         *line = ft_strjoin_freed(*line, &glob.av[0][2], 1);
     else
@@ -32,7 +32,7 @@ void    f1(char **line, char *l, int *ll, int *r)
     left = ++i + 1;
     *r = i;
     *ll = left;
-    *line = ft_strjoin_freed2(*line, ft_strdup(tmp), 1);
+    *line = ft_strjoin11(*line, ft_strdup(tmp));
     free(tmp);
 }
 
@@ -46,10 +46,10 @@ void    f2(char **line, char *l, int *ll, int *r)
     left = *ll;
     tmp = ft_strdup(" ");
     tmp[0] = -2;
-    *line = ft_strjoin_freed2(*line, ft_substr(l, left, i - left), 1);
-    *line = ft_strjoin_freed2(*line, ft_strdup(tmp), 1);
-    *line = ft_strjoin_freed2(*line, ft_itoa(glob.exit_code), 1);
-    *line = ft_strjoin_freed2(*line, ft_strdup(tmp), 1);
+    *line = ft_strjoin11(*line, ft_substr(l, left, i - left));
+    *line = ft_strjoin11(*line, ft_strdup(tmp));
+    *line = ft_strjoin11(*line, ft_itoa(glob.exit_code));
+    *line = ft_strjoin11(*line, ft_strdup(tmp));
     left = ++i + 1;
     *r = i;
     *ll = left;
@@ -65,24 +65,24 @@ void    f3(char **line, char *l, int *ll, int *r)
     left = *ll;
     i = *r;
 
-    *line = ft_strjoin_freed2(*line, ft_substr(l, left, i - left), 1);
+    *line = ft_strjoin11(*line, ft_substr(l, left, i - left));
     left = ++i;
     tmp = ft_strdup(" ");
     tmp[0] = -2;
-    *line = ft_strjoin_freed2(*line, ft_strdup(tmp), 1);
+    *line = ft_strjoin11(*line, ft_strdup(tmp));
     free(tmp);
     while (l[i] && (ft_isalnum(l[i]) || l[i] == '_'))
         i++;
     tmp = ft_substr(l, left, i - left);
-    *line = ft_strjoin_freed2(*line, find_var(tmp, glob.env), 1);
+    *line = ft_strjoin11(*line, find_var(tmp, glob.env));
     left = i;
     i--;
     *r = i;
     *ll = left;
-
+    free(tmp);
     tmp = ft_strdup(" ");
     tmp[0] = -2;
-    *line = ft_strjoin_freed2(*line, ft_strdup(tmp), 1);
+    *line = ft_strjoin11(*line, ft_strdup(tmp));
     free(tmp);
 }
 
@@ -111,7 +111,7 @@ char    *expand(char *l)
         else if (l[i] == '$' && (((l[i + 1] == '\'' || l[i + 1] == '\"') && !in_dquote) || l[i + 1] == '_' || ft_isalpha(l[i + 1])))
             f3(&line, l, &left, &i);
     }
-    line = ft_strjoin_freed2(line, ft_substr(l, left, i - left), 1);
+    line = ft_strjoin11(line, ft_substr(l, left, i - left));
     free(l);
     return (line);
 }

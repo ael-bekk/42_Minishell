@@ -77,7 +77,6 @@ typedef struct s_glob
     char    **av;
     char    **exec_env;
     int     error;
-    int     count;
     t_list  *local;
     t_list  *env;
 }   t_glob;

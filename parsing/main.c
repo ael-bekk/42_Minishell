@@ -59,11 +59,12 @@ int main(int ac, char **av, char **ev)
             exit(0);
         }
         glob.no_init = 0;
-        inp = handl_unclosed(inp);
+        
+        if (inp && inp[0])
+            inp = handl_unclosed(inp);
         if (inp && inp[0])
             add_history(inp);
         or_and(inp);
-        // mini_cmd(inp);
         free(inp);
     }
     return (0);

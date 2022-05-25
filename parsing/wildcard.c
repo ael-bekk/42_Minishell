@@ -38,22 +38,25 @@ int search_in_dir(char *d, char **pfix_sfix, char **n_f, int l)
         if (is_matching(p->d_name, n_f[l], 0, 0) && p->d_name[0] != '.')
         {
             new_d = ft_strjoin_freed(ft_strdup(d), "/", 1);
-            new_d = ft_strjoin_freed(ft_strdup(new_d), p->d_name, 1);
+            new_d = ft_strjoin_freed(new_d, p->d_name, 1);
             new_p_s[0] = ft_strjoin_freed(ft_strdup(pfix_sfix[0]), p->d_name, 1);
-            new_p_s[0] = ft_strjoin_freed(ft_strdup(new_p_s[0]), "/", 1);
+            new_p_s[0] = ft_strjoin_freed(new_p_s[0], "/", 1);
             new_p_s[1] = pfix_sfix[1];
-            if (!n_f[l + 1] && (check_dir(new_d) ||  !pfix_sfix[1][0]))
+            if (!n_f[l + 1] && (check_dir(new_d) || !pfix_sfix[1][0]))
             {
-                glob.line[glob.line_c] = ft_strjoin11(ft_strdup(""), ft_strdup(pfix_sfix[0]));
+                glob.line[glob.line_c] = ft_strdup(pfix_sfix[0]);
                 glob.line[glob.line_c] = ft_strjoin11(glob.line[glob.line_c], ft_strdup(p->d_name));
                 glob.line[glob.line_c] = ft_strjoin11(glob.line[glob.line_c], ft_strdup(pfix_sfix[1]));
                 glob.line_c++;
             }
             else
                 search_in_dir(new_d, new_p_s, n_f, l + 1);
+            free(new_d);
+            free(new_p_s[0]);
         }
         p = readdir(dir);
     }
+    closedir(dir);
     return (0);
 }
 
@@ -67,7 +70,10 @@ void    wild(char *ll)
 
     glob.line[glob.line_c] = NULL;
     if (!ft_strchr(ll, '*'))
+    {
+        free(ll);
         return ;
+    }
     i = -1;
     c[1] = 0;
     path = ft_strdup(".");
@@ -84,7 +90,7 @@ void    wild(char *ll)
     while (ll[++i] == '/' || ll[i] == '.')
     {
         c[0] = ll[i];
-        p_s_fix[0] = ft_strjoin_freed(p_s_fix[0], c, 1);
+        p_s_fix[0] = ft_strjoin11(p_s_fix[0], ft_strdup(c));
     }
     i = 0;
     while (!ft_strchr(s[i], '*'))
@@ -97,4 +103,8 @@ void    wild(char *ll)
     glob.line[glob.line_c] = NULL;
     ft_sort_arry(glob.line);
     free(ll);
+    free(path);
+    ft_free(s);
+    free(p_s_fix[0]);
+    free(p_s_fix[1]);
 }
