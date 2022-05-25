@@ -32,14 +32,7 @@ int check_pipe(char *str)
 		{
 			a = 0;
 			if ((str[i + 1] && str[i + 1] == '|') || ( str[i - 1] && str[i - 1] == '|'))
-			{
-				if (glob.count)
-				{
-					p_error(str[i]);
-					glob.error = 1;
-				}
 				a = 1;
-			}
 		}
 		else  if (str[i] != ' ' && str[i] != '\n')
 			a = 1;
@@ -61,7 +54,6 @@ char *handler_pipe(char *line)
 	while (a && !glob.error)
 	{
 		str = readline(glob.herd);
-		glob.count++;
 		if (!str)
 		{
 			if (!glob.no_init)
