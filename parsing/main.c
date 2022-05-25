@@ -47,7 +47,6 @@ int main(int ac, char **av, char **ev)
     {
         glob.error = 0;
         glob.nb_cmd = 0;
-        glob.count = 0;
         glob.p = -1;
         print_prompet();
         signal(SIGINT, sig_hnd);
