@@ -61,6 +61,10 @@
 
 typedef struct s_glob
 {
+    char    *line[100000000];
+    int     line_c;
+    int     cmd;
+    int     red;
     pid_t   pid;
     pid_t   pid_cmd;
     int     nb_cmd;
@@ -83,7 +87,6 @@ typedef struct s_glob
 //****************************************************************************//
 
 t_glob  glob;
-char    *line;
 
 //****************************************************************************//
 //                             signal_hanling                                 //

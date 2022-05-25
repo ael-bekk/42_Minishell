@@ -5,17 +5,12 @@ int is_matching(char *dir, char *to_search, int it_1, int it_2)
 {
     if (!dir[it_1] && !to_search[it_2])
         return (1);
-    if (!dir[it_1] && to_search[it_2] == '*')
-        return (is_matching(dir, to_search, it_1, it_2 + 1));
-    if (!dir[it_1] || !to_search[it_2])
-        return (0);
-    if (to_search[it_2] != '*' && to_search[it_2] != dir[it_1])
-        return (0);
-    if (to_search[it_2] != '*' && to_search[it_2] == dir[it_1])
+    if (to_search[it_2] == dir[it_1])
         return (is_matching(dir, to_search, it_1 + 1, it_2 + 1));
-    return (is_matching(dir, to_search, it_1 + 1, it_2 + 1)
-        || is_matching(dir, to_search, it_1, it_2 + 1)
-        || is_matching(dir, to_search, it_1 + 1, it_2));
+    if (to_search[it_2] == '*')
+        return (is_matching(dir, to_search, it_1, it_2 + 1)
+            || is_matching(dir, to_search, it_1 + 1, it_2));
+    return (0);
 }
 
 int check_dir(char *path)
@@ -47,18 +42,16 @@ int search_in_dir(char *d, char **pfix_sfix, char **n_f, int l)
             new_p_s[0] = ft_strjoin_freed(ft_strdup(pfix_sfix[0]), p->d_name, 1);
             new_p_s[0] = ft_strjoin_freed(ft_strdup(new_p_s[0]), "/", 1);
             new_p_s[1] = pfix_sfix[1];
-            if (!n_f[l + 1] && (check_dir(new_d) ||  pfix_sfix[1][0] == ' '))
+            if (!n_f[l + 1] && (check_dir(new_d) ||  !pfix_sfix[1][0]))
             {
-                line = ft_strjoin11(line, ft_strdup(pfix_sfix[0]));
-                line = ft_strjoin11(line, ft_strdup(p->d_name));
-                line = ft_strjoin11(line, ft_strdup(pfix_sfix[1]));
+                glob.line[glob.line_c] = ft_strjoin11(ft_strdup(""), ft_strdup(pfix_sfix[0]));
+                glob.line[glob.line_c] = ft_strjoin11(glob.line[glob.line_c], ft_strdup(p->d_name));
+                glob.line[glob.line_c] = ft_strjoin11(glob.line[glob.line_c], ft_strdup(pfix_sfix[1]));
+                glob.line_c++;
             }
             else
                 search_in_dir(new_d, new_p_s, n_f, l + 1);
-            free(new_d);
-            free(new_p_s[0]);
         }
-        
         p = readdir(dir);
     }
     return (0);
@@ -72,7 +65,7 @@ void    wild(char *ll)
     char c[2];
     char **s;
 
-    line = NULL;
+    glob.line[glob.line_c] = NULL;
     if (!ft_strchr(ll, '*'))
         return ;
     i = -1;
@@ -84,9 +77,9 @@ void    wild(char *ll)
         path[0] = '/';
     
     if (ll[ft_strlen(ll) - 1] == '/')
-        p_s_fix[1] = ft_strdup("/ ");
+        p_s_fix[1] = ft_strdup("/");
     else
-        p_s_fix[1] = ft_strdup(" ");
+        p_s_fix[1] = ft_strdup("");
     
     while (ll[++i] == '/' || ll[i] == '.')
     {
@@ -101,5 +94,7 @@ void    wild(char *ll)
         i++;
     }
     search_in_dir(path, p_s_fix, &s[i], 0);
-    free(line);
+    glob.line[glob.line_c] = NULL;
+    ft_sort_arry(glob.line);
+    free(ll);
 }

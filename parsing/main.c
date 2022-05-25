@@ -63,6 +63,7 @@ int main(int ac, char **av, char **ev)
         if (inp && inp[0])
             add_history(inp);
         or_and(inp);
+        // mini_cmd(inp);
         free(inp);
     }
     return (0);

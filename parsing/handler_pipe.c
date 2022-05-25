@@ -97,7 +97,10 @@ char *check_full(char *line)
 		if (!v)
 			a = check_or_and(line);
 		if (glob.error)
-			break;
+		{
+			free(line);
+			return (NULL);
+		}
 	}
 	return (line);
 }

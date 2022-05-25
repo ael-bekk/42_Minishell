@@ -13,5 +13,10 @@ char *handl_unclosed(char *inp)
         close(glob.p);
     }
     glob.p = -1;
+    if(glob.error)
+    {
+        free(inp);
+        return (NULL);
+    }
     return (inp);
 }

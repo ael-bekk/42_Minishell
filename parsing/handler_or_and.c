@@ -81,7 +81,7 @@ void	or_and(char *line)
 	a = 0;
 	i = 0;
 	check = 1;
-	if (glob.error || !line)
+	if (!line)
 		return ;
 	lent = ft_strlen(line);
 	while(i < lent)
@@ -100,7 +100,9 @@ void	or_and(char *line)
 			i++;
         }
     }
-	if ((!glob.exit_code && check == 1) || ((glob.exit_code || a == 0) && check == 2))
+	if (!a && glob.exit_code)
+		mini_cmd((line + a));
+	else if ((!glob.exit_code && check == 1) || ((glob.exit_code || a == 0) && check == 2))
 		mini_cmd((line + a));
 }
 
