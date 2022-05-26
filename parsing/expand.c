@@ -27,8 +27,6 @@ void    f1(char **line, char *l, int *ll, int *r)
     *line = ft_strjoin11(*line, ft_strdup(tmp));
     if (l[i + 1] == '0')
         *line = ft_strjoin_freed(*line, &glob.av[0][2], 1);
-    else
-        *line = ft_strjoin_freed(*line, "", 1);
     left = ++i + 1;
     *r = i;
     *ll = left;

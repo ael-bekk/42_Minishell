@@ -37,7 +37,10 @@ char	*ft_strjoin11(char *s1, char *s2)
 	while (s2 && s2[l2])
 		l2++;
 	if (!(l1 + l2))
+	{
+		(ft_free11(&s1) || ft_free11(&s2));
 		return (NULL);
+	}
 	res = (char *)malloc(l1 + l2 + 1);
 	if (!res)
 		return (ft_free11(&s1));
