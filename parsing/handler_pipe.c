@@ -1,21 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   handler_pipe.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: amounadi <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/14 02:58:32 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/14 23:05:56 by amounadi         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../inc/minishell.h"
 
 int check_pipe(char *str)
 {
-	int i;
-	int a;
+	int	i;
+	int	a;
 
 	i = -1;
 	a = 1;
@@ -64,8 +52,7 @@ char *handler_pipe(char *line)
 			return (NULL);
 		}
 		line = ft_strjoin_freed2(line, str, 1);
-		if (check_pipe(line))
-			a = 0;
+		a = !check_pipe(line);
 	}
 	return (line);
 }

@@ -17,7 +17,7 @@
 
 #include "../libft/libft.h"
 #include "./built_in.h"
-#include "./parsing.h"
+#include "./pars_exec.h"
 
 //****************************************************************************//
 //                           Add some colors colors                           //
@@ -65,6 +65,9 @@ typedef struct s_glob
     int     line_c;
     int     cmd;
     int     red;
+    char    *d_name;
+    char    *old_inp;
+    int     last_in;
     pid_t   pid;
     pid_t   pid_cmd;
     int     nb_cmd;
@@ -117,7 +120,7 @@ int     define_cmd(t_cmd *cmd);
 int     errors_return(char *s);
 int     errors_return_red(char *s, t_cmd *cmd);
 
-int     execution(t_cmd *cmd);
+
 
 char    **list_to_str(t_list *head);
 void    ft_sort_arry(char **str);

@@ -19,14 +19,16 @@ int    pars(t_cmd **cmd, char **splt)
 
 t_cmd    *parsing(char *line)
 {
+    int     i;
     char    **s;
     t_cmd   *cmd;
 
     cmd = NULL;
 	if (!line)
 		return (NULL);
+    i = -1;
     s = split(line, '|');
-    for(int i = 0; s && s[i]; i++)
+    while (s && s[++i])
     {
         s[i] = separ_line(s[i]);
         if (pars(&cmd, split(s[i], ' ')))
