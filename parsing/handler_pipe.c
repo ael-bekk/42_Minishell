@@ -51,11 +51,14 @@ char *handler_pipe(char *line)
 			free(str);
 			return (NULL);
 		}
+		if (!check_line_pipe(str))
+		return (NULL);
 		line = ft_strjoin_freed2(line, str, 1);
 		a = !check_pipe(line);
 	}
 	return (line);
 }
+ 
 
 char *check_full(char *line)
 {
