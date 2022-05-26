@@ -20,14 +20,7 @@ int check_or_and(char *str)
 				i++;
 		}
 		else  if (str[i] != ' ' && str[i] != '\n')
-		{
-			if (str[i] == '|' || str[i] == '&')
-			{
-				p_error(str[i]);
-				glob.error = 1;	
-			}
 			a = 1;
-		}
 	}
 	return(a);
 }
@@ -58,6 +51,8 @@ char *handler_or_and(char *line)
 			free(str);
 			return (NULL);
 		}
+		if(!check_line_or_and(str))
+			return (NULL);
 		line = ft_strjoin_freed2(line, str, 1);
 		a = check_or_and(line);
         	if (a == 0 || a == -1)
