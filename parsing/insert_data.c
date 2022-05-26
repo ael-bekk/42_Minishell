@@ -1,5 +1,25 @@
 #include "../inc/minishell.h"
 
+char    *change_wild2(char *s)
+{
+    int i;
+    int q;
+    char *new;
+
+    i = -1;
+    new = ft_strdup(s);
+    while (new[++i])
+    {
+        if (new[i] == '\'' || new[i] == '\"')
+        {
+            q = new[i];
+            while (new[++i] && q != new[i])
+                    new[i] = new[i] * (new[i] != '*') -4 * (new[i] == '*');
+        }
+    }
+    return (new);
+}
+
 char *delete_quote2(char *str)
 {
 	int i;
@@ -66,7 +86,7 @@ void    insertData(t_cmd *new, char **s)
                 new->rid[r - 1][0] = -3;
                 new->rid[r - 1] = ft_strjoin_freed(new->rid[r - 1], s[i], 1);
             }
-            wild(delete_quote(ft_strdup(s[i])));
+            wild(delete_quote(change_wild2(s[i])));
             if (glob.line_c)
             {
                 free(new->rid[r - 1]);
@@ -84,7 +104,7 @@ void    insertData(t_cmd *new, char **s)
                 free(new->cmd[--c]);
                 new->cmd[c] = NULL;
             }
-            wild(delete_quote(ft_strdup(s[i])));
+            wild(delete_quote(change_wild2(s[i])));
             if (glob.line_c)
             {
                 free(new->cmd[c - 1]);

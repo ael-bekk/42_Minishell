@@ -1,16 +1,33 @@
 #include "../inc/minishell.h"
 #include <dirent.h>
 
-int is_matching(char *dir, char *to_search, int it_1, int it_2)
+char    *change_wild(char *s)
 {
-    if (!dir[it_1] && !to_search[it_2])
+    int i;
+    char *new;
+
+    i = -1;
+    new = ft_strdup(s);
+    while (new[++i])
+        new[i] = new[i] * (new[i] != '*') -4 * (new[i] == '*');
+    return (new);
+}
+
+int is_matching(char *dir, char *to_search)
+{
+    if (!*dir && !*to_search)
         return (1);
-    if (to_search[it_2] == dir[it_1])
-        return (is_matching(dir, to_search, it_1 + 1, it_2 + 1));
-    if (to_search[it_2] == '*')
-        return (is_matching(dir, to_search, it_1, it_2 + 1)
-            || is_matching(dir, to_search, it_1 + 1, it_2));
-    return (0);
+    if (!*dir && *to_search == '*')
+        return (is_matching(dir, to_search + 1));
+    if (!*dir || !*to_search)
+        return (0);
+    if (*to_search != '*' && *to_search != *dir)
+        return (0);
+    if (*to_search != '*' && *to_search == *dir)
+        return (is_matching(dir + 1, to_search + 1));
+    return (is_matching(dir + 1, to_search + 1)
+        || is_matching(dir, to_search + 1)
+        || is_matching(dir + 1, to_search));
 }
 
 int check_dir(char *path)
@@ -31,11 +48,13 @@ int search_in_dir(char *d, char **pfix_sfix, char **n_f, int l)
     struct dirent *p;
     char *new_d;
     char *new_p_s[2];
+    char *cng;
 
     p = readdir(dir);
     while (p)
     {
-        if (is_matching(p->d_name, n_f[l], 0, 0) && p->d_name[0] != '.')
+        cng = change_wild(p->d_name);
+        if (is_matching(cng, n_f[l]) && p->d_name[0] != '.')
         {
             new_d = ft_strjoin_freed(ft_strdup(d), "/", 1);
             new_d = ft_strjoin_freed(new_d, p->d_name, 1);
@@ -54,6 +73,7 @@ int search_in_dir(char *d, char **pfix_sfix, char **n_f, int l)
             free(new_d);
             free(new_p_s[0]);
         }
+        free(cng);
         p = readdir(dir);
     }
     closedir(dir);
