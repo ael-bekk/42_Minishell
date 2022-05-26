@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 14:44:58 by ael-bekk          #+#    #+#             */
-/*   Updated: 2021/11/23 13:50:13 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/26 16:58:03 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,8 @@ char	*ft_strjoin11(char *s1, char *s2)
 	int		l2;
 	char	*res;
 
-	l1 = 0;
-	l2 = 0;
-	while (s1 && s1[l1])
-		l1++;
-	while (s2 && s2[l2])
-		l2++;
+	l1 = ft_strlen(s1);
+	l2 = ft_strlen(s2);
 	if (!(l1 + l2))
 	{
 		(ft_free11(&s1) || ft_free11(&s2));

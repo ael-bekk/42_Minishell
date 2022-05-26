@@ -1,29 +1,5 @@
 #include "../inc/minishell.h"
 
-void    affiche(t_cmd *cmd)
-{ 
-    while (cmd)
-    {
-        int i = -1;
-        printf("\n---------------------------\n");
-        printf("here_doc : \n");
-        while(cmd->here_doc[++i])
-            printf("[%s] --- ", cmd->here_doc[i]);
-        printf("\n");
-        i = -1;
-        printf("rid : \n");
-        while(cmd->rid[++i])
-            printf("[%s -- %d] --- ", cmd->rid[i], cmd->type[i]);
-        printf("\n");
-        i = -1;
-        printf("cmd : \n");
-        while(cmd->cmd[++i])
-            printf("[%s] ", cmd->cmd[i]);
-        printf("\n");
-        cmd = cmd->next;
-    }
-}
-
 void    mini_cmd(char *line)
 {
     t_cmd *cmd;
@@ -36,7 +12,6 @@ void    mini_cmd(char *line)
 
 int main(int ac, char **av, char **ev)
 {
-
     char *inp;
 
     glob.av = av;
@@ -58,11 +33,14 @@ int main(int ac, char **av, char **ev)
             exit(0);
         }
         glob.no_init = 0;
-        
         if (inp && inp[0])
             inp = handl_unclosed(inp);
-        if (inp && inp[0])
+        if (inp && inp[0] && ft_strcmp(glob.old_inp, inp))
+        {
+            free(glob.old_inp);
+            glob.old_inp = ft_strdup(inp);
             add_history(inp);
+        }
         or_and(inp);
         free(inp);
     }

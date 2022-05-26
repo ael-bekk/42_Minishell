@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_spece.c                                        :+:      :+:    :+:   */
+/*   add_space.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amounadi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:00:37 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/11 23:51:52 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/05/26 17:48:48 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-static	int	count_symbole(char *str)
+
+static int	count_symbole(char *str)
 {
 	int i;
 	int a;
@@ -24,11 +25,37 @@ static	int	count_symbole(char *str)
 	return (a * 2);
 }
 
-char *separ_line(char *s)
+void	add_space_line1(char *s, char *str, int *i, int *j)
+{
+	str[(*j)++] = ' ';
+	str[(*j)++] = s[(*i)++];
+	str[(*j)++] = s[(*i)++];
+	str[(*j)++] = ' ';
+}
+
+void	add_space_line2(char *s, char *str, int *i, int *j)
+{
+	str[(*j)++] = ' ';
+	str[(*j)++] = s[(*i)++];
+	str[(*j)++] = ' ';
+}
+
+void	add_space_line3(char *s, char *str, int *i, int *j)
+{
+	int	type;
+
+	type = (s[(*i)] == '\'') + 2 * (s[(*i)] == '\"');
+	if (type)
+		str[(*j)++] = s[(*i)++];
+	while (type && s[(*i)] && ((type == 1 && s[(*i)] != '\'') || (type == 2 && s[(*i)] != '\"')))
+		str[(*j)++] = s[(*i)++];
+	str[(*j)++] = s[(*i)++];
+}
+
+char	*separ_line(char *s)
 {
 	int		i;
 	int		j;
-	int		type;
 	char	*str;
 
 	i = 0;
@@ -37,27 +64,11 @@ char *separ_line(char *s)
 	while(s[i])
 	{
 		if(s[i + 1] && ((s[i] == '>' && s[i+1] == '>') || (s[i] == '<' && s[i+1] == '<')))
-		{
-			str[j++] = ' ';
-			str[j++] = s[i++];
-			str[j++] = s[i++];
-			str[j++] = ' ';
-		}
+			add_space_line1(s, str, &i, &j);
 		else if(s[i] == '>' || s[i] == '<')
-		{
-			str[j++] = ' ';
-			str[j++] = s[i++];
-			str[j++] = ' ';
-		}
+			add_space_line2(s, str, &i, &j);
 		else 
-		{
-			type = (s[i] == '\'') + 2 * (s[i] == '\"');
-			if (type)
-				str[j++] = s[i++];
-			while (type && s[i] && ((type == 1 && s[i] != '\'') || (type == 2 && s[i] != '\"')))
-				str[j++] = s[i++];
-			str[j++] = s[i++];
-		}
+			add_space_line3(s, str, &i, &j);
 	}
 	free(s);
 	str[j] = '\0';

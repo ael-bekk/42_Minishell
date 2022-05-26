@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:15:08 by ael-bekk          #+#    #+#             */
-/*   Updated: 2021/11/10 11:19:30 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/26 13:33:12 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
 // part ~
-int     ft_double_strlen(char **s);
+int		ft_double_strlen(char **s);
 char	*ft_strjoin_freed(char *s1, char *s2, int type);
 char	*ft_strchr_line(const char *s, int c);
 char	*ft_strjoin_freed2(char *s1, char *s2, int type);
-char    **ft_str_double_join(char ***s1, char **s2, int l1, int l2);
-void    ft_free(char **s);
+char	**ft_str_double_join(char ***s1, char **s2, int l1, int l2);
+void	ft_free(char **s);
 int		ft_strcmp(char*s1, char*s2);
 
 // part 3 *linked_list*

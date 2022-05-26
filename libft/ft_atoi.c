@@ -30,12 +30,7 @@ int	ft_atoi(const char *str)
 		n = n * 10 + (*str - '0');
 		str++;
 		if (n > LONG_MAX)
-		{
-			//glob.exit_code =
-			if (ng > 0)
-				return (-1);
-			return (0);
-		}
+			return (255);
 	}
 	return (n * ng);
 }
