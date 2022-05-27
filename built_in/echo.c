@@ -6,13 +6,13 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 17:07:28 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 17:07:28 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/26 19:01:00 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void    print_all(char **cmd, int fd_out)
+void	print_all(char **cmd, int fd_out)
 {
 	int	i;
 
@@ -37,7 +37,8 @@ int	nl_echo(char *s)
 		return (1);
 	return (0);
 }
-int blt_echo(char **cmd, int fd_out)
+
+int	blt_echo(char **cmd, int fd_out)
 {
 	int	i;
 

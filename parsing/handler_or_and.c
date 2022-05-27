@@ -84,12 +84,12 @@ void	or_and(char *line)
 	if (!line)
 		return ;
 	lent = ft_strlen(line);
-	while(i < lent)
+	while (i < lent)
 	{
 		a = i;
-		while(line[i])
+		while (line[i])
 		{
-			if(line[i + 1] && ((line[i] == '&' && line[i + 1] == '&') || (line[i] == '|' && line[i + 1] == '|')))
+			if (line[i + 1] && ((line[i] == '&' && line[i + 1] == '&') || (line[i] == '|' && line[i + 1] == '|')))
         	{
 				line[i] = '\0';
 				if ((!glob.exit_code && check == 1) || ((glob.exit_code || a == 0) && check == 2) || !a)
