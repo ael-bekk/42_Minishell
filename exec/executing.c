@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 18:52:09 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/27 09:26:25 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:03:44 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ int	execution(t_cmd *cmd)
 	if (glob.nb_cmd == 1 && cmd->use && check_built(cmd->cmd[0]))
 		glob.exit_code = exec_built(cmd);
 	else
-		exec_cmds(cmd, cmd);
+		up_to = exec_cmds(cmd, cmd);
 	close_all(cmd);
 	if (up_to)
 	{
 		waitpid(glob.pid_cmd, &up_to, 0);
 		if (!glob.exit_code)
-			glob.exit_code = up_to;
+			glob.exit_code = up_to / 256;
 		up_to = !glob.exit_code;
 	}
 	while (wait(NULL) != -1)

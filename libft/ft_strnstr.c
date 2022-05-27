@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 13:47:33 by ael-bekk          #+#    #+#             */
-/*   Updated: 2021/11/09 13:47:35 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/27 13:52:48 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	i = 0;
 	if (!*needle)
 		return ((char *)haystack);
-	while (haystack[i] && i < len)
+	while (haystack && haystack[i] && i < len)
 	{
 		j = 0;
 		while (needle[j] && j + i < len

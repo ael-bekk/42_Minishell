@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 18:42:43 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/27 09:26:11 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:17:14 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	mini_cmd(char *line)
 {
 	t_cmd	*cmd;
 
+printf("hi\n");
 	cmd = parsing(line);
 	if (cmd && !define_cmd(cmd))
 		glob.exit_code = execution(cmd);
@@ -76,7 +77,6 @@ int	main(int ac, char **av, char **ev)
             add_history(inp);
         }
         or_and(inp);
-        free(inp);
     }
     return (0);
 }

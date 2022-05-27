@@ -65,39 +65,78 @@ char *handler_or_and(char *line)
 	return (line);
 }
 
+// void	or_and(char *line)
+// {
+// 	int i;
+// 	int a;
+// 	int check;
+// 	int lent;
+
+// 	a = 0;
+// 	i = 0;
+// 	check = 1;
+// 	if (!line)
+// 		return ;
+// 	lent = ft_strlen(line);
+// 	while (i < lent)
+// 	{
+// 		a = i;
+// 		while (line[i])
+// 		{
+// 			if (line[i + 1] && ((line[i] == '&' && line[i + 1] == '&') || (line[i] == '|' && line[i + 1] == '|')))
+//         	{
+// 				line[i] = '\0';
+// 				if ((!glob.exit_code && check == 1) || (glob.exit_code && check == 2) || !a)
+// 					mini_cmd((line + a));
+// 				check = (line[i + 1] == '&') + 2 * (line[i+1] == '|');
+// 				a = ++i + 1;
+// 			}
+// 			i++;
+//         }
+//     }
+// 	if ((!glob.exit_code && check == 1) || (glob.exit_code && check == 2))
+// 		mini_cmd((line + a));
+// 	else if (!a)
+// 		mini_cmd((line + a));
+// }
 
 void	or_and(char *line)
 {
 	int i;
-	int a;
-	int check;
-	int lent;
+	int start;
+	int stack;
+	int	and_or;
 
-	a = 0;
-	i = 0;
-	check = 1;
-	if (!line)
-		return ;
-	lent = ft_strlen(line);
-	while (i < lent)
+	and_or = 1;
+	start = 0;
+	i = -1;
+	printf("%s\n", line);
+	while (line && line[++i])
 	{
-		a = i;
-		while (line[i])
+		start = i;
+		if (line[i] == '(')
 		{
-			if (line[i + 1] && ((line[i] == '&' && line[i + 1] == '&') || (line[i] == '|' && line[i + 1] == '|')))
-        	{
-				line[i] = '\0';
-				if ((!glob.exit_code && check == 1) || (glob.exit_code && check == 2) || !a)
-					mini_cmd((line + a));
-				check = (line[i + 1] == '&') + 2 * (line[i+1] == '|');
-				a = ++i + 1;
-			}
-			i++;
-        }
+			stack = 1;
+			while (line && line[++i] && stack)
+				stack += (line[i] == '(') - (line[i] == ')');
+			line[i-- - 1] = 0;
+			if ((and_or && glob.exit_code) || (!and_or && !glob.exit_code) || !start)
+				or_and(ft_strdup(&line[start + 1]));
+		}
+		else if (line[i] != ' ')
+		{
+			stack = and_or;
+			while (line && line[++i])
+				if (line[i + 1] && ((line[i] == '|' && line[i + 1] == '|') || (line[i] == '&' && line[i + 1] == '&')))
+				{
+					and_or = (line[i++] == '|' && line[i] == '|');
+					line[i++ - 1] = 0;
+					break;
+				}
+			i--;
+			if ((stack && glob.exit_code) || (!stack && !glob.exit_code) || !start)
+				mini_cmd(&line[start]);
+		}
     }
-	if ((!glob.exit_code && check == 1) || (glob.exit_code && check == 2))
-		mini_cmd((line + a));
-	else if (!a)
-		mini_cmd((line + a));
+	free(line);
 }
-
