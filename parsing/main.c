@@ -34,7 +34,10 @@ int main(int ac, char **av, char **ev)
         }
         glob.no_init = 0;
         if (inp && inp[0])
+        {   
+            valid_parentheses(inp);
             inp = handl_unclosed(inp);
+        }
         if (inp && inp[0] && ft_strcmp(glob.old_inp, inp))
         {
             free(glob.old_inp);

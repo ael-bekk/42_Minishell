@@ -77,5 +77,5 @@ int	execution(t_cmd *cmd)
 	while (wait(NULL) != -1)
 		;
 	glob.p = -1;
-	return ((glob.exit_code / 256) * up_to + glob.exit_code * !up_to);
+	return (((glob.exit_code / 256) * up_to) + (glob.exit_code * !up_to));
 }
