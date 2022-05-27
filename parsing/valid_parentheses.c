@@ -1,6 +1,5 @@
 #include "../inc/minishell.h"
 
-
 char    *skip_qoute(char *str)
 {
     if (*str == '"')
@@ -49,22 +48,26 @@ int	valid_parentheses(char *s)
 	{
         if (*s == '\'' || *s == '"')
             s = skip_qoute(s);
-		if (*s == '(')
+		else if (*s == '(')
         {
+            printf("here\n");
 			stack[a++] = *s++;
             y = i++;
-            while(*s && *s++ == ' ' && ++i)
+            while(*s && *s == ' ' && i++)
+            {
                 y++;
+                s++;
+            }
         }
-        if (a && *s == ')' && stack[a - 1] == '(' && y + 1 != i && s++)
+        else if (a && *s == ')' && stack[a - 1] == '(' && y + 1 != i && ++i && s++)
 			a--;
-		if (*s == ')')
+		else if (*s == ')')
         {
             a = 1;
             break;
         }
-        if(*s && *s != '"' && *s != '\'' && *s != '(' && *s != ')' && ++i) 
-            s++;
+        else if (++i && s++)
+            ;
     }
 	if (check_error_parentheses(a, *s, stack[a - 1]))   
 		return (0);    
