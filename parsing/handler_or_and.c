@@ -20,14 +20,7 @@ int check_or_and(char *str)
 				i++;
 		}
 		else  if (str[i] != ' ' && str[i] != '\n')
-		{
-			if (str[i] == '|' || str[i] == '&')
-			{
-				p_error(str[i]);
-				glob.error = 1;	
-			}
 			a = 1;
-		}
 	}
 	return(a);
 }
@@ -58,6 +51,8 @@ char *handler_or_and(char *line)
 			free(str);
 			return (NULL);
 		}
+		if(!check_line_or_and(str))
+			return (NULL);
 		line = ft_strjoin_freed2(line, str, 1);
 		a = check_or_and(line);
         	if (a == 0 || a == -1)
@@ -92,7 +87,7 @@ void	or_and(char *line)
 			if (line[i + 1] && ((line[i] == '&' && line[i + 1] == '&') || (line[i] == '|' && line[i + 1] == '|')))
         	{
 				line[i] = '\0';
-				if ((!glob.exit_code && check == 1) || ((glob.exit_code || a == 0) && check == 2) || !a)
+				if ((!glob.exit_code && check == 1) || (glob.exit_code && check == 2) || !a)
 					mini_cmd((line + a));
 				check = (line[i + 1] == '&') + 2 * (line[i+1] == '|');
 				a = ++i + 1;
@@ -100,9 +95,9 @@ void	or_and(char *line)
 			i++;
         }
     }
-	if (!a && glob.exit_code)
+	if ((!glob.exit_code && check == 1) || (glob.exit_code && check == 2))
 		mini_cmd((line + a));
-	else if ((!glob.exit_code && check == 1) || ((glob.exit_code || a == 0) && check == 2))
+	else if (!a)
 		mini_cmd((line + a));
 }
 

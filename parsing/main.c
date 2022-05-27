@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 18:42:43 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 18:44:12 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/27 09:26:11 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,38 @@ int	main(int ac, char **av, char **ev)
 {
 	char	*inp;
 
-	glob.av = av;
-	copy_data_env(ev);
-	printf("%s", TITLE);
-	prompet();
-	while (TRUE)
-	{
-		glob.error = 0;
-		glob.nb_cmd = 0;
-		glob.p = -1;
-		print_prompet();
-		signal(SIGINT, sig_hnd);
-		signal(SIGQUIT, sig_hnd2);
-		inp = readline("\033[0;34m~> \033[0;36m% \033[0m");
-		minishell(inp);
-		free(inp);
-	}
-	return (0);
+    glob.av = av;
+    copy_data_env(ev);
+    printf("%s", TITLE);
+    prompet();
+    while (TRUE)
+    {
+        glob.error = 0;
+        glob.nb_cmd = 0;
+        glob.p = -1;
+        print_prompet();
+        signal(SIGINT, sig_hnd);
+        signal(SIGQUIT, sig_hnd2);
+        inp = readline("\033[0;34m~> \033[0;36m% \033[0m");
+        if (!inp)
+        {
+            printf("exit\n");
+            exit(0);
+        }
+        glob.no_init = 0;
+        if (inp && inp[0])
+        {   
+            valid_parentheses(inp);
+            inp = handl_unclosed(inp);
+        }
+        if (inp && inp[0] && ft_strcmp(glob.old_inp, inp))
+        {
+            free(glob.old_inp);
+            glob.old_inp = ft_strdup(inp);
+            add_history(inp);
+        }
+        or_and(inp);
+        free(inp);
+    }
+    return (0);
 }

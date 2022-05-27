@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 18:52:09 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 18:55:06 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/27 09:26:25 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	execution(t_cmd *cmd)
 	int	old_exit_code;
 
 	glob.p = -2;
+	up_to = 0;
 	ft_free(glob.exec_env);
 	glob.exec_env = list_to_str(glob.env);
 	if (glob.nb_cmd == 1 && cmd->use && check_built(cmd->cmd[0]))
@@ -88,5 +89,5 @@ int	execution(t_cmd *cmd)
 	while (wait(NULL) != -1)
 		;
 	glob.p = -1;
-	return ((glob.exit_code / 256) * up_to + glob.exit_code * !up_to);
+	return (((glob.exit_code / 256) * up_to) + (glob.exit_code * !up_to));
 }

@@ -127,5 +127,10 @@ void    ft_sort_arry(char **str);
 char    *delete_quote2(char *str);
 void    wild(char *ll);
 void    p_error(char c);
+int     check_line_pipe(char *str);
+int     check_line_or_and(char *str);
+int     valid_parentheses(char *s);
+
 
 #endif
+

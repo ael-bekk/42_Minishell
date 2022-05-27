@@ -40,8 +40,12 @@ char	*delete_quote2(char *str)
 	i = 0;
 	j = 0;
 	while (str && str[i])
+	{
 		if (str[i] != -2)
 			str[j++] = str[i++];
+		else
+			i++;
+	}
 	if (str)
 		str[j] = '\0';
 	return (str);
