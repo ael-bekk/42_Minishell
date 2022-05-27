@@ -37,39 +37,38 @@ int	valid_parentheses(char *s)
 {
 	int i;
 	int a;
-    int y;
-    char *stack;
+    	int y;
+    	char *stack;
     
-    stack = malloc(ft_strlen(s) + 1);
+    	stack = malloc(ft_strlen(s) + 1);
 	a = 0;
 	i = 0;
-    y = 0;
+    	y = 0;
 	while (*s)
 	{
-        if (*s == '\'' || *s == '"')
-            s = skip_qoute(s);
+        	if (*s == '\'' || *s == '"')
+			s = skip_qoute(s);
 		else if (*s == '(')
-        {
-            printf("here\n");
+        	{
 			stack[a++] = *s++;
-            y = i++;
-            while(*s && *s == ' ' && i++)
-            {
-                y++;
-                s++;
-            }
-        }
-        else if (a && *s == ')' && stack[a - 1] == '(' && y + 1 != i && ++i && s++)
+           		 y = i++;
+            		while(*s && *s == ' ' && i++)
+            		{
+                	y++;
+                	s++;
+            		}
+        	}
+        	else if (a && *s == ')' && stack[a - 1] == '(' && y + 1 != i && ++i && s++)
 			a--;
 		else if (*s == ')')
-        {
-            a = 1;
-            break;
-        }
-        else if (++i && s++)
-            ;
-    }
+        	{
+           	 a = 1;
+           	 break;
+       		 }
+        	else if (++i && s++)
+            		;
+    	}
 	if (check_error_parentheses(a, *s, stack[a - 1]))   
-		return (0);    
+	return (0);    
     return (1);
 }
