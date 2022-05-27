@@ -43,7 +43,7 @@ char	*delete_quote2(char *str)
 	{
 		if (str[i] != -2)
 			str[j++] = str[i++];
-		esle
+		else
 			i++;
 	}
 	if (str)
