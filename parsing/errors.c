@@ -79,7 +79,7 @@ void	p_error(char c)
 {
 	if (!glob.error)
 	{
-		ft_putstr_fd("\033[4;31mparse error near `",2);
+		ft_putstr_fd("\033[4;31msyntax error near unexpected token `",2);
 		ft_putchar_fd(c,2);
 		ft_putstr_fd("'\033[0m\n",2);
 	}

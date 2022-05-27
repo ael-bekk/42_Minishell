@@ -87,7 +87,7 @@ void	or_and(char *line)
 			if(line[i + 1] && ((line[i] == '&' && line[i + 1] == '&') || (line[i] == '|' && line[i + 1] == '|')))
         	{
 				line[i] = '\0';
-				if ((!glob.exit_code && check == 1) || ((glob.exit_code || a == 0) && check == 2) || !a)
+				if ((!glob.exit_code && check == 1) || (glob.exit_code && check == 2) || !a)
 					mini_cmd((line + a));
 				check = (line[i + 1] == '&') + 2 * (line[i+1] == '|');
 				a = ++i + 1;
@@ -95,9 +95,9 @@ void	or_and(char *line)
 			i++;
         }
     }
-	if (!a && glob.exit_code)
+	if ((!glob.exit_code && check == 1) || (glob.exit_code && check == 2))
 		mini_cmd((line + a));
-	else if ((!glob.exit_code && check == 1) || ((glob.exit_code || a == 0) && check == 2))
+	else if (!a)
 		mini_cmd((line + a));
 }
 
