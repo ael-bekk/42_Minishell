@@ -22,15 +22,36 @@ int		check_spece_pipe(char *str)
 	}
 	return (1);
 }
+int skip_qoute_inside(char *str)
+{
+	int i;
 
+	i = 0;
+    if (str[i] == '"')
+    {
+        i++;
+        while(str[i] && str[i] != '"')
+            i++;
+		return (i);
+    }
+    else
+    {
+        i++;
+        while(str[i] && str[i] != '\'')
+            i++;
+		return (i);
+    }
+}
 
 int check_pipe(char *str)
 {
 	int	i;
 	int	a;
+	int len;
 
 	i = -1;
 	a = 1;
+	len = 0;
 	if (!str)
 		return(1);
 	if (str[0] && (str[0] == '|' || str[0] == '&'))
@@ -38,9 +59,12 @@ int check_pipe(char *str)
 		p_error(str[0]);
 		glob.error = 1;
 	}
-	while (str[++i])
+	len = ft_strlen(str);
+	while (++i < len)
 	{
-		if (str[i] == '|')
+		if (str[i] == '\'' || str[i] == '"')
+			i += skip_qoute_inside(str + i);
+		else if (str[i] == '|')
 		{
 			a = 0;
 			if (!check_spece_pipe(str + i))
@@ -78,13 +102,12 @@ char *handler_pipe(char *line)
 			return (NULL);
 		}
 		if (!check_line_pipe(str))
-		return (NULL);
+			return (NULL);
 		line = ft_strjoin_freed2(line, str, 1);
 		a = !check_pipe(line);
 	}
 	return (line);
 }
- 
 
 char *check_full(char *line)
 {

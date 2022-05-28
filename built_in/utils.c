@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/09 13:47:33 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/27 13:52:48 by ael-bekk         ###   ########.fr       */
+/*   Created: 2022/05/26 18:49:20 by ael-bekk          #+#    #+#             */
+/*   Updated: 2022/05/26 18:49:58 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/minishell.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+void	change_pwd()
 {
-	size_t	i;
-	size_t	j;
+	char	*e[2];
 
-	i = 0;
-	if (!*needle)
-		return ((char *)haystack);
-	while (haystack && haystack[i] && i < len)
-	{
-		j = 0;
-		while (needle[j] && j + i < len
-			&& haystack[i + j] == needle[j])
-			j++;
-		if (!needle[j])
-			return (&((char *)haystack)[i]);
-		i++;
-	}
-	return (NULL);
+	e[0] = ft_strjoin_freed2(ft_strdup("PWD="), getcwd(NULL, 0), 1);
+	e[1] = NULL;
+	blt_export(e, &glob.env, 1, 3);
+	free(e[0]);
+}
+
+void	change_old_pwd(char *s)
+{
+	char	*e[2];
+
+	e[0] = ft_strjoin_freed2(ft_strdup("OLDPWD="), s, 1);
+	e[1] = NULL;
+	blt_export(e, &glob.env, 1, 3);
+	free(e[0]);
 }

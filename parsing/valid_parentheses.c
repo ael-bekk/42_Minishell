@@ -1,5 +1,15 @@
 #include "../inc/minishell.h"
 
+void	delete_parentheses(char *str)
+{
+	while(*str)
+	{
+		if (*str == 40 || *str == 41)
+			*str = ' ';
+		str++;
+	}
+}
+
 char    *skip_qoute(char *str)
 {
     if (*str == '"')
@@ -16,10 +26,9 @@ char    *skip_qoute(char *str)
             str++;
         return (++str);
     }
-
 }
 
-int check_error_parentheses(int a, char c, char s)
+int check_error_parentheses(int a, char c, int s)
 {
     if (a != 0)
     {
@@ -47,29 +56,36 @@ int	valid_parentheses(char *s)
 	while (*s)
 	{
         if (*s == '\'' || *s == '"')
-            s = skip_qoute(s);
+		s = skip_qoute(s);
 		else if (*s == '(')
         {
-            printf("here\n");
 			stack[a++] = *s++;
-            y = i++;
-            while(*s && *s == ' ' && i++)
+       		 y = i++;
+			while(*s && ( *s == ' ' || *s == '|' || *s == '&') && i++)
             {
+				if (*s == '|' || *s == '&')
+				{
+					p_error(*s);
+					glob.error = 1;
+					return (0);
+				}
                 y++;
                 s++;
-            }
-        }
-        else if (a && *s == ')' && stack[a - 1] == '(' && y + 1 != i && ++i && s++)
+            	}
+        	}
+        	else if (a && *s == ')' && stack[a - 1] == '(' && y + 1 != i && ++i && s++)
 			a--;
 		else if (*s == ')')
         {
-            a = 1;
-            break;
-        }
+           	 a = 1;
+           	 break;
+    	 }
         else if (++i && s++)
             ;
     }
-	if (check_error_parentheses(a, *s, stack[a - 1]))   
+	y = stack[a - 1];
+	free(stack);
+	if (check_error_parentheses(a, *s,y))   
 		return (0);    
     return (1);
 }

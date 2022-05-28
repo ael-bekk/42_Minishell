@@ -1,18 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/26 18:42:43 by ael-bekk          #+#    #+#             */
+/*   Updated: 2022/05/27 15:17:14 by ael-bekk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
-void    mini_cmd(char *line)
+void	mini_cmd(char *line)
 {
-    t_cmd *cmd;
+	t_cmd	*cmd;
 
-    cmd = parsing(line);
-    if (cmd && !define_cmd(cmd))
-        glob.exit_code = execution(cmd);
-    ft_free_list(&cmd);
+	cmd = parsing(line);
+	if (cmd && !define_cmd(cmd))
+		glob.exit_code = execution(cmd);
+	ft_free_list(&cmd);
 }
 
-int main(int ac, char **av, char **ev)
+void	minishell(char *inp)
 {
-    char *inp;
+	if (!inp)
+	{
+		printf("exit\n");
+		exit(0);
+	}
+	glob.no_init = 0;
+	if (inp && inp[0])
+		inp = handl_unclosed(inp);
+	if (inp && inp[0] && ft_strcmp(glob.old_inp, inp))
+	{
+		free(glob.old_inp);
+		glob.old_inp = ft_strdup(inp);
+		add_history(inp);
+	}
+	or_and(inp);
+}
+
+int	main(int ac, char **av, char **ev)
+{
+	char	*inp;
 
     glob.av = av;
     copy_data_env(ev);
@@ -45,7 +76,6 @@ int main(int ac, char **av, char **ev)
             add_history(inp);
         }
         or_and(inp);
-        free(inp);
     }
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 17:07:10 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 17:28:26 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/26 18:57:42 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	check_built(char *cmd)
 	str[6] = "export";
 	str[7] = NULL;
 	i = -1;
-	while(cmd && str[++i])
-		if (!ft_strncmp(cmd,str[i], ft_strlen(str[0]) + 1))
-			return(1);
-	return(0);
+	while (cmd && str[++i])
+		if (!ft_strncmp(cmd, str[i], ft_strlen(str[0]) + 1))
+			return (1);
+	return (0);
 }
 
 int	exec_built(t_cmd *cmd)
@@ -50,26 +50,26 @@ int	exec_built(t_cmd *cmd)
 		return (blt_unset(&cmd->cmd[1]));
 	if (!ft_strncmp(cmd->cmd[0], "export", 7))
 		return (blt_export(&cmd->cmd[1], &glob.env, cmd->out, 3)
-		   || blt_export(&cmd->cmd[1], &glob.local, cmd->out, 2));
+			|| blt_export(&cmd->cmd[1], &glob.local, cmd->out, 2));
 	return (glob.exit_code);
 }
 
-int print_check_error(char *str)
+int	print_check_error(char *str)
 {
-    ft_putstr_fd("\033[4;31mError: ", 2);
+	ft_putstr_fd("\033[4;31mError: ", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(": command not found\033[0m\n", 2);
 	glob.exit_code = 127;
-    return (0);
+	return (0);
 }
 
 int	check_path(char **str, t_list *path)
 {
-	int     i;
-	char    **s_path;
-	char    *p;
-    
-    i = -1;
+	int		i;
+	char	**s_path;
+	char	*p;
+
+	i = -1;
 	if (!path)
 	{
 		ft_putstr_fd("\033[4;31mError: PATH doesn't exist\033[0m\n", 2);
@@ -77,7 +77,7 @@ int	check_path(char **str, t_list *path)
 		return (0);
 	}
 	s_path = ft_split(path->value, ':');
-	while(s_path[++i])
+	while (s_path[++i])
 	{
 		p = ft_strjoin_freed(ft_strdup(s_path[i]), "/", 1);
 		p = ft_strjoin_freed(p, *str, 1);

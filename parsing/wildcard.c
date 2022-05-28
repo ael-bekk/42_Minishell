@@ -6,14 +6,14 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:08:56 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 15:08:56 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/26 18:47:39 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 #include <dirent.h>
 
-int search_in_dir(char *d, char **pfix_sfix, char **n_f, int l);
+int	search_in_dir(char *d, char **pfix_sfix, char **n_f, int l);
 
 char	*change_wild(char *s)
 {
