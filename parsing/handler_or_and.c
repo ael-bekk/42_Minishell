@@ -11,13 +11,27 @@ int check_or_and(char *str)
 		return(1);
 	while (str[++i] && !glob.error)
 	{
-		if (a == 1 && str[i + 1] && ((str[i] == '|' &&  str[i + 1] == '|') || (str[i] == '&' &&  str[i + 1] == '&')))
+		if (str[i] == '\'' || str[i] == '"')
+			i += skip_qoute_inside(str + i);
+		else if (a == 1 && str[i + 1] && ((str[i] == '|' &&  str[i + 1] == '|') || (str[i] == '&' &&  str[i + 1] == '&')))
 		{
 			a = -1;
 			if (str[i] == '&')
 				a = 0;
 			if (str[i + 1] && ((str[i + 1] == '|' && a == -1) || (str[i + 1] == '&' && a == 0)))
 				i++;
+			if(str[i + 1] && ((str[i] == '|' || str[i] == '&') &&  (str[i + 1] == '|' || str[i + 1] == ')' || str[i + 1] == '(' )))
+			{
+				p_error(str[i]);
+				glob.error = 1;
+				return (0);
+			}
+		}
+		else if ((str[i + 1] && str[i] == '&' && str[i + 1] != '&') || (str[i] == '&' && !str[i + 1]))
+		{
+			p_error(str[i]);
+			glob.error = 1;
+			return (0);
 		}
 		else  if (str[i] != ' ' && str[i] != '\n')
 			a = 1;
@@ -65,6 +79,7 @@ char *handler_or_and(char *line)
 	return (line);
 }
 
+ 
  void	or_and(char *line)
  {
  	int i;
@@ -78,14 +93,17 @@ char *handler_or_and(char *line)
  	if (!line)
  		return ;
  	lent = ft_strlen(line);
+	delete_parentheses(line);
  	while (i < lent)
  	{
  		a = i;
  		while (line[i])
  		{
- 			if (line[i + 1] && ((line[i] == '&' && line[i + 1] == '&') || (line[i] == '|' && line[i + 1] == '|')))
+			if (line[i] == 34 || line[i] == 39)
+				i += skip_qoute_inside(line + i);
+ 			else if (line[i + 1] && ((line[i] == '&' && line[i + 1] == '&') || (line[i] == '|' && line[i + 1] == '|')))
          	{
- 				line[i] = '\0';
+ 				line[i] = '\0'; 
  				if ((!glob.exit_code && check == 1) || (glob.exit_code && check == 2) || !a)
  					mini_cmd((line + a));
  				check = (line[i + 1] == '&') + 2 * (line[i+1] == '|');
@@ -99,45 +117,3 @@ char *handler_or_and(char *line)
  	else if (!a)
  		mini_cmd((line + a));
  }
-/*
-void	or_and(char *line)
-{
-	int i;
-	int start;
-	int stack;
-	int	and_or;
-
-	and_or = 1;
-	start = 0;
-	i = -1;
-	printf("%s\n", line);
-	while (line && line[++i])
-	{
-		start = i;
-		if (line[i] == '(')
-		{
-			stack = 1;
-			while (line && line[++i] && stack)
-				stack += (line[i] == '(') - (line[i] == ')');
-			line[i-- - 1] = 0;
-			if ((and_or && glob.exit_code) || (!and_or && !glob.exit_code) || !start)
-				or_and(ft_strdup(&line[start + 1]));
-		}
-		else if (line[i] != ' ')
-		{
-			stack = and_or;
-			while (line && line[++i])
-				if (line[i + 1] && ((line[i] == '|' && line[i + 1] == '|') || (line[i] == '&' && line[i + 1] == '&')))
-				{
-					and_or = (line[i++] == '|' && line[i] == '|');
-					line[i++ - 1] = 0;
-					break;
-				}
-			i--;
-			if ((stack && glob.exit_code) || (!stack && !glob.exit_code) || !start)
-				mini_cmd(&line[start]);
-		}
-    }
-	free(line);
-}
-*/

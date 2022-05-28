@@ -16,7 +16,6 @@ void	mini_cmd(char *line)
 {
 	t_cmd	*cmd;
 
-printf("hi\n");
 	cmd = parsing(line);
 	if (cmd && !define_cmd(cmd))
 		glob.exit_code = execution(cmd);
