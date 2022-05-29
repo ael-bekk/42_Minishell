@@ -16,8 +16,7 @@ static void	ft_plus(char c, char b, int *q, int a)
 	}
 	if (a == 3)
 	{
-		if ((c && c == '|')
-			|| (b && b == '|'))
+		if ((c && c == '|') || (b && b == '|'))
 			*q = 1;
 	}
 }
@@ -32,7 +31,7 @@ int	check_pipe(char *str)
 	a = 1;
 	if (!str)
 		return (1);
-	ft_plus(str[0], 's', &i, 1);
+	//ft_plus(str[0], 's', &i, 1);
 	len = ft_strlen(str);
 	while (++i < len)
 	{
@@ -67,7 +66,7 @@ char	*handler_pipe(char *line)
 		str = readline(glob.herd);
 		if (!str)
 		{
-			ft_plus('c', 'c', &a, 2);
+			//ft_plus('c', 'c', &a, 2);
 			free(line);
 			free(str);
 			return (NULL);
