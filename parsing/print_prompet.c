@@ -6,13 +6,13 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 18:45:16 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 18:45:16 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/29 03:39:59 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	print_prompet()
+void	print_prompet(void)
 {
 	t_list	*home;
 	char	*pwd;

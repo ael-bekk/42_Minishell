@@ -1,90 +1,63 @@
 #include "../inc/minishell.h"
 
-int		check_spece_pipe(char *str)
+static void	ft_plus(char c, char b, int *q, int a)
 {
-	int i;
-	int a;
-
-	i = 0;
-	a = 0;
-	if(str[i] == '|')
+	if (a == 1 && c && (c == '|' || c == '&'))
 	{
-		a = i;
-		i++;
-		while(str[i] && (str[i] == '\n' || str[i] == ' '))
-			i++;
-		if (str[i] && str[i] == '|' && a  + 1 != i )
-		{
-			p_error(str[i]);
-			glob.error = 1;
-			return (0);
-		}
+		p_error(c);
+		glob.error = 1;
 	}
-	return (1);
-}
-int skip_qoute_inside(char *str)
-{
-	int i;
-
-	i = 0;
-    if (str[i] == '"')
-    {
-        i++;
-        while(str[i] && str[i] != '"')
-            i++;
-		return (i);
-    }
-    else
-    {
-        i++;
-        while(str[i] && str[i] != '\'')
-            i++;
-		return (i);
-    }
+	if (a == 2)
+	{
+		if (!glob.no_init)
+			ft_putstr_fd("\033[4;31m Minishell: syntax error:\
+				unexpected end of file\n\033[0m", 2);
+		glob.no_init = 1;
+	}
+	if (a == 3)
+	{
+		if ((c && c == '|')
+			|| (b && b == '|'))
+			*q = 1;
+	}
 }
 
-int check_pipe(char *str)
+int	check_pipe(char *str)
 {
 	int	i;
 	int	a;
-	int len;
+	int	len;
 
 	i = -1;
 	a = 1;
-	len = 0;
 	if (!str)
-		return(1);
-	if (str[0] && (str[0] == '|' || str[0] == '&'))
-	{
-		p_error(str[0]);
-		glob.error = 1;
-	}
+		return (1);
+	ft_plus(str[0], 's', &i, 1);
 	len = ft_strlen(str);
 	while (++i < len)
 	{
 		if (str[i] == '\'' || str[i] == '"')
 			i += skip_qoute_inside(str + i);
-		else if (str[i] == '|')
+		else if (str[i] == '|' && a--)
 		{
 			a = 0;
-			if (!check_spece_pipe(str + i))
+			if (!check_space_pipe(str + i))
 				return (0);
-			if ((str[i + 1] && str[i + 1] == '|') || ( str[i - 1] && str[i - 1] == '|'))
-				a = 1;
+			ft_plus(str[i + 1], str[i - 1], &a, 3);
 		}
-		else  if (str[i] != ' ' && str[i] != '\n')
+		else if (str[i] != ' ' && str[i] != '\n')
 			a = 1;
 	}
-	return(a);
+	return (a);
 }
 
-char *handler_pipe(char *line)
+char	*handler_pipe(char *line)
 {
-	char *str;
-	int 	a;
+	char	*str;
+	int		a;
 
 	if (!line)
-		return (NULL);	
+		return (NULL);
 	a = !check_pipe(line);
 	free(glob.herd);
 	glob.herd = NULL;
@@ -94,9 +67,7 @@ char *handler_pipe(char *line)
 		str = readline(glob.herd);
 		if (!str)
 		{
-			if (!glob.no_init)
-				ft_putstr_fd("\033[4;31m Minishell: syntax error: unexpected end of file\n\033[0m", 2);
-			glob.no_init = 1;
+			ft_plus('c', 'c', &a, 2);
 			free(line);
 			free(str);
 			return (NULL);
@@ -109,14 +80,14 @@ char *handler_pipe(char *line)
 	return (line);
 }
 
-char *check_full(char *line)
+char	*check_full(char *line)
 {
-	int v;
-	int a;
-	
+	int	v;
+	int	a;
+
 	if (!line)
 		return (NULL);
-	v = !check_pipe(line) ||  check_quote(line);
+	v = !check_pipe(line) || check_quote(line);
 	if (!v)
 		a = check_or_and(line);
 	while (v || a == -1 || a == 0)

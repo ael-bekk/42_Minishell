@@ -8,6 +8,7 @@
 #include <signal.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <dirent.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
@@ -133,7 +134,12 @@ int     valid_parentheses(char *s);
 char    *skip_qoute(char *str);
 int     skip_qoute_inside(char *str);
 void    delete_parentheses(char *line);
-
+int		search_in_dir(char *d, char **pfix_sfix, char **n_f, int l);
+void	search_in_dir2(char *d, char **pfix_sfix, char **n_f, int l);
+void	search_in_dir3(char *d, char **pfix_sfix, char **new_p_s, char **new_d);
+int     is_matching(char *dir, char *to_search);
+int     skip_qoute_inside(char *str);
+int     check_space_pipe(char *str);
+char	*change_wild2(char *s);
 
 #endif
-

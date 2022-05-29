@@ -46,7 +46,7 @@ int		execution(t_cmd *cmd);
 
 t_cmd	*creat_node(void);
 t_cmd	*ft_nodelast(t_cmd *head);
-void	insertData(t_cmd *nw, char **s);
+void	insertdata(t_cmd *nw, char **s);
 void	copy_data_env(char **ev);
 void	add_back_node(t_cmd **head, t_cmd *nw);
 void	ft_free_list(t_cmd **head);
