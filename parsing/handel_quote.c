@@ -9,8 +9,8 @@ int	check_quote(char *str)
 	i = 0;
 	a = 0;
 	if (!str)
-		return (0);
-	while (str[i])
+		return(0);
+	while(str[i])
 	{
 		if (!a && (str[i] == '\"' || str[i] == '\''))
 		{
@@ -24,12 +24,12 @@ int	check_quote(char *str)
 	return (a);
 }
 
-char	*delete_quote(char *str)
+char *delete_quote(char *str)
 {
 	int	quote;
 	int	in_expanded;
-	int	i;
-	int	j;
+	int i;
+	int j;
 
 	i = -1;
 	j = 0;
@@ -49,7 +49,7 @@ char	*delete_quote(char *str)
 			str[j++] = str[i];
 	}
 	if (str)
-		str[j] = '\0';
+		str[j] = '\0';	
 	return (str);
 }
 
@@ -57,8 +57,7 @@ void	*quote2_error(char *line, char *str, int a)
 {
 	if (!glob.no_init)
 	{
-		ft_putstr_fd("\033[4;31m bash: unexpected EOF while looking for matching `\
-		", 2);
+		ft_putstr_fd("\033[4;31m bash: unexpected EOF while looking for matching `", 2);
 		ft_putchar_fd(((a == 2) * '\'' + (a == 1) * '\"'), 2);
 		ft_putstr_fd("'\nbash: syntax error: unexpected end of file\033[0m\n", 2);
 	}
@@ -68,12 +67,11 @@ void	*quote2_error(char *line, char *str, int a)
 	return (NULL);
 }
 
-char	*handel_quote(char *line)
+char *handel_quote(char *line)
 {
-	char	*str;
-	int		a;
+	char *str;
+	int a = 1;
 
-	a = 1;
 	a = check_quote(line);
 	while (a && !glob.error)
 	{

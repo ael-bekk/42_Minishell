@@ -1,0 +1,140 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handler_pipe.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/29 20:41:16 by ael-bekk          #+#    #+#             */
+/*   Updated: 2022/05/29 21:04:27 by ael-bekk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../inc/minishell.h"
+
+int	check_spece_pipe(char *str)
+{
+	int	i;
+	int	a;
+
+	i = 0;
+	a = 0;
+	if (str[i] == '|')
+	{
+		a = i;
+		i++;
+		while (str[i] && (str[i] == '\n' || str[i] == ' '))
+			i++;
+		if (str[i] && str[i] == '|' && a + 1 != i)
+		{
+			p_error(str[i]);
+			glob.error = 1;
+			return (0);
+		}
+	}
+	return (1);
+}
+
+int	skip_qoute_inside(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '"')
+	{
+		i++;
+		while (str[i] && str[i] != '"')
+			i++;
+		return (i);
+	}
+	else
+	{
+		i++;
+		while (str[i] && str[i] != '\'')
+			i++;
+		return (i);
+	}
+}
+
+int	check_pipe(char *str, int len)
+{
+	int	i;
+	int	a;
+
+	i = -1;
+	a = 1;
+	if (str && str[0] && (str[0] == '|' || str[0] == '&'))
+		p_error(str[0]);
+	while (str && ++i < len)
+	{
+		if (str[i] == '\'' || str[i] == '"')
+			i += skip_qoute_inside(str + i);
+		else if (str[i] == '|')
+		{
+			a = 0;
+			if (!check_spece_pipe(str + i))
+				return (0);
+			if ((str[i + 1] && str[i + 1] == '|')
+				|| (str[i - 1] && str[i - 1] == '|'))
+				a = 1;
+		}
+		else if (str[i] != ' ' && str[i] != '\n')
+			a = 1;
+	}
+	return (a);
+}
+
+char	*handler_pipe(char *line)
+{
+	char	*str;
+	int		a;
+
+	a = !check_pipe(line, ft_strlen(line));
+	free(glob.herd);
+	glob.herd = ft_strdup("\033[0;32mpipe> \033[0;37m");
+	while (a && !glob.error)
+	{
+		str = readline(glob.herd);
+		if (!str)
+		{
+			if (!glob.no_init)
+				ft_putstr_fd(SYNTAX_ERROR, 2);
+			glob.no_init = 1;
+			free(line);
+			free(str);
+			return (NULL);
+		}
+		if (!check_line_pipe(str))
+			return (NULL);
+		line = ft_strjoin_freed2(line, str, 1);
+		a = !check_pipe(line, ft_strlen(line));
+	}
+	return (line);
+}
+
+char	*check_full(char *line)
+{
+	int	v;
+	int	a;
+
+	if (!line)
+		return (NULL);
+	v = (!check_pipe(line, ft_strlen(line)) || check_quote(line));
+	if (!v)
+		a = check_or_and(line);
+	while (v || a == -1 || a == 0)
+	{
+		line = handel_quote(line);
+		line = handler_pipe(line);
+		line = handler_or_and(line);
+		v = (!check_pipe(line, ft_strlen(line)) || check_quote(line));
+		if (!v)
+			a = check_or_and(line);
+		if (glob.error)
+		{
+			free(line);
+			return (NULL);
+		}
+	}
+	return (line);
+}

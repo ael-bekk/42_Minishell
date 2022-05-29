@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wildcard.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/26 15:08:56 by ael-bekk          #+#    #+#             */
+/*   Updated: 2022/05/26 18:47:39 by ael-bekk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
+
 
 int	is_matching(char *dir, char *to_search)
 {
@@ -16,6 +29,8 @@ int	is_matching(char *dir, char *to_search)
 		|| is_matching(dir, to_search + 1)
 		|| is_matching(dir + 1, to_search));
 }
+
+
 
 int	wild2(char *ll, char **path, char **s, char **p_s_fix)
 {

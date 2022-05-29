@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 17:57:54 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/29 02:18:48 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/05/26 17:57:55 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,17 +95,16 @@ void	f3(char **line, char *l, int *ll, int *r)
 	free(tmp);
 }
 
-char	*expand(char *l)
+char    *expand(char *l)
 {
-	char	*line;
-	int		i;
-	int		left;
-	int		in_dquote;
+	char *line;
+	int i;
+	int left;
+	int in_dquote = 0;
 
 	left = 0;
 	i = -1;
 	line = NULL;
-	in_dquote = 0;
 	while (l && l[++i])
 	{
 		if (l[i] == '\"')
@@ -116,9 +115,8 @@ char	*expand(char *l)
 			f1(&line, l, &left, &i);
 		else if (l[i] == '$' && l[i + 1] == '?')
 			f2(&line, l, &left, &i);
-		else if (l[i] == '$' && (((l[i + 1] == '\''
-			|| l[i + 1] == '\"') && !in_dquote)
-			|| l[i + 1] == '_' || ft_isalpha(l[i + 1])))
+		else if (l[i] == '$' && (((l[i + 1] == '\'' || l[i + 1] == '\"')
+			&& !in_dquote) || l[i + 1] == '_' || ft_isalpha(l[i + 1])))
 			f3(&line, l, &left, &i);
 	}
 	line = ft_strjoin11(line, ft_substr(l, left, i - left));

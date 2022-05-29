@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 18:08:36 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/29 02:27:55 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/05/26 18:12:11 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	match_strings(char *s1, char *s2, int lent, char fin)
 
 void	red_here_doc(t_cmd *cmd, char *limiter, int *p)
 {
-	int		cont;
-	char	*line;
+	int cont;
+	char *line;
 
 	line = NULL;
 	cont = FALSE;
@@ -65,7 +65,7 @@ void	red_here_doc(t_cmd *cmd, char *limiter, int *p)
 		{
 			glob.no_init = 1;
 			free(line);
-			break ;
+			break;
 		}
 		if (!cmd->t_type)
 			line = delete_quote2(expand2(line));
@@ -80,8 +80,8 @@ void	red_here_doc(t_cmd *cmd, char *limiter, int *p)
 
 int	here_doc(t_cmd *cmd, char *limiter)
 {
-	int	i;
-	int	p[2];
+	int i;
+	int p[2];
 
 	glob.p = dup(0);
 	pipe(p);
