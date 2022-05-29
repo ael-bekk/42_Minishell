@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include <dirent.h>
-
-int	search_in_dir(char *d, char **pfix_sfix, char **n_f, int l);
 
 char	*change_wild(char *s)
 {
