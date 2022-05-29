@@ -6,20 +6,20 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 17:07:48 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 17:07:48 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/29 01:22:22 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	ft_print_error()
+int	ft_print_error(void)
 {
 	ft_putstr_fd("pwd: too many arguments\n", 2);
 	glob.exit_code = 1;
 	return (1);
 }
 
-int     blt_pwd(char *p, int fd_out)
+int	blt_pwd(char *p, int fd_out)
 {
 	char	*s;
 	t_list	*l;

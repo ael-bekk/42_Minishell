@@ -6,13 +6,13 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 17:07:33 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 17:07:33 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/29 01:26:48 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int blt_exit(char **cmd)
+int	blt_exit(char **cmd)
 {
 	int	i;
 
@@ -23,7 +23,8 @@ int blt_exit(char **cmd)
 	{
 		if (!ft_isdigit(cmd[0][i]))
 		{
-			printf("\033[4;31m %s: exit: %s: numeric argument required\n", glob.av[0], cmd[0]);
+			printf("\033[4;31m %s: exit: %s: numeric argument required\n",
+				glob.av[0], cmd[0]);
 			exit(255);
 		}
 	}

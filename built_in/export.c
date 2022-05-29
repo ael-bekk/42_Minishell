@@ -6,13 +6,13 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 17:07:35 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 17:07:35 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/29 01:24:29 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int		print_export(int fd)
+int	print_export(int fd)
 {
 	char	**str;
 	int		i;
@@ -20,11 +20,11 @@ int		print_export(int fd)
 	i = -1;
 	str = list_to_str(glob.local);
 	ft_sort_arry(str);
-	while(str[++i])
+	while (str[++i])
 	{
-		ft_putstr_fd("declare -x ",fd);
-		ft_putstr_fd(str[i],fd);
-		ft_putstr_fd("\n",fd);
+		ft_putstr_fd("declare -x ", fd);
+		ft_putstr_fd(str[i], fd);
+		ft_putstr_fd("\n", fd);
 	}
 	ft_free(str);
 	return (0);
@@ -43,7 +43,7 @@ t_list	*find_var2(char *key, t_list *env)
 	return (NULL);
 }
 
-int is_valid_var(char *s, int type)
+int	is_valid_var(char *s, int type)
 {
 	int	i;
 	int	p_m;
@@ -105,7 +105,7 @@ int	blt_export(char **cmd, t_list **g, int fd, int tp)
 	i = -1;
 	ret = 0;
 	if (!cmd[0] && tp == 2)
-		return(print_export(fd));
+		return (print_export(fd));
 	while (cmd && cmd[++i])
 	{
 		blt_export2(cmd[i], g, &type, tp);

@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 17:07:28 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 19:01:00 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/29 01:31:39 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	nl_echo(char *s)
 	int	i;
 
 	i = 0;
-	while (s && s[0] == '-'&& s[++i])
+	while (s && s[0] == '-' && s[++i])
 		if (s[i] != 'n')
 			return (0);
 	if (s && s[1] == 'n' && !s[i])
@@ -48,7 +48,8 @@ int	blt_echo(char **cmd, int fd_out)
 	print_all(&cmd[i], fd_out);
 	if (!nl_echo(cmd[0]) && (cmd[i] || !i))
 		ft_putstr_fd("\n", fd_out);
-	else if (cmd[i] && cmd[i][ft_strlen(cmd[i]) - 1] != '\n' && nl_echo(cmd[0]) && fd_out == 1)
+	else if (cmd[i] && cmd[i][ft_strlen(cmd[i]) - 1] != '\n'
+		&& nl_echo(cmd[0]) && fd_out == 1)
 		glob.no_nl = 1;
 	return (0);
 }
