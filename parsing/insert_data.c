@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 18:19:37 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 18:28:39 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/29 20:48:13 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*change_wild2(char *s)
 {
-	int i;
-	int q;
-	char *new;
+	int		i;
+	int 	q;
+	char	*new;
 
 	i = -1;
 	new = ft_strdup(s);
@@ -34,7 +34,7 @@ char	*change_wild2(char *s)
 
 char	*delete_quote2(char *str)
 {
-	int i;
+	int	i;
 	int j;
 
 	i = 0;

@@ -55,7 +55,7 @@
 # define DQUOTE "\033[0;32mdquote> \033[0;37m"
 # define QUOTE "\033[0;32mquote> \033[0;37m"
 # define ERROR_SYS_CALL -1
-
+# define SYNTAX_ERROR "\033[4;31m Minishell: syntax error: unexpected end of file\n\033[0m"
 //****************************************************************************//
 //                                  Stracters                                 //
 //****************************************************************************//
