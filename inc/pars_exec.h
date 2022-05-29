@@ -53,7 +53,7 @@ void	ft_free_list(t_cmd **head);
 char	*find_var(char *key, t_list *env);
 t_list	*find_var2(char *key, t_list *env);
 int		equal_place(char *s);
-int		allocateData(t_cmd *cmd, int h_doc, int rid, int cmnd);
+int		allocatedata(t_cmd *cmd, int h_doc, int rid, int cmnd);
 int		aloccate_data(t_cmd *cmd, char **s);
 
 //****************************************************************************//

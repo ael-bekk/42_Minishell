@@ -1,6 +1,6 @@
 #include "../inc/minishell.h"
 
-int     check_line_or_and(char *str)
+int	check_line_or_and(char *str)
 {
 	char c;
 
@@ -22,7 +22,7 @@ int     check_line_or_and(char *str)
 	return (1);		
 }
 
-int check_line_pipe(char *str)
+int	check_line_pipe(char *str)
 {
 	char c;
 

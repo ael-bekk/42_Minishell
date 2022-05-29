@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 17:58:56 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 17:59:01 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/29 21:04:30 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_free_list(t_cmd **head)
 {
 	t_cmd	*tmp;
 
-	
 	while (head && *head)
 	{
 		tmp = *head;
