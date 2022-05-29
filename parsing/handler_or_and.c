@@ -1,4 +1,14 @@
 #include "../inc/minishell.h"
+int check_space(char *str)
+{
+	while(*str)
+	{
+		if (*str != ' ')
+			return (0);
+		str++;
+	}
+	return(1);
+}
 
 int check_or_and(char *str)
 {
@@ -7,7 +17,7 @@ int check_or_and(char *str)
 
 	i = -1;
 	a = 0;
-	if (!str)
+	if (!str || check_space(str))
 		return(1);
 	while (str[++i] && !glob.error)
 	{
@@ -44,7 +54,7 @@ char *handler_or_and(char *line)
 	char *str;
 	int 	a;
 
-	if (!line || !line[0])
+	if (!line || !line[0] || check_space(line))
 		return (NULL);	
 	a = check_or_and(line);
 	free(glob.herd);
