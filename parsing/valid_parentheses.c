@@ -4,6 +4,8 @@ void	delete_parentheses(char *str)
 {
 	while(*str)
 	{
+        if (*str == 34 || *str == 39)
+            str = skip_qoute(str);
 		if (*str == 40 || *str == 41)
 			*str = ' ';
 		str++;

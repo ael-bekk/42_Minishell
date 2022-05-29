@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 17:07:50 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 17:28:00 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/29 01:30:42 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,22 @@ void	blt_unset2(char *cmd, int *res)
 	*res = !is_valid_var2(cmd);
 	while (env && !*res)
 	{
-		if (!ft_strncmp(cmd, env->key, strlen(cmd)) && strlen(cmd) == strlen(env->key))
+		if (!ft_strncmp(cmd, env->key, strlen(cmd))
+			&& strlen(cmd) == strlen(env->key))
 			ft_lstdel_from_list(&glob.env, env);
 		env = env->next;
 	}
 	env = glob.local;
 	while (env && !*res)
 	{
-		if (!ft_strncmp(cmd, env->key, strlen(cmd)) && strlen(cmd) == strlen(env->key))
+		if (!ft_strncmp(cmd, env->key, strlen(cmd))
+			&& strlen(cmd) == strlen(env->key))
 			ft_lstdel_from_list(&glob.local, env);
 		env = env->next;
 	}
 }
 
-int blt_unset(char **cmd)
+int	blt_unset(char **cmd)
 {
 	int		i;
 	int		res;
@@ -82,8 +84,12 @@ int blt_unset(char **cmd)
 	{
 		blt_unset2(cmd[i], &res);
 		if (res)
-			printf("%s: export: `%s': not a valid identifier\n", glob.av[0], cmd[i]);
-		glob.exit_code = glob.exit_code || res;
+			printf("%s: export: `%s': not a valid identifier\n",
+				glob.av[0], cmd[i]);
+		if (glob.exit_code)
+			glob.exit_code = glob.exit_code;
+		else
+			glob.exit_code = res;
 	}
 	return (glob.exit_code);
 }

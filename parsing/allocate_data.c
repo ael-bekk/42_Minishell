@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 17:52:55 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 17:53:20 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/29 01:40:14 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_data(char **s, int len)
 		s[len] = NULL;
 }
 
-int	allocateData(t_cmd *cmd, int h_doc, int red, int cmnd)
+int	allocatedata(t_cmd *cmd, int h_doc, int red, int cmnd)
 {
 	cmd->here_doc = (char **)malloc(sizeof(char *) * (h_doc + 1));
 	cmd->rid = (char **)malloc(sizeof(char *) * (red + 1));
@@ -49,7 +49,8 @@ int	aloccate_data(t_cmd *cmd, char **s)
 	i = -1;
 	while (s && s[++i])
 	{
-		red += (s[i][0] == '>' && s[i][1] == '>') || (s[i][0] == '<' && !s[i][1]) || s[i][0] == '>';
+		red += (s[i][0] == '>' && s[i][1] == '>')
+			|| (s[i][0] == '<' && !s[i][1]) || s[i][0] == '>';
 		h_doc += s[i][0] == '<' && s[i][1] == '<';
 		if (s[i][0] == '>' || s[i][0] == '<')
 			i++;
@@ -58,5 +59,5 @@ int	aloccate_data(t_cmd *cmd, char **s)
 	}
 	if (!cmnd)
 		cmd->use = 0;
-	return (allocateData(cmd, h_doc, red, cmnd));
+	return (allocatedata(cmd, h_doc, red, cmnd));
 }

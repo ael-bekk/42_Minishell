@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 17:07:31 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 17:07:31 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/29 01:32:58 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	blt_env(char *s, int fd_out)
 {
-	int		i;
-	t_list	*lst;
-	char	**str; 
-	
-	str =list_to_str(glob.env);
+	int			i;
+	t_list		*lst;
+	char		**str;
+
+	str = list_to_str(glob.env);
 	ft_sort_arry(str);
 	if (s)
 	{
