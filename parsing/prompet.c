@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 18:45:13 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 18:45:13 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/29 05:14:57 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*deppace_name(char *s)
 	return (c);
 }
 
-int	cherch_file()
+int	cherch_file(void)
 {
 	int		fd;
 	char	*env[2];
@@ -41,7 +41,8 @@ int	cherch_file()
 	{
 		if (ft_strnstr(s, "ComputerName", ft_strlen(s)))
 		{
-			env[0] = ft_strjoin_freed2(ft_strdup("COMPUTER="), deppace_name(get_next_line11(fd)), 1);
+			env[0] = ft_strjoin_freed2(ft_strdup("COMPUTER="),
+					deppace_name(get_next_line11(fd)), 1);
 			env[1] = NULL;
 			blt_export(env, &glob.local, 1, 2);
 			free(env[0]);
@@ -57,7 +58,7 @@ int	cherch_file()
 	return (0);
 }
 
-void	prompet()
+void	prompet(void)
 {
 	t_list	*tmp;
 
@@ -70,6 +71,6 @@ void	prompet()
 	tmp = find_var2("USER", glob.local);
 	ft_lstadd_back(&glob.local,
 		ft_lstnew(ft_strdup("PS1"),
-		ft_strjoin_freed2(ft_strjoin_freed(ft_strdup(tmp->value), "@", 1),
-		ft_strdup(find_var2("COMPUTER", glob.local)->value), 1)));
+			ft_strjoin_freed2(ft_strjoin_freed(ft_strdup(tmp->value), "@", 1),
+				ft_strdup(find_var2("COMPUTER", glob.local)->value), 1)));
 }
