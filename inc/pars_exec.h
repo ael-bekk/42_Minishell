@@ -67,7 +67,7 @@ char	*check_full(char *line);
 int		check_quote(char *str);
 int		print_quote(char *str);
 char	*handl_unclosed(char *inp);
-int		check_pipe(char *str);
+int		check_pipe(char *str, int len);
 char	*expand(char *l);
 char	*expand2(char *l);
 void	f1(char **line, char *l, int *ll, int *r);

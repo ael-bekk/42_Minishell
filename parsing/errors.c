@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 17:54:29 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 17:58:20 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/29 20:45:15 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,5 @@ void	p_error(char c)
 		ft_putchar_fd(c,2);
 		ft_putstr_fd("'\033[0m\n",2);
 	}
+	glob.error = 1;
 }
