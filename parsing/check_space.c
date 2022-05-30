@@ -63,14 +63,3 @@ int	check_space_and(char *str)
 	}
 	return (1);
 }
-
-int	check_space(char *str)
-{
-	while (*str)
-	{
-		if (*str != ' ')
-			return (0);
-		str++;
-	}
-	return (1);
-}
