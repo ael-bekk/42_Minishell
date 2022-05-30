@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
+/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 05:14:06 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/30 05:14:50 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/05/30 21:01:30 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	main(int ac, char **av, char **ev)
 {
 	char	*inp;
 
+	(void)ac;
 	g_glob.av = av;
 	copy_data_env(ev);
 	printf("%s", TITLE);

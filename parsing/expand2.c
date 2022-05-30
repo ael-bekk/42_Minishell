@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
+/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 04:20:12 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/30 04:20:16 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/05/30 21:00:55 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 char	*find_var(char *key, t_list *env)
 {
-	char	*tmp;
-
 	while (env)
 	{
 		if (!ft_strncmp(key, env->key, strlen(env->key) + 1))

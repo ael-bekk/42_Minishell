@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
+/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 04:01:39 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/30 04:01:45 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/05/30 21:02:15 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	print_export(int fd)
 
 t_list	*find_var2(char *key, t_list *env)
 {
-	char	*tmp;
-
 	while (env)
 	{
 		if (!ft_strncmp(key, env->key, strlen(env->key) + 1))
@@ -76,6 +74,7 @@ void	blt_export2(char *cmd, t_list **g, int *type, int tp)
 	t_list	*node;
 	int		p;
 
+	node = NULL;
 	*type = is_valid_var(cmd, tp);
 	if (*type && *type < 3)
 	{

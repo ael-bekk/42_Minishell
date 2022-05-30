@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
+/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 04:03:16 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/30 04:04:03 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/05/30 21:02:41 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	exec_cmds(t_cmd *cmd, t_cmd *cmd2)
 int	execution(t_cmd *cmd)
 {
 	int	up_to;
-	int	old_exit_code;
 
 	g_glob.p = -2;
 	up_to = 0;
