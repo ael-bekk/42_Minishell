@@ -165,7 +165,6 @@ void	search_in_dir3(char *d, char **pfix_sfix, char **new_p_s, char **new_d);
 int		is_matching(char *dir, char *to_search);
 int		check_space_and(char *str);
 int		check_spece_pipe(char *str);
-int		check_space(char *str);
 char	*change_wild2(char *s);
 
 //****************************************************************************//

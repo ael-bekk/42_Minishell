@@ -41,8 +41,8 @@ int	check_or_and(char *str)
 	int	a;
 
 	i = -1;
-	a = 0;
-	if (!str || check_space(str))
+	a = 1;
+	if (!str)
 		return (1);
 	while (str[++i] && !g_glob.error)
 	{
@@ -89,7 +89,8 @@ char	*handler_or_and(char *line)
 	char	*str;
 	int		a;
 
-	if (!line || !line[0] || check_space(line))
+	
+	if (!line || !line[0])
 		return (NULL);
 	ft_norm2(line, &a);
 	while ((a == -1 || a == 0) && !g_glob.error)
