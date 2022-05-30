@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_space.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/30 04:16:28 by amounadi          #+#    #+#             */
+/*   Updated: 2022/05/30 04:16:44 by amounadi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
+
 int	check_spece_pipe(char *str)
 {
 	int	i;
@@ -21,6 +34,7 @@ int	check_spece_pipe(char *str)
 	}
 	return (1);
 }
+
 int	check_space_and(char *str)
 {
 	int	i;

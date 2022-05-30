@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   print_prompet.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 18:45:16 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 18:45:16 by ael-bekk         ###   ########.fr       */
+/*   Created: 2022/05/30 04:26:30 by amounadi          #+#    #+#             */
+/*   Updated: 2022/05/30 04:26:32 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	print_prompet()
+void	print_prompet(void)
 {
 	t_list	*home;
 	char	*pwd;
