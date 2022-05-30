@@ -12,7 +12,7 @@ int	check_spece_pipe(char *str)
 		i++;
 		while (str[i] && (str[i] == '\n' || str[i] == ' '))
 			i++;
-		if (str[i] && str[i] == '|'&& a + 1 != i)
+		if (str[i] && str[i] == '|' && a + 1 != i)
 		{
 			p_error(str[i]);
 			glob.error = 1;
@@ -52,5 +52,5 @@ int	check_space(char *str)
 			return (0);
 		str++;
 	}
-	return(1);
+	return (1);
 }

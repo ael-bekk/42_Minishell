@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 17:54:16 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 17:54:16 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/30 02:39:23 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_cmd	*creat_node(void)
 {
-	t_cmd *node;
+	t_cmd	*node;
 
 	node = (t_cmd *)malloc(sizeof(t_cmd));
 	node->use = 1;

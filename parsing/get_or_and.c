@@ -9,7 +9,7 @@ static	void	ft_norm(char *line, int *i, int *a, int *check)
 	{
 		line[*i] = '\0';
 		if ((!glob.exit_code && *check == 1)
-			|| (glob.exit_code && *check == 2) || !a)
+			|| (glob.exit_code && *check == 2) || !*a)
 			mini_cmd((line + *a));
 		*check = (line[*i + 1] == '&') + 2 * (line[*i + 1] == '|');
 		*a = ++(*i) + 1;

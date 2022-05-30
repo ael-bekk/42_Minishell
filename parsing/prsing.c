@@ -22,7 +22,7 @@ int	pars(t_cmd **cmd, char **splt)
 		ft_free(splt);
 		return (1);
 	}
-	insertData(new, splt);
+	insertdata(new, splt);
 	add_back_node(cmd, new);
 	glob.nb_cmd++;
 	ft_free(splt);

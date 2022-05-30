@@ -2,15 +2,15 @@
 
 int	check_line_or_and(char *str)
 {
-	char c;
+	char	c;
 
-	while(*str && (*str == ' ' || *str == '\n'))
+	while (*str && (*str == ' ' || *str == '\n'))
 		str++;
 	if (*str && (*str == '|' || *str == '&'))
 	{
 		c = *str;
 		str++;
-		while(*str && (*str == ' ' || *str == '\n'))
+		while (*str && (*str == ' ' || *str == '\n'))
 			str++;
 		if (!*str || *str == '&' || *str == '|')
 		{
@@ -19,20 +19,20 @@ int	check_line_or_and(char *str)
 			return (0);
 		}
 	}
-	return (1);		
+	return (1);
 }
 
 int	check_line_pipe(char *str)
 {
-	char c;
+	char	c;
 
-	while(*str && (*str == ' ' || *str == '\n'))
+	while (*str && (*str == ' ' || *str == '\n'))
 		str++;
 	if (*str && (*str == '|' || *str == '&'))
 	{
 		c = *str;
 		str++;
-		while(*str && (*str == ' ' || *str == '\n'))
+		while (*str && (*str == ' ' || *str == '\n'))
 			str++;
 		if (!*str)
 		{
@@ -41,5 +41,5 @@ int	check_line_pipe(char *str)
 			return (0);
 		}
 	}
-	return (1);		
+	return (1);
 }

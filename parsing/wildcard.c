@@ -6,12 +6,31 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:08:56 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 18:47:39 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/30 02:28:59 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+char	*change_wild2(char *s)
+{
+	int		i;
+	int		q;
+	char	*new;
+
+	i = -1;
+	new = ft_strdup(s);
+	while (new[++i])
+	{
+		if (new[i] == '\'' || new[i] == '\"')
+		{
+			q = new[i];
+			while (new[++i] && q != new[i])
+					new[i] = new[i] * (new[i] != '*') - 4 * (new[i] == '*');
+		}
+	}
+	return (new);
+}
 
 int	is_matching(char *dir, char *to_search)
 {
@@ -29,8 +48,6 @@ int	is_matching(char *dir, char *to_search)
 		|| is_matching(dir, to_search + 1)
 		|| is_matching(dir + 1, to_search));
 }
-
-
 
 int	wild2(char *ll, char **path, char **s, char **p_s_fix)
 {

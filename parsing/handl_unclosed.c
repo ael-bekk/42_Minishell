@@ -2,10 +2,11 @@
 
 char	*handl_unclosed(char *inp)
 {
-	int i;
+	int	i;
 
 	glob.p = -1;
-	if ((!check_pipe(inp, ft_strlen(inp)) || check_quote(inp) || !check_or_and(inp) || check_or_and(inp) == -1) && !glob.error)
+	if ((!check_pipe(inp, ft_strlen(inp)) || check_quote(inp)
+			|| !check_or_and(inp) || check_or_and(inp) == -1) && !glob.error)
 	{
 		glob.p = dup(0);
 		inp = check_full(inp);
@@ -13,7 +14,7 @@ char	*handl_unclosed(char *inp)
 		close(glob.p);
 	}
 	glob.p = -1;
-	if(glob.error)
+	if (glob.error)
 	{
 		free(inp);
 		return (NULL);

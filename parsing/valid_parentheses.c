@@ -21,8 +21,8 @@ char	*skip_qoute(char *str)
 			str++;
 		return (++str);
 	}
-    else
-    {
+	else
+	{
 		str++;
 		while (*str && *str != '\'')
 			str++;
@@ -32,29 +32,29 @@ char	*skip_qoute(char *str)
 
 int	check_error_parentheses(int a, char c, int s)
 {
-    if (a != 0)
-    {
-        if (c == ')')
-            p_error(c);
-        else
-            p_error(s);
-        glob.error = 1;
+	if (a != 0)
+	{
+		if (c == ')')
+			p_error(c);
+		else
+			p_error(s);
+		glob.error = 1;
 		return (0);    
-    }
-    return (1);
+	}
+	return (1);
 }
 
 int	valid_parentheses(char *s)
 {
 	int		i;
 	int		a;
-    int		y;
-    char	*stack;
-    
-    stack = malloc(ft_strlen(s) + 1);
+	int		y;
+	char	*stack;
+	
+	stack = malloc(ft_strlen(s) + 1);
 	a = 0;
 	i = 0;
-    y = 0;
+	y = 0;
 	while (*s)
 	{
 		if (*s == '\'' || *s == '"')
@@ -84,8 +84,8 @@ int	valid_parentheses(char *s)
 			break ;
 		}
 		else if (++i && s++)
-            ;
-    }
+			;
+	}
 	y = stack[a - 1];
 	free(stack);
 	if (check_error_parentheses(a, *s,y))
