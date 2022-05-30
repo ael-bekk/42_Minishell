@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   valid_parentheses.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/30 05:18:10 by amounadi          #+#    #+#             */
+/*   Updated: 2022/05/30 05:18:11 by amounadi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 void	delete_parentheses(char *str)
@@ -39,7 +51,7 @@ int	check_error_parentheses(int a, char c, int s)
 		else
 			p_error(s);
 		glob.error = 1;
-		return (0);    
+		return (0);
 	}
 	return (1);
 }
@@ -50,7 +62,7 @@ int	valid_parentheses(char *s)
 	int		a;
 	int		y;
 	char	*stack;
-	
+
 	stack = malloc(ft_strlen(s) + 1);
 	a = 0;
 	i = 0;
@@ -62,8 +74,8 @@ int	valid_parentheses(char *s)
 		else if (*s == '(')
 		{
 			stack[a++] = *s++;
-		   	y = i++;
-			while(*s && ( *s == ' ' || *s == '|' || *s == '&') && i++)
+			y = i++;
+			while (*s && (*s == ' ' || *s == '|' || *s == '&') && i++)
 			{
 				if (*s == '|' || *s == '&')
 				{
@@ -76,7 +88,8 @@ int	valid_parentheses(char *s)
 				s++;
 			}
 		}
-		else if (a && *s == ')' && stack[a - 1] == '(' && y + 1 != i && ++i && s++)
+		else if (a && *s == ')' && stack[a - 1] == '('
+			&& y + 1 != i && ++i && s++)
 			a--;
 		else if (*s == ')')
 		{
@@ -88,7 +101,7 @@ int	valid_parentheses(char *s)
 	}
 	y = stack[a - 1];
 	free(stack);
-	if (check_error_parentheses(a, *s,y))
+	if (check_error_parentheses(a, *s, y))
 		return (0);
 	return (1);
 }
