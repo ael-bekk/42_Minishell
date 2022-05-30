@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:00:37 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/29 20:39:13 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/05/30 00:54:58 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ char	*separ_line(char *s)
 	while (s[i])
 	{
 		if (s[i + 1] && ((s[i] == '>' && s[i + 1] == '>')
-				|| (s[i] == '<' && s[i+1] == '<')))
+				|| (s[i] == '<' && s[i + 1] == '<')))
 			add_space_line1(s, str, &i, &j);
 		else if (s[i] == '>' || s[i] == '<')
 			add_space_line2(s, str, &i, &j);
-		else 
+		else
 			add_space_line3(s, str, &i, &j);
 	}
 	free(s);

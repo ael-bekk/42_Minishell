@@ -12,29 +12,6 @@
 
 #include "../inc/minishell.h"
 
-int	check_spece_pipe(char *str)
-{
-	int	i;
-	int	a;
-
-	i = 0;
-	a = 0;
-	if (str[i] == '|')
-	{
-		a = i;
-		i++;
-		while (str[i] && (str[i] == '\n' || str[i] == ' '))
-			i++;
-		if (str[i] && str[i] == '|' && a + 1 != i)
-		{
-			p_error(str[i]);
-			glob.error = 1;
-			return (0);
-		}
-	}
-	return (1);
-}
-
 int	skip_qoute_inside(char *str)
 {
 	int	i;
@@ -67,11 +44,12 @@ int	check_pipe(char *str, int len)
 		p_error(str[0]);
 	while (str && ++i < len)
 	{
+		if (str[i] == '&' && !check_space_and(str + i))
+			return (0);
 		if (str[i] == '\'' || str[i] == '"')
 			i += skip_qoute_inside(str + i);
-		else if (str[i] == '|')
+		else if (str[i] == '|' && a--)
 		{
-			a = 0;
 			if (!check_spece_pipe(str + i))
 				return (0);
 			if ((str[i + 1] && str[i + 1] == '|')
