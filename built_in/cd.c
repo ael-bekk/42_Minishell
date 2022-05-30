@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
+/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 03:59:02 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/30 03:59:12 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/05/30 21:01:42 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	handle_minus(char *path, char *ss)
 
 int	handle_dot(char *path, char *ss)
 {
-	t_list	*s;
 	char	*pwd;
 
 	if (path[0] == '.' && !path[1])

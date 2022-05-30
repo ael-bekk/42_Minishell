@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
+/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 04:01:10 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/30 04:01:13 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/05/30 20:57:20 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	blt_env(char *s, int fd_out)
 {
 	int			i;
-	t_list		*lst;
 	char		**str;
 
 	str = list_to_str(g_glob.env);

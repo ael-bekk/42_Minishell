@@ -62,4 +62,8 @@ int	check_space_and(char *str)
 		}
 	}
 	return (1);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 732278f6ce374d648d94fdb3e3b8251e5146a441

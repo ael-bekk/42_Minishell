@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handl_unclosed.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
+/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 04:23:32 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/30 04:23:35 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/05/30 21:01:04 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 char	*handl_unclosed(char *inp)
 {
-	int	i;
-
 	g_glob.p = -1;
 	if ((!check_pipe(inp, ft_strlen(inp)) || check_quote(inp)
 			|| !check_or_and(inp) || check_or_and(inp) == -1) && !g_glob.error)
