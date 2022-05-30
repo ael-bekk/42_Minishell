@@ -48,12 +48,12 @@ int	search_in_dir(char *d, char **pfix_sfix, char **n_f, int l)
 	while (p)
 	{
 		cng = change_wild(p->d_name);
-		glob.d_name = p->d_name;
+		g_glob.d_name = p->d_name;
 		if (is_matching(cng, n_f[l]) && ((p->d_name[0] != '.'
 					&& n_f[0][0] != '.') || n_f[0][0] == '.'))
 			search_in_dir2(d, pfix_sfix, n_f, l);
 		free(cng);
-		glob.d_name = NULL;
+		g_glob.d_name = NULL;
 		p = readdir(dir);
 	}
 	closedir(dir);
@@ -72,12 +72,12 @@ void	search_in_dir2(char *d, char **pfix_sfix, char **n_f, int l)
 			pfix_sfix[0][ft_strlen(pfix_sfix[0]) - 1] = 0;
 		if (n_f[0][1] == '.')
 			pfix_sfix[0][ft_strlen(pfix_sfix[0]) - 1] = 0;
-		glob.line[glob.line_c] = ft_strdup(pfix_sfix[0]);
-		glob.line[glob.line_c] = ft_strjoin11(glob.line[glob.line_c],
-				ft_strdup(glob.d_name));
-		glob.line[glob.line_c] = ft_strjoin11(glob.line[glob.line_c],
+		g_glob.line[g_glob.line_c] = ft_strdup(pfix_sfix[0]);
+		g_glob.line[g_glob.line_c] = ft_strjoin11(g_glob.line[g_glob.line_c],
+				ft_strdup(g_glob.d_name));
+		g_glob.line[g_glob.line_c] = ft_strjoin11(g_glob.line[g_glob.line_c],
 				ft_strdup(pfix_sfix[1]));
-		glob.line_c++;
+		g_glob.line_c++;
 		if (n_f[0][0] == '.')
 			pfix_sfix[0][ft_strlen(pfix_sfix[0])] = '.';
 		if (n_f[0][1] == '.')
@@ -92,8 +92,8 @@ void	search_in_dir2(char *d, char **pfix_sfix, char **n_f, int l)
 void	search_in_dir3(char *d, char **pfix_sfix, char **new_p_s, char **new_d)
 {
 	*new_d = ft_strjoin_freed(ft_strdup(d), "/", 1);
-	*new_d = ft_strjoin_freed(*new_d, glob.d_name, 1);
-	new_p_s[0] = ft_strjoin_freed(ft_strdup(pfix_sfix[0]), glob.d_name, 1);
+	*new_d = ft_strjoin_freed(*new_d, g_glob.d_name, 1);
+	new_p_s[0] = ft_strjoin_freed(ft_strdup(pfix_sfix[0]), g_glob.d_name, 1);
 	new_p_s[0] = ft_strjoin_freed(new_p_s[0], "/", 1);
 	new_p_s[1] = pfix_sfix[1];
 }

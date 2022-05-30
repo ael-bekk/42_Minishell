@@ -12,6 +12,19 @@
 
 #include "../inc/minishell.h"
 
+char	*find_var(char *key, t_list *env)
+{
+	char	*tmp;
+
+	while (env)
+	{
+		if (!ft_strncmp(key, env->key, strlen(env->key) + 1))
+			return (ft_strdup(env->value));
+		env = env->next;
+	}
+	return (ft_strdup(""));
+}
+
 char	*expand2(char *l)
 {
 	char	*line;

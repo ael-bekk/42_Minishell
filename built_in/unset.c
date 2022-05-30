@@ -55,21 +55,21 @@ void	blt_unset2(char *cmd, int *res)
 {
 	t_list	*env;
 
-	env = glob.env;
+	env = g_glob.env;
 	*res = !is_valid_var2(cmd);
 	while (env && !*res)
 	{
 		if (!ft_strncmp(cmd, env->key, strlen(cmd))
 			&& strlen(cmd) == strlen(env->key))
-			ft_lstdel_from_list(&glob.env, env);
+			ft_lstdel_from_list(&g_glob.env, env);
 		env = env->next;
 	}
-	env = glob.local;
+	env = g_glob.local;
 	while (env && !*res)
 	{
 		if (!ft_strncmp(cmd, env->key, strlen(cmd))
 			&& strlen(cmd) == strlen(env->key))
-			ft_lstdel_from_list(&glob.local, env);
+			ft_lstdel_from_list(&g_glob.local, env);
 		env = env->next;
 	}
 }
@@ -85,11 +85,11 @@ int	blt_unset(char **cmd)
 		blt_unset2(cmd[i], &res);
 		if (res)
 			printf("%s: export: `%s': not a valid identifier\n",
-				glob.av[0], cmd[i]);
-		if (glob.exit_code)
-			glob.exit_code = glob.exit_code;
+				g_glob.av[0], cmd[i]);
+		if (g_glob.exit_code)
+			g_glob.exit_code = g_glob.exit_code;
 		else
-			glob.exit_code = res;
+			g_glob.exit_code = res;
 	}
-	return (glob.exit_code);
+	return (g_glob.exit_code);
 }

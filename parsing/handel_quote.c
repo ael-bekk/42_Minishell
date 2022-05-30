@@ -67,13 +67,13 @@ char	*delete_quote(char *str)
 
 void	*quote2_error(char *line, char *str, int a)
 {
-	if (!glob.no_init)
+	if (!g_glob.no_init)
 	{
 		ft_putstr_fd("\033[4;31m bash: unexpected EOF while looking for matching `", 2);
 		ft_putchar_fd(((a == 2) * '\'' + (a == 1) * '\"'), 2);
 		ft_putstr_fd("'\nbash: syntax error: unexpected end of file\033[0m\n", 2);
 	}
-	glob.no_init = 1;
+	g_glob.no_init = 1;
 	free(line);
 	free(str);
 	return (NULL);
@@ -86,15 +86,15 @@ char	*handel_quote(char *line)
 
 	a = 1;
 	a = check_quote(line);
-	while (a && !glob.error)
+	while (a && !g_glob.error)
 	{
-		free(glob.herd);
-		glob.herd = NULL;
+		free(g_glob.herd);
+		g_glob.herd = NULL;
 		if (a == 1)
-			glob.herd = ft_strdup(DQUOTE);
+			g_glob.herd = ft_strdup(DQUOTE);
 		else
-			glob.herd = ft_strdup(QUOTE);
-		str = readline(glob.herd);
+			g_glob.herd = ft_strdup(QUOTE);
+		str = readline(g_glob.herd);
 		if (!str)
 			return (quote2_error(line, str, a));
 		line = ft_strjoin_freed2(line, str, 0);

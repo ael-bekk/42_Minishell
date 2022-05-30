@@ -27,7 +27,7 @@ int	check_line_or_and(char *str)
 		if (!*str || *str == '&' || *str == '|')
 		{
 			p_error(c);
-			glob.error = 1;
+			g_glob.error = 1;
 			return (0);
 		}
 	}
@@ -49,7 +49,7 @@ int	check_line_pipe(char *str)
 		if (!*str)
 		{
 			p_error(c);
-			glob.error = 1;
+			g_glob.error = 1;
 			return (0);
 		}
 	}

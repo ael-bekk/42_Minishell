@@ -16,17 +16,17 @@ char	*handl_unclosed(char *inp)
 {
 	int	i;
 
-	glob.p = -1;
+	g_glob.p = -1;
 	if ((!check_pipe(inp, ft_strlen(inp)) || check_quote(inp)
-			|| !check_or_and(inp) || check_or_and(inp) == -1) && !glob.error)
+			|| !check_or_and(inp) || check_or_and(inp) == -1) && !g_glob.error)
 	{
-		glob.p = dup(0);
+		g_glob.p = dup(0);
 		inp = check_full(inp);
-		dup(glob.p);
-		close(glob.p);
+		dup(g_glob.p);
+		close(g_glob.p);
 	}
-	glob.p = -1;
-	if (glob.error)
+	g_glob.p = -1;
+	if (g_glob.error)
 	{
 		free(inp);
 		return (NULL);

@@ -18,7 +18,7 @@ int	print_export(int fd)
 	int		i;
 
 	i = -1;
-	str = list_to_str(glob.local);
+	str = list_to_str(g_glob.local);
 	ft_sort_arry(str);
 	while (str[++i])
 	{
@@ -51,7 +51,7 @@ int	is_valid_var(char *s, int type)
 	i = 0;
 	if (!ft_isalpha(s[0]) && s[0] != '_')
 	{
-		printf("%s: export: `%s': not a valid identifier\n", glob.av[0], s);
+		printf("%s: export: `%s': not a valid identifier\n", g_glob.av[0], s);
 		return (0);
 	}
 	while (s[i] && (ft_isalnum(s[i]) || s[i] == '_'))
@@ -62,7 +62,7 @@ int	is_valid_var(char *s, int type)
 		return (1);
 	if (s[i] == '=')
 		return (2);
-	printf("%s: export: `", glob.av[0]);
+	printf("%s: export: `", g_glob.av[0]);
 	p_m = (s[i] == '=');
 	i = 0;
 	while (s[i] && ((s[i] != '=' && p_m) || !p_m))

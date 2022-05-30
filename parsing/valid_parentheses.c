@@ -50,7 +50,7 @@ int	check_error_parentheses(int a, char c, int s)
 			p_error(c);
 		else
 			p_error(s);
-		glob.error = 1;
+		g_glob.error = 1;
 		return (0);
 	}
 	return (1);
@@ -80,7 +80,7 @@ int	valid_parentheses(char *s)
 				if (*s == '|' || *s == '&')
 				{
 					p_error (*s);
-					glob.error = 1;
+					g_glob.error = 1;
 					free (stack);
 					return (0);
 				}

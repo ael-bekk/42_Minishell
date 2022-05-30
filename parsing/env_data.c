@@ -25,8 +25,8 @@ int	equal_place(char *s)
 
 void	copy_data_env(char **ev)
 {
-	blt_export(ev, &glob.env, 1, 3);
-	blt_export(ev, &glob.local, 1, 2);
+	blt_export(ev, &g_glob.env, 1, 3);
+	blt_export(ev, &g_glob.local, 1, 2);
 }
 
 char	**list_to_str(t_list *head)

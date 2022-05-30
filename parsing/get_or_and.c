@@ -20,8 +20,8 @@ static	void	ft_norm(char *line, int *i, int *a, int *check)
 			|| (line[*i] == '|' && line[*i + 1] == '|')))
 	{
 		line[*i] = '\0';
-		if ((!glob.exit_code && *check == 1)
-			|| (glob.exit_code && *check == 2) || !*a)
+		if ((!g_glob.exit_code && *check == 1)
+			|| (g_glob.exit_code && *check == 2) || !*a)
 			mini_cmd((line + *a));
 		*check = (line[*i + 1] == '&') + 2 * (line[*i + 1] == '|');
 		*a = ++(*i) + 1;
@@ -51,7 +51,7 @@ void	or_and(char	*line)
 			i++;
 		}
 	}
-	if ((!glob.exit_code && check == 1) || (glob.exit_code && check == 2))
+	if ((!g_glob.exit_code && check == 1) || (g_glob.exit_code && check == 2))
 		mini_cmd((line + a));
 	else if (!a)
 		mini_cmd((line + a));

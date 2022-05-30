@@ -44,7 +44,7 @@ int	cherch_file(void)
 			env[0] = ft_strjoin_freed2(ft_strdup("COMPUTER="),
 					deppace_name(get_next_line11(fd)), 1);
 			env[1] = NULL;
-			blt_export(env, &glob.local, 1, 2);
+			blt_export(env, &g_glob.local, 1, 2);
 			free(env[0]);
 			free(s);
 			close(fd);
@@ -63,14 +63,14 @@ void	prompet(void)
 	t_list	*tmp;
 
 	if (!cherch_file())
-		ft_lstadd_back(&glob.local,
+		ft_lstadd_back(&g_glob.local,
 			ft_lstnew(ft_strdup("COMPUTER"), ft_strdup("COMPUTER")));
-	if (!find_var2("USER", glob.local))
-		ft_lstadd_back(&glob.local,
+	if (!find_var2("USER", g_glob.local))
+		ft_lstadd_back(&g_glob.local,
 			ft_lstnew(ft_strdup("USER"), ft_strdup("USER")));
-	tmp = find_var2("USER", glob.local);
-	ft_lstadd_back(&glob.local,
+	tmp = find_var2("USER", g_glob.local);
+	ft_lstadd_back(&g_glob.local,
 		ft_lstnew(ft_strdup("PS1"),
 			ft_strjoin_freed2(ft_strjoin_freed(ft_strdup(tmp->value), "@", 1),
-				ft_strdup(find_var2("COMPUTER", glob.local)->value), 1)));
+				ft_strdup(find_var2("COMPUTER", g_glob.local)->value), 1)));
 }

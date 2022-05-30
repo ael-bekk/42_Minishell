@@ -18,14 +18,14 @@ int	blt_env(char *s, int fd_out)
 	t_list		*lst;
 	char		**str;
 
-	str = list_to_str(glob.env);
+	str = list_to_str(g_glob.env);
 	ft_sort_arry(str);
 	if (s)
 	{
 		ft_putstr_fd("env: ", 2);
 		ft_putstr_fd(s, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
-		glob.exit_code = 1;
+		g_glob.exit_code = 1;
 		return (1);
 	}
 	i = -1;

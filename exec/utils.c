@@ -49,9 +49,9 @@ int	exec_built(t_cmd *cmd)
 	if (!ft_strncmp(cmd->cmd[0], "unset", 6))
 		return (blt_unset(&cmd->cmd[1]));
 	if (!ft_strncmp(cmd->cmd[0], "export", 7))
-		return (blt_export(&cmd->cmd[1], &glob.env, cmd->out, 3)
-			|| blt_export(&cmd->cmd[1], &glob.local, cmd->out, 2));
-	return (glob.exit_code);
+		return (blt_export(&cmd->cmd[1], &g_glob.env, cmd->out, 3)
+			|| blt_export(&cmd->cmd[1], &g_glob.local, cmd->out, 2));
+	return (g_glob.exit_code);
 }
 
 int	print_check_error(char *str)
@@ -59,7 +59,7 @@ int	print_check_error(char *str)
 	ft_putstr_fd("\033[4;31mError: ", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(": command not found\033[0m\n", 2);
-	glob.exit_code = 127;
+	g_glob.exit_code = 127;
 	return (0);
 }
 
@@ -73,7 +73,7 @@ int	check_path(char **str, t_list *path)
 	if (!path)
 	{
 		ft_putstr_fd("\033[4;31mError: PATH doesn't exist\033[0m\n", 2);
-		glob.exit_code = 127;
+		g_glob.exit_code = 127;
 		return (0);
 	}
 	s_path = ft_split(path->value, ':');

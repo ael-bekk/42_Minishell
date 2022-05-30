@@ -30,9 +30,9 @@ int	allocatedata(t_cmd *cmd, int h_doc, int red, int cmnd)
 	init_data(cmd->here_doc, h_doc);
 	init_data(cmd->rid, red);
 	init_data(cmd->cmd, cmnd);
-	glob.cmd = cmnd;
-	glob.red = red;
-	glob.last_in = 0;
+	g_glob.cmd = cmnd;
+	g_glob.red = red;
+	g_glob.last_in = 0;
 	return (1);
 }
 

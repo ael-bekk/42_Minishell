@@ -50,6 +50,6 @@ int	blt_echo(char **cmd, int fd_out)
 		ft_putstr_fd("\n", fd_out);
 	else if (cmd[i] && cmd[i][ft_strlen(cmd[i]) - 1] != '\n'
 		&& nl_echo(cmd[0]) && fd_out == 1)
-		glob.no_nl = 1;
+		g_glob.no_nl = 1;
 	return (0);
 }

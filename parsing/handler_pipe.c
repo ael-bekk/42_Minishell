@@ -68,16 +68,16 @@ char	*handler_pipe(char *line)
 	int		a;
 
 	a = !check_pipe(line, ft_strlen(line));
-	free(glob.herd);
-	glob.herd = ft_strdup("\033[0;32mpipe> \033[0;37m");
-	while (a && !glob.error)
+	free(g_glob.herd);
+	g_glob.herd = ft_strdup("\033[0;32mpipe> \033[0;37m");
+	while (a && !g_glob.error)
 	{
-		str = readline(glob.herd);
+		str = readline(g_glob.herd);
 		if (!str)
 		{
-			if (!glob.no_init)
+			if (!g_glob.no_init)
 				ft_putstr_fd(SYNTAX_ERROR, 2);
-			glob.no_init = 1;
+			g_glob.no_init = 1;
 			free(line);
 			free(str);
 			return (NULL);
@@ -108,7 +108,7 @@ char	*check_full(char *line)
 		v = (!check_pipe(line, ft_strlen(line)) || check_quote(line));
 		if (!v)
 			a = check_or_and(line);
-		if (glob.error)
+		if (g_glob.error)
 		{
 			free(line);
 			return (NULL);

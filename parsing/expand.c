@@ -12,19 +12,6 @@
 
 #include "../inc/minishell.h"
 
-char	*find_var(char *key, t_list *env)
-{
-	char	*tmp;
-
-	while (env)
-	{
-		if (!ft_strncmp(key, env->key, strlen(env->key) + 1))
-			return (ft_strdup(env->value));
-		env = env->next;
-	}
-	return (ft_strdup(""));
-}
-
 void	f1(char **line, char *l, int *ll, int *r)
 {
 	int		i;
@@ -38,7 +25,7 @@ void	f1(char **line, char *l, int *ll, int *r)
 	*line = ft_strjoin11(*line, ft_substr(l, left, i - left));
 	*line = ft_strjoin11(*line, ft_strdup(tmp));
 	if (l[i + 1] == '0')
-		*line = ft_strjoin_freed(*line, &glob.av[0][2], 1);
+		*line = ft_strjoin_freed(*line, &g_glob.av[0][2], 1);
 	left = ++i + 1;
 	*r = i;
 	*ll = left;
@@ -58,7 +45,7 @@ void	f2(char **line, char *l, int *ll, int *r)
 	tmp[0] = -2;
 	*line = ft_strjoin11(*line, ft_substr(l, left, i - left));
 	*line = ft_strjoin11(*line, ft_strdup(tmp));
-	*line = ft_strjoin11(*line, ft_itoa(glob.exit_code));
+	*line = ft_strjoin11(*line, ft_itoa(g_glob.exit_code));
 	*line = ft_strjoin11(*line, ft_strdup(tmp));
 	left = ++i + 1;
 	*r = i;
@@ -83,7 +70,7 @@ void	f3(char **line, char *l, int *ll, int *r)
 	while (l[i] && (ft_isalnum(l[i]) || l[i] == '_'))
 		i++;
 	tmp = ft_substr(l, left, i - left);
-	*line = ft_strjoin11(*line, find_var(tmp, glob.env));
+	*line = ft_strjoin11(*line, find_var(tmp, g_glob.env));
 	left = i;
 	i--;
 	*r = i;
@@ -95,6 +82,13 @@ void	f3(char **line, char *l, int *ll, int *r)
 	free(tmp);
 }
 
+static void	ft_norm(int *i, int *left, int *in_dquote)
+{
+	*in_dquote = 0;
+	*left = 0;
+	*i = -1;
+}
+
 char	*expand(char *l)
 {
 	char	*line;
@@ -102,10 +96,8 @@ char	*expand(char *l)
 	int		left;
 	int		in_dquote;
 
-	left = 0;
-	i = -1;
 	line = NULL;
-	in_dquote = 0;
+	ft_norm(&i, &left, &in_dquote);
 	while (l && l[++i])
 	{
 		if (l[i] == '\"')

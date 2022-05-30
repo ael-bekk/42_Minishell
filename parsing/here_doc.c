@@ -14,11 +14,11 @@
 
 int	in_file(t_cmd *cmd, char *s)
 {
-	if (cmd->in && !glob.last_in)
+	if (cmd->in && !g_glob.last_in)
 		close(cmd->in);
 	if (!s || s[0] == -3)
 		return (errors_return_red(&s[1], cmd));
-	if (!glob.last_in)
+	if (!g_glob.last_in)
 	{
 		cmd->in = open(s, O_RDONLY);
 		if (cmd->in == ERROR_SYS_CALL)
@@ -58,12 +58,12 @@ void	red_here_doc(t_cmd *cmd, char *limiter, int *p)
 	cont = FALSE;
 	while (cont == FALSE)
 	{
-		line = readline(glob.herd);
+		line = readline(g_glob.herd);
 		if (line)
 			cont = match_strings(line, limiter, ft_strlen(limiter), 0);
 		else
 		{
-			glob.no_init = 1;
+			g_glob.no_init = 1;
 			free(line);
 			break ;
 		}
@@ -83,21 +83,21 @@ int	here_doc(t_cmd *cmd, char *limiter)
 	int	i;
 	int	p[2];
 
-	glob.p = dup(0);
+	g_glob.p = dup(0);
 	pipe(p);
 	if (cmd->in)
 		close(cmd->in);
 	cmd->in = p[0];
-	free(glob.herd);
-	glob.herd = ft_strdup("");
+	free(g_glob.herd);
+	g_glob.herd = ft_strdup("");
 	i = -1;
-	while (++i < glob.nb_cmd - 1)
-		glob.herd = ft_strjoin11(glob.herd, ft_strdup("pipe "));
-	glob.herd = ft_strjoin11(glob.herd, ft_strdup("heredoc> \033[0m"));
+	while (++i < g_glob.nb_cmd - 1)
+		g_glob.herd = ft_strjoin11(g_glob.herd, ft_strdup("pipe "));
+	g_glob.herd = ft_strjoin11(g_glob.herd, ft_strdup("heredoc> \033[0m"));
 	red_here_doc(cmd, limiter, p);
 	close(p[1]);
-	dup(glob.p);
-	close(glob.p);
-	glob.p = -1 * !glob.no_init;
-	return (glob.exit_code);
+	dup(g_glob.p);
+	close(g_glob.p);
+	g_glob.p = -1 * !g_glob.no_init;
+	return (g_glob.exit_code);
 }

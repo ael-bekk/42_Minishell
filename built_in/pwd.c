@@ -15,7 +15,7 @@
 int	ft_print_error(void)
 {
 	ft_putstr_fd("pwd: too many arguments\n", 2);
-	glob.exit_code = 1;
+	g_glob.exit_code = 1;
 	return (1);
 }
 
@@ -34,7 +34,7 @@ int	blt_pwd(char *p, int fd_out)
 	}
 	else
 	{
-		l = find_var2("PWD", glob.env);
+		l = find_var2("PWD", g_glob.env);
 		if (l)
 		{
 			ft_putstr_fd(l->value, fd_out);

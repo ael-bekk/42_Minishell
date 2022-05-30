@@ -18,11 +18,11 @@ int	handle_tilde(char *path, char *ss)
 
 	if (!path || (path[0] == '~' && !path[1]))
 	{
-		s = find_var2("HOME", glob.env);
+		s = find_var2("HOME", g_glob.env);
 		if (s && chdir(s->value) == -1)
 		{
-			printf("%s: cd: %s: %s\n", glob.av[0], s->value, strerror(errno));
-			glob.exit_code = 1;
+			printf("%s: cd: %s: %s\n", g_glob.av[0], s->value, strerror(errno));
+			g_glob.exit_code = 1;
 			free(ss);
 			return (1);
 		}
@@ -39,18 +39,18 @@ int	handle_minus(char *path, char *ss)
 
 	if (path[0] == '-' && !path[1])
 	{
-		s = find_var2("OLDPWD", glob.env);
+		s = find_var2("OLDPWD", g_glob.env);
 		if (s && chdir(s->value) == -1)
 		{
-			printf("%s: cd: %s: %s\n", glob.av[0], s->value, strerror(errno));
-			glob.exit_code = 1;
+			printf("%s: cd: %s: %s\n", g_glob.av[0], s->value, strerror(errno));
+			g_glob.exit_code = 1;
 			free(ss);
 			return (1);
 		}
 		else if (!s)
 		{
-			printf("%s: cd: OLDPWD not set\n", glob.av[0]);
-			glob.exit_code = 1;
+			printf("%s: cd: OLDPWD not set\n", g_glob.av[0]);
+			g_glob.exit_code = 1;
 			free(ss);
 			return (1);
 		}
@@ -73,7 +73,7 @@ int	handle_dot(char *path, char *ss)
 		{
 			printf("cd: error retrieving current directory: getcwd: cannot ");
 			printf("access parent directories: No such file or directory\n");
-			glob.exit_code = 0;
+			g_glob.exit_code = 0;
 			free(ss);
 			free(pwd);
 			return (1);
@@ -92,22 +92,22 @@ int	blt_cd(char *path)
 {
 	char	*s;
 
-	glob.exit_code = 0;
+	g_glob.exit_code = 0;
 	s = getcwd(NULL, 0);
 	if (handle_tilde(path, s))
-		return (glob.exit_code);
+		return (g_glob.exit_code);
 	if (handle_minus(path, s))
-		return (glob.exit_code);
+		return (g_glob.exit_code);
 	if (handle_dot(path, s))
-		return (glob.exit_code);
+		return (g_glob.exit_code);
 	if (chdir(path) == -1)
 	{
-		printf("%s: cd: %s: %s\n", glob.av[0], path, strerror(errno));
+		printf("%s: cd: %s: %s\n", g_glob.av[0], path, strerror(errno));
 		free(s);
-		glob.exit_code = 1;
+		g_glob.exit_code = 1;
 		return (1);
 	}
 	change_pwd();
 	change_old_pwd(s);
-	return (glob.exit_code);
+	return (g_glob.exit_code);
 }
