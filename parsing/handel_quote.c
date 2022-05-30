@@ -69,7 +69,8 @@ void	*quote2_error(char *line, char *str, int a)
 {
 	if (!g_glob.no_init)
 	{
-		ft_putstr_fd("\033[4;31m bash: unexpected EOF while looking for matching `", 2);
+		ft_putstr_fd("\033[4;31m bash: unexpected ", 2);
+		ft_putstr_fd("EOF while looking for matching `", 2);
 		ft_putchar_fd(((a == 2) * '\'' + (a == 1) * '\"'), 2);
 		ft_putstr_fd("'\nbash: syntax error: unexpected end of file\033[0m\n", 2);
 	}

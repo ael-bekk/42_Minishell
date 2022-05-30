@@ -83,5 +83,6 @@ void	p_error(char c)
 		ft_putchar_fd(c, 2);
 		ft_putstr_fd("'\033[0m\n", 2);
 	}
+	g_glob.exit_code = 258;
 	g_glob.error = 1;
 }

@@ -46,6 +46,12 @@ int	check_space_and(char *str)
 	{
 		a = i;
 		i++;
+		if (str[i] == '|')
+		{
+			p_error(str[i]);
+			g_glob.error = 1;
+			return (0);
+		}
 		while (str[i] && (str[i] == '\n' || str[i] == ' '))
 			i++;
 		if (str[i] && str[i] == '|' && a + 1 != i)

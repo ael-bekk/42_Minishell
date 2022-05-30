@@ -98,7 +98,10 @@ char	*handler_or_and(char *line)
 		if (!str)
 		{
 			if (!g_glob.no_init)
-				ft_putstr_fd("\033[4;31m Minishell: syntax error: unexpected end of file\n\033[0m", 2);
+			{
+				ft_putstr_fd("\033[4;31m Minishell: syntax error", 2);
+				ft_putstr_fd(": unexpected end of file\n\033[0m", 2);
+			}
 			g_glob.no_init = 1;
 			free(line);
 			free(str);

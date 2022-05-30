@@ -35,7 +35,7 @@ int	cherch_file(void)
 	char	*env[2];
 	char	*s;
 
-	fd = open("/Library/Preferences/SystemConfiguration/preferences.plist", O_RDONLY);
+	fd = open(S1, O_RDONLY);
 	s = get_next_line11(fd);
 	while (s)
 	{
