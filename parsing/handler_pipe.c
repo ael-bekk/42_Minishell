@@ -40,8 +40,7 @@ int	check_pipe(char *str, int len)
 
 	i = -1;
 	a = 1;
-	if (str && str[0] && (str[0] == '|' || str[0] == '&'))
-		p_error(str[0]);
+	check_space(str);
 	while (str && ++i < len)
 	{
 		if (str[i] == '&' && !check_space_and(str + i))

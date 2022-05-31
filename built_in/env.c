@@ -12,19 +12,37 @@
 
 #include "../inc/minishell.h"
 
+static char	**env_to_str(t_list *head)
+{
+	char	**str;
+	int		i;
+
+	i = 0;
+	str = malloc(ft_lstsize(head) * sizeof(char *) + 1);
+	while (head)
+	{
+		str[i] = ft_strjoin_freed(ft_strdup(head->key), "=", 1);
+		str[i] = ft_strjoin_freed(str[i], head->value, 1);
+		head = head->next;
+		i++;
+	}
+	str[i] = NULL;
+	return (str);
+}
+
 int	blt_env(char *s, int fd_out)
 {
 	int			i;
 	char		**str;
 
-	str = list_to_str(g_glob.env);
-	ft_sort_arry(str);
+	str = env_to_str(g_glob.env);
 	if (s)
 	{
 		ft_putstr_fd("env: ", 2);
 		ft_putstr_fd(s, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 		g_glob.exit_code = 1;
+		ft_free(str);
 		return (1);
 	}
 	i = -1;
@@ -33,5 +51,6 @@ int	blt_env(char *s, int fd_out)
 		ft_putstr_fd(str[i], fd_out);
 		ft_putstr_fd("\n", fd_out);
 	}
+	ft_free(str);
 	return (0);
 }

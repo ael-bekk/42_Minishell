@@ -6,7 +6,7 @@
 /*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 04:24:07 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/30 04:24:10 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/05/31 00:49:49 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ char	*handler_or_and(char *line)
 	char	*str;
 	int		a;
 
-	
 	if (!line || !line[0])
 		return (NULL);
 	ft_norm2(line, &a);

@@ -38,8 +38,9 @@ char	**list_to_str(t_list *head)
 	str = malloc(ft_lstsize(head) * sizeof(char *) + 1);
 	while (head)
 	{
-		str[i] = ft_strjoin_freed(ft_strdup(head->key), "=", 1);
+		str[i] = ft_strjoin_freed(ft_strdup(head->key), "=\"", 1);
 		str[i] = ft_strjoin_freed(str[i], head->value, 1);
+		str[i] = ft_strjoin_freed(str[i], "\"", 1);
 		head = head->next;
 		i++;
 	}

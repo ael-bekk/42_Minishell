@@ -6,7 +6,7 @@
 /*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 04:16:28 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/30 04:16:44 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/05/31 01:40:45 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,18 @@ int	check_space_and(char *str)
 		}
 	}
 	return (1);
-<<<<<<< HEAD
 }
-=======
+
+void	check_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i] && str[i] == ' ')
+		i++;
+	if (str && str[i] && (str[i] == '|' || str[i] == '&'))
+	{
+		p_error(str[i]);
+		g_glob.error = 1;
+	}
 }
->>>>>>> 732278f6ce374d648d94fdb3e3b8251e5146a441

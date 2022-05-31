@@ -166,6 +166,7 @@ int		is_matching(char *dir, char *to_search);
 int		check_space_and(char *str);
 int		check_spece_pipe(char *str);
 char	*change_wild2(char *s);
+void	check_space(char *s);
 
 //****************************************************************************//
 //                                   parsing                                  //

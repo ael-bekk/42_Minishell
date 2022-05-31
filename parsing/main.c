@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/30 05:14:06 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/30 21:01:30 by ael-bekk         ###   ########.fr       */
+/*   Created: 2022/05/31 01:06:20 by amounadi          #+#    #+#             */
+/*   Updated: 2022/05/31 01:09:11 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,6 @@ void	mini_cmd(char *line)
 	if (cmd && !define_cmd(cmd))
 		g_glob.exit_code = execution(cmd);
 	ft_free_list(&cmd);
-}
-
-void	minishell(char *inp)
-{
-	if (!inp)
-	{
-		printf("exit\n");
-		exit(0);
-	}
-	g_glob.no_init = 0;
-	if (inp && inp[0])
-		inp = handl_unclosed(inp);
-	if (inp && inp[0] && ft_strcmp(g_glob.old_inp, inp))
-	{
-		free(g_glob.old_inp);
-		g_glob.old_inp = ft_strdup(inp);
-		add_history(inp);
-	}
-	or_and(inp);
 }
 
 char	*ft_main(char *inp)
@@ -55,6 +36,7 @@ char	*ft_main(char *inp)
 		g_glob.old_inp = ft_strdup(inp);
 		add_history(inp);
 	}
+	or_and(inp);
 	return (inp);
 }
 
@@ -82,7 +64,7 @@ int	main(int ac, char **av, char **ev)
 			exit(0);
 		}
 		inp = ft_main(inp);
-		or_and(inp);
+		free(inp);
 	}
 	return (0);
 }
