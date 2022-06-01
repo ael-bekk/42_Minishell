@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 05:27:45 by amounadi          #+#    #+#             */
-/*   Updated: 2022/06/01 18:56:48 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:58:46 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,7 @@ int		aloccate_data(t_cmd *cmd, char **s);
 //                        quote and dquote ( " | ' )                          //
 //****************************************************************************//
 
-char	*handel_quote(char *line); 
+char	*handel_quote(char *line);
 char	*delete_quote(char *str);
 char	*handler_pipe(char *line);
 char	*check_full(char *line);
