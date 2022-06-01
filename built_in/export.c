@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 04:01:39 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/30 21:02:15 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:18:11 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	blt_export2(char *cmd, t_list **g, int *type, int tp)
 		cmd[p - (*type == 1)] = 0;
 		node = find_var2(cmd, *g);
 	}
-	if (!node)
+	if (!node && *type < 3)
 		ft_lstadd_back(g, ft_lstnew(ft_strdup(cmd), ft_strdup(&cmd[p + 1])));
 	else if (*type == 1 && node)
 		node->value = ft_strjoin_freed(node->value, &cmd[p + 1], 1);
