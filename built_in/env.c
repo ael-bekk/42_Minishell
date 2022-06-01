@@ -12,30 +12,12 @@
 
 #include "../inc/minishell.h"
 
-static char	**env_to_str(t_list *head)
-{
-	char	**str;
-	int		i;
-
-	i = 0;
-	str = malloc(ft_lstsize(head) * sizeof(char *) + 1);
-	while (head)
-	{
-		str[i] = ft_strjoin_freed(ft_strdup(head->key), "=", 1);
-		str[i] = ft_strjoin_freed(str[i], head->value, 1);
-		head = head->next;
-		i++;
-	}
-	str[i] = NULL;
-	return (str);
-}
-
 int	blt_env(char *s, int fd_out)
 {
 	int			i;
 	char		**str;
 
-	str = env_to_str(g_glob.env);
+	str = list_to_str(g_glob.env);
 	if (s)
 	{
 		ft_putstr_fd("env: ", 2);

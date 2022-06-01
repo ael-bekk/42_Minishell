@@ -35,7 +35,7 @@ char	**list_to_str(t_list *head)
 	int		i;
 
 	i = 0;
-	str = malloc(ft_lstsize(head) * sizeof(char *) + 1);
+	str = ft_calloc(ft_lstsize(head) + 1, sizeof(char *));
 	while (head)
 	{
 		str[i] = ft_strjoin_freed(ft_strdup(head->key), "=", 1);
@@ -43,7 +43,6 @@ char	**list_to_str(t_list *head)
 		head = head->next;
 		i++;
 	}
-	str[i] = NULL;
 	return (str);
 }
 

@@ -19,7 +19,7 @@ int	check_spece_pipe(char *str)
 
 	i = 0;
 	a = 0;
-	if (str[i] == '|')
+	if (str && str[i] == '|')
 	{
 		a = i;
 		i++;

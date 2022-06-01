@@ -41,7 +41,7 @@ int	check_pipe(char *str, int len)
 	i = -1;
 	a = 1;
 	check_space(str);
-	while (str && ++i < len)
+	while (!g_glob.error && str && ++i < len)
 	{
 		if (str[i] == '&' && !check_space_and(str + i))
 			return (0);

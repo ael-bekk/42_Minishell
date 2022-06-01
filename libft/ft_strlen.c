@@ -17,6 +17,8 @@ int	ft_strlen(const char *s)
 	size_t	len;
 
 	len = 0;
+	if (!s)
+		printf("OPS\n");
 	while (s && s[len])
 		len++;
 	return (len);

@@ -59,17 +59,23 @@ void	blt_unset2(char *cmd, int *res)
 	*res = !is_valid_var2(cmd);
 	while (env && !*res)
 	{
-		if (!ft_strncmp(cmd, env->key, strlen(cmd))
-			&& strlen(cmd) == strlen(env->key))
+		if (!ft_strncmp(cmd, env->key, ft_strlen(cmd))
+			&& ft_strlen(cmd) == ft_strlen(env->key))
+		{
 			ft_lstdel_from_list(&g_glob.env, env);
+			return ;
+		}
 		env = env->next;
 	}
 	env = g_glob.local;
 	while (env && !*res)
 	{
-		if (!ft_strncmp(cmd, env->key, strlen(cmd))
-			&& strlen(cmd) == strlen(env->key))
+		if (!ft_strncmp(cmd, env->key, ft_strlen(cmd))
+			&& ft_strlen(cmd) == ft_strlen(env->key))
+		{
 			ft_lstdel_from_list(&g_glob.local, env);
+			return ;
+		}
 		env = env->next;
 	}
 }

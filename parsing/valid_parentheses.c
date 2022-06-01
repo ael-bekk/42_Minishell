@@ -31,14 +31,18 @@ char	*skip_qoute(char *str)
 		str++;
 		while (*str && *str != '"')
 			str++;
-		return (++str);
+		if (*str && *str == '"')
+			return (str++);
+		return (str);
 	}
 	else
 	{
 		str++;
 		while (*str && *str != '\'')
 			str++;
-		return (++str);
+		if (*str && *str == '\'')
+			return (str++);
+		return (str);
 	}
 }
 
