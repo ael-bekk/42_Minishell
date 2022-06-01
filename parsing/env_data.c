@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   env_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/30 04:18:54 by amounadi          #+#    #+#             */
-/*   Updated: 2022/06/01 15:17:08 by ael-bekk         ###   ########.fr       */
+/*   Created: 2022/06/01 17:31:13 by amounadi          #+#    #+#             */
+/*   Updated: 2022/06/01 17:31:15 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+char	**local_to_str(t_list *head)
+{
+	char	**str;
+	int		i;
+
+	i = 0;
+	str = ft_calloc(ft_lstsize(head) + 1, sizeof(char *));
+	while (head)
+	{
+		str[i] = ft_strjoin_freed(ft_strdup(head->key), "=\"", 1);
+		str[i] = ft_strjoin_freed(str[i], head->value, 1);
+		str[i] = ft_strjoin_freed(str[i], "\"", 1);
+		head = head->next;
+		i++;
+	}
+	return (str);
+}
 
 int	equal_place(char *s)
 {

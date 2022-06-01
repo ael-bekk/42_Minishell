@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/30 04:01:39 by amounadi          #+#    #+#             */
-/*   Updated: 2022/06/01 15:18:11 by ael-bekk         ###   ########.fr       */
+/*   Created: 2022/06/01 17:32:01 by amounadi          #+#    #+#             */
+/*   Updated: 2022/06/01 17:32:06 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	print_export(int fd)
 	int		i;
 
 	i = -1;
-	str = list_to_str(g_glob.local);
+	str = local_to_str(g_glob.local);
 	ft_sort_arry(str);
 	while (str[++i])
 	{

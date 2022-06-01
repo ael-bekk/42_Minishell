@@ -6,7 +6,7 @@
 /*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 05:27:45 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/30 05:58:36 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/06/01 17:30:53 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ int		check_space_and(char *str);
 int		check_spece_pipe(char *str);
 char	*change_wild2(char *s);
 void	check_space(char *s);
+char	**local_to_str(t_list *head);
 
 //****************************************************************************//
 //                                   parsing                                  //
