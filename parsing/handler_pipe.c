@@ -3,37 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handler_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/29 20:41:16 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/29 21:04:27 by ael-bekk         ###   ########.fr       */
+/*   Created: 2022/05/30 04:24:36 by amounadi          #+#    #+#             */
+/*   Updated: 2022/05/30 04:24:38 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-int	check_spece_pipe(char *str)
-{
-	int	i;
-	int	a;
-
-	i = 0;
-	a = 0;
-	if (str[i] == '|')
-	{
-		a = i;
-		i++;
-		while (str[i] && (str[i] == '\n' || str[i] == ' '))
-			i++;
-		if (str[i] && str[i] == '|' && a + 1 != i)
-		{
-			p_error(str[i]);
-			glob.error = 1;
-			return (0);
-		}
-	}
-	return (1);
-}
 
 int	skip_qoute_inside(char *str)
 {
@@ -63,15 +40,15 @@ int	check_pipe(char *str, int len)
 
 	i = -1;
 	a = 1;
-	if (str && str[0] && (str[0] == '|' || str[0] == '&'))
-		p_error(str[0]);
-	while (str && ++i < len)
+	check_space(str);
+	while (!g_glob.error && str && ++i < len)
 	{
+		if (str[i] == '&' && !check_space_and(str + i))
+			return (0);
 		if (str[i] == '\'' || str[i] == '"')
 			i += skip_qoute_inside(str + i);
-		else if (str[i] == '|')
+		else if (str[i] == '|' && a--)
 		{
-			a = 0;
 			if (!check_spece_pipe(str + i))
 				return (0);
 			if ((str[i + 1] && str[i + 1] == '|')
@@ -90,16 +67,16 @@ char	*handler_pipe(char *line)
 	int		a;
 
 	a = !check_pipe(line, ft_strlen(line));
-	free(glob.herd);
-	glob.herd = ft_strdup("\033[0;32mpipe> \033[0;37m");
-	while (a && !glob.error)
+	free(g_glob.herd);
+	g_glob.herd = ft_strdup("\033[0;32mpipe> \033[0;37m");
+	while (a && !g_glob.error)
 	{
-		str = readline(glob.herd);
+		str = readline(g_glob.herd);
 		if (!str)
 		{
-			if (!glob.no_init)
+			if (!g_glob.no_init)
 				ft_putstr_fd(SYNTAX_ERROR, 2);
-			glob.no_init = 1;
+			g_glob.no_init = 1;
 			free(line);
 			free(str);
 			return (NULL);
@@ -130,7 +107,7 @@ char	*check_full(char *line)
 		v = (!check_pipe(line, ft_strlen(line)) || check_quote(line));
 		if (!v)
 			a = check_or_and(line);
-		if (glob.error)
+		if (g_glob.error)
 		{
 			free(line);
 			return (NULL);

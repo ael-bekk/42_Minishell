@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   print_prompet.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 18:45:16 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 18:45:16 by ael-bekk         ###   ########.fr       */
+/*   Created: 2022/05/30 04:26:30 by amounadi          #+#    #+#             */
+/*   Updated: 2022/05/30 04:26:32 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	print_prompet()
+void	print_prompet(void)
 {
 	t_list	*home;
 	char	*pwd;
 
-	if (glob.no_nl)
+	if (g_glob.no_nl)
 	{
 		printf("\033[0;90m\033[0;106m%%\033[0m\n");
-		glob.no_nl = 0;
+		g_glob.no_nl = 0;
 	}
 	printf("\033[1;32m");
-	printf("%s\033[1;34m", find_var2("PS1", glob.local)->value);
-	home = find_var2("HOME", glob.env);
+	printf("%s\033[1;34m", find_var2("PS1", g_glob.local)->value);
+	home = find_var2("HOME", g_glob.env);
 	pwd = getcwd(NULL, 0);
 	if (pwd && home && ft_strnstr(pwd, home->value, ft_strlen(home->value)))
 		printf(" [~%s]\n", &pwd[ft_strlen(home->value)]);

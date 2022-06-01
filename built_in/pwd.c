@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 17:07:48 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/29 01:22:22 by amounadi         ###   ########.fr       */
+/*   Created: 2022/05/30 04:02:01 by amounadi          #+#    #+#             */
+/*   Updated: 2022/06/01 17:32:42 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_print_error(void)
 {
 	ft_putstr_fd("pwd: too many arguments\n", 2);
-	glob.exit_code = 1;
+	g_glob.exit_code = 1;
 	return (1);
 }
 
@@ -34,7 +34,7 @@ int	blt_pwd(char *p, int fd_out)
 	}
 	else
 	{
-		l = find_var2("PWD", glob.env);
+		l = find_var2("PWD", g_glob.env);
 		if (l)
 		{
 			ft_putstr_fd(l->value, fd_out);

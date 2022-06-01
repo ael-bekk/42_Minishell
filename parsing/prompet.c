@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompet.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 18:45:13 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 18:45:13 by ael-bekk         ###   ########.fr       */
+/*   Created: 2022/06/01 17:33:31 by amounadi          #+#    #+#             */
+/*   Updated: 2022/06/01 17:33:37 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,22 @@ char	*deppace_name(char *s)
 	return (c);
 }
 
-int	cherch_file()
+int	cherch_file(void)
 {
 	int		fd;
 	char	*env[2];
 	char	*s;
 
-	fd = open("/Library/Preferences/SystemConfiguration/preferences.plist", O_RDONLY);
+	fd = open(S1, O_RDONLY);
 	s = get_next_line11(fd);
 	while (s)
 	{
 		if (ft_strnstr(s, "ComputerName", ft_strlen(s)))
 		{
-			env[0] = ft_strjoin_freed2(ft_strdup("COMPUTER="), deppace_name(get_next_line11(fd)), 1);
+			env[0] = ft_strjoin_freed2(ft_strdup("COMPUTER="),
+					deppace_name(get_next_line11(fd)), 1);
 			env[1] = NULL;
-			blt_export(env, &glob.local, 1, 2);
+			blt_export(env, &g_glob.local, 1, 2);
 			free(env[0]);
 			free(s);
 			close(fd);
@@ -57,19 +58,19 @@ int	cherch_file()
 	return (0);
 }
 
-void	prompet()
+void	prompet(void)
 {
 	t_list	*tmp;
 
 	if (!cherch_file())
-		ft_lstadd_back(&glob.local,
+		ft_lstadd_back(&g_glob.local,
 			ft_lstnew(ft_strdup("COMPUTER"), ft_strdup("COMPUTER")));
-	if (!find_var2("USER", glob.local))
-		ft_lstadd_back(&glob.local,
+	if (!find_var2("USER", g_glob.local))
+		ft_lstadd_back(&g_glob.local,
 			ft_lstnew(ft_strdup("USER"), ft_strdup("USER")));
-	tmp = find_var2("USER", glob.local);
-	ft_lstadd_back(&glob.local,
+	tmp = find_var2("USER", g_glob.local);
+	ft_lstadd_back(&g_glob.local,
 		ft_lstnew(ft_strdup("PS1"),
-		ft_strjoin_freed2(ft_strjoin_freed(ft_strdup(tmp->value), "@", 1),
-		ft_strdup(find_var2("COMPUTER", glob.local)->value), 1)));
+			ft_strjoin_freed2(ft_strjoin_freed(ft_strdup(tmp->value), "@", 1),
+				ft_strdup(find_var2("COMPUTER", g_glob.local)->value), 1)));
 }

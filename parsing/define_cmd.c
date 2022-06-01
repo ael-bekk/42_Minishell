@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 17:54:19 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 17:54:19 by ael-bekk         ###   ########.fr       */
+/*   Created: 2022/05/30 04:18:01 by amounadi          #+#    #+#             */
+/*   Updated: 2022/05/30 04:18:06 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,29 @@ int	read_from_here_doc(t_cmd *cmd)
 {
 	int	i;
 
-	while (cmd && glob.p == -1)
+	while (cmd && g_glob.p == -1)
 	{
 		i = -1;
-		while (cmd->here_doc[++i] && glob.p == -1)
+		while (cmd->here_doc[++i] && g_glob.p == -1)
 			here_doc(cmd, cmd->here_doc[i]);
 		cmd = cmd->next;
 	}
-	glob.p = -1;
-	return (glob.exit_code);
+	g_glob.p = -1;
+	return (g_glob.exit_code);
 }
 
 int	open_files(t_cmd *cmd, int (*t[4])(t_cmd *, char *))
 {
 	int	i;
 
-	while (cmd && glob.p == -1 && !glob.exit_code)
+	while (cmd && g_glob.p == -1 && !g_glob.exit_code)
 	{
 		i = -1;
-		while (cmd->rid[++i] && glob.p == -1 && !glob.exit_code)
+		while (cmd->rid[++i] && g_glob.p == -1 && !g_glob.exit_code)
 			t[cmd->type[i]](cmd, cmd->rid[i]);
 		cmd = cmd->next;
 	}
-	glob.exit_code = !!glob.exit_code;
+	g_glob.exit_code = !!g_glob.exit_code;
 	return (0);
 }
 
@@ -63,16 +63,16 @@ int	define_cmd(t_cmd *cmd)
 {
 	int	(*t[4])(t_cmd *, char *);
 
-	glob.p = -1;
+	g_glob.p = -1;
 	t[1] = in_file;
 	t[2] = out_file;
 	t[3] = appand_file;
-	glob.exit_code = 0;
+	g_glob.exit_code = 0;
 	if (open_pipes(cmd))
-		return (glob.exit_code);
+		return (g_glob.exit_code);
 	if (read_from_here_doc(cmd))
-		return (glob.exit_code);
+		return (g_glob.exit_code);
 	if (open_files(cmd, t))
-		return (glob.exit_code);
-	return (glob.exit_code);
+		return (g_glob.exit_code);
+	return (g_glob.exit_code);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 17:07:50 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/29 01:30:42 by amounadi         ###   ########.fr       */
+/*   Created: 2022/05/30 04:02:25 by amounadi          #+#    #+#             */
+/*   Updated: 2022/05/30 04:02:31 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,27 @@ void	blt_unset2(char *cmd, int *res)
 {
 	t_list	*env;
 
-	env = glob.env;
+	env = g_glob.env;
 	*res = !is_valid_var2(cmd);
 	while (env && !*res)
 	{
-		if (!ft_strncmp(cmd, env->key, strlen(cmd))
-			&& strlen(cmd) == strlen(env->key))
-			ft_lstdel_from_list(&glob.env, env);
+		if (!ft_strncmp(cmd, env->key, ft_strlen(cmd))
+			&& ft_strlen(cmd) == ft_strlen(env->key))
+		{
+			ft_lstdel_from_list(&g_glob.env, env);
+			return ;
+		}
 		env = env->next;
 	}
-	env = glob.local;
+	env = g_glob.local;
 	while (env && !*res)
 	{
-		if (!ft_strncmp(cmd, env->key, strlen(cmd))
-			&& strlen(cmd) == strlen(env->key))
-			ft_lstdel_from_list(&glob.local, env);
+		if (!ft_strncmp(cmd, env->key, ft_strlen(cmd))
+			&& ft_strlen(cmd) == ft_strlen(env->key))
+		{
+			ft_lstdel_from_list(&g_glob.local, env);
+			return ;
+		}
 		env = env->next;
 	}
 }
@@ -85,11 +91,11 @@ int	blt_unset(char **cmd)
 		blt_unset2(cmd[i], &res);
 		if (res)
 			printf("%s: export: `%s': not a valid identifier\n",
-				glob.av[0], cmd[i]);
-		if (glob.exit_code)
-			glob.exit_code = glob.exit_code;
+				g_glob.av[0], cmd[i]);
+		if (g_glob.exit_code)
+			g_glob.exit_code = g_glob.exit_code;
 		else
-			glob.exit_code = res;
+			g_glob.exit_code = res;
 	}
-	return (glob.exit_code);
+	return (g_glob.exit_code);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 17:07:35 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/29 01:24:29 by amounadi         ###   ########.fr       */
+/*   Created: 2022/06/01 17:32:01 by amounadi          #+#    #+#             */
+/*   Updated: 2022/06/01 17:32:06 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	print_export(int fd)
 	int		i;
 
 	i = -1;
-	str = list_to_str(glob.local);
+	str = local_to_str(g_glob.local);
 	ft_sort_arry(str);
 	while (str[++i])
 	{
@@ -32,8 +32,6 @@ int	print_export(int fd)
 
 t_list	*find_var2(char *key, t_list *env)
 {
-	char	*tmp;
-
 	while (env)
 	{
 		if (!ft_strncmp(key, env->key, strlen(env->key) + 1))
@@ -51,7 +49,7 @@ int	is_valid_var(char *s, int type)
 	i = 0;
 	if (!ft_isalpha(s[0]) && s[0] != '_')
 	{
-		printf("%s: export: `%s': not a valid identifier\n", glob.av[0], s);
+		printf("%s: export: `%s': not a valid identifier\n", g_glob.av[0], s);
 		return (0);
 	}
 	while (s[i] && (ft_isalnum(s[i]) || s[i] == '_'))
@@ -62,7 +60,7 @@ int	is_valid_var(char *s, int type)
 		return (1);
 	if (s[i] == '=')
 		return (2);
-	printf("%s: export: `", glob.av[0]);
+	printf("%s: export: `", g_glob.av[0]);
 	p_m = (s[i] == '=');
 	i = 0;
 	while (s[i] && ((s[i] != '=' && p_m) || !p_m))
@@ -76,6 +74,7 @@ void	blt_export2(char *cmd, t_list **g, int *type, int tp)
 	t_list	*node;
 	int		p;
 
+	node = NULL;
 	*type = is_valid_var(cmd, tp);
 	if (*type && *type < 3)
 	{
@@ -83,7 +82,7 @@ void	blt_export2(char *cmd, t_list **g, int *type, int tp)
 		cmd[p - (*type == 1)] = 0;
 		node = find_var2(cmd, *g);
 	}
-	if (!node)
+	if (!node && *type < 3)
 		ft_lstadd_back(g, ft_lstnew(ft_strdup(cmd), ft_strdup(&cmd[p + 1])));
 	else if (*type == 1 && node)
 		node->value = ft_strjoin_freed(node->value, &cmd[p + 1], 1);

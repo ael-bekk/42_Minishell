@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   allocate_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 17:52:55 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/29 21:03:50 by amounadi         ###   ########.fr       */
+/*   Created: 2022/05/30 04:04:56 by amounadi          #+#    #+#             */
+/*   Updated: 2022/05/30 04:15:21 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	allocatedata(t_cmd *cmd, int h_doc, int red, int cmnd)
 	init_data(cmd->here_doc, h_doc);
 	init_data(cmd->rid, red);
 	init_data(cmd->cmd, cmnd);
-	glob.cmd = cmnd;
-	glob.red = red;
-	glob.last_in = 0;
+	g_glob.cmd = cmnd;
+	g_glob.red = red;
+	g_glob.last_in = 0;
 	return (1);
 }
 
@@ -49,9 +49,9 @@ int	aloccate_data(t_cmd *cmd, char **s)
 	i = -1;
 	while (s && s[++i])
 	{
-		red += (s[i][0] == '>' && s[i][1] == '>')
-			|| (s[i][0] == '<' && !s[i][1]) || s[i][0] == '>';
-		h_doc += s[i][0] == '<' && s[i][1] == '<';
+		red += ((s[i][0] == '>' && s[i][1] == '>')
+				|| (s[i][0] == '<' && !s[i][1]) || s[i][0] == '>');
+		h_doc += (s[i][0] == '<' && s[i][1] == '<');
 		if (s[i][0] == '>' || s[i][0] == '<')
 			i++;
 		else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   creat_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 17:54:16 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 17:54:16 by ael-bekk         ###   ########.fr       */
+/*   Created: 2022/05/30 04:17:40 by amounadi          #+#    #+#             */
+/*   Updated: 2022/05/30 04:17:41 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_cmd	*creat_node(void)
 {
-	t_cmd *node;
+	t_cmd	*node;
 
 	node = (t_cmd *)malloc(sizeof(t_cmd));
 	node->use = 1;

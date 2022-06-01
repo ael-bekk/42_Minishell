@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 17:07:28 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/29 01:31:39 by amounadi         ###   ########.fr       */
+/*   Created: 2022/05/30 04:00:51 by amounadi          #+#    #+#             */
+/*   Updated: 2022/05/30 04:01:01 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ int	blt_echo(char **cmd, int fd_out)
 		ft_putstr_fd("\n", fd_out);
 	else if (cmd[i] && cmd[i][ft_strlen(cmd[i]) - 1] != '\n'
 		&& nl_echo(cmd[0]) && fd_out == 1)
-		glob.no_nl = 1;
+		g_glob.no_nl = 1;
 	return (0);
 }

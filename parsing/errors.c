@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 17:54:29 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/29 20:45:15 by ael-bekk         ###   ########.fr       */
+/*   Created: 2022/05/30 04:19:23 by amounadi          #+#    #+#             */
+/*   Updated: 2022/05/30 04:19:25 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 int	errors_return_red(char *s, t_cmd *cmd)
 {
 	ft_putstr_fd("\033[4;31m  ", 2);
-	ft_putstr_fd(&glob.av[0][2], 2);
+	ft_putstr_fd(&g_glob.av[0][2], 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd(": ambiguous redirect\033[0m\n", 2);
 	cmd->use = 0;
-	glob.exit_code = 1;
+	g_glob.exit_code = 1;
 	return (1);
 }
 
@@ -29,15 +29,15 @@ int	errors_return(char *s)
 	char	*er;
 
 	er = strerror(errno);
-	glob.exit_code = errno;
+	g_glob.exit_code = errno;
 	ft_putstr_fd("\033[4;31m", 2);
-	ft_putstr_fd(&glob.av[0][2], 2);
+	ft_putstr_fd(&g_glob.av[0][2], 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(er, 2);
 	ft_putstr_fd("\033[0m\n", 2);
-	return (glob.exit_code);
+	return (g_glob.exit_code);
 }
 
 int	errors_print(char *s)
@@ -45,7 +45,7 @@ int	errors_print(char *s)
 	if (s)
 	{
 		ft_putstr_fd("\033[4;31m ", 2);
-		ft_putstr_fd(&glob.av[0][2], 2);
+		ft_putstr_fd(&g_glob.av[0][2], 2);
 		ft_putstr_fd(": parse error near `", 2);
 		ft_putstr_fd(s, 2);
 		ft_putstr_fd("'\n\033[0m", 2);
@@ -53,7 +53,7 @@ int	errors_print(char *s)
 	else
 	{
 		ft_putstr_fd("\033[4;31m ", 2);
-		ft_putstr_fd(&glob.av[0][2], 2);
+		ft_putstr_fd(&g_glob.av[0][2], 2);
 		ft_putstr_fd(": parse error near `newline'\033[0m\n", 2);
 	}
 	return (1);
@@ -77,11 +77,12 @@ int	pars_error(char **s)
 
 void	p_error(char c)
 {
-	if (!glob.error)
+	if (!g_glob.error)
 	{
-		ft_putstr_fd("\033[4;31msyntax error near unexpected token `",2);
-		ft_putchar_fd(c,2);
-		ft_putstr_fd("'\033[0m\n",2);
+		ft_putstr_fd("\033[4;31msyntax error near unexpected token `", 2);
+		ft_putchar_fd(c, 2);
+		ft_putstr_fd("'\033[0m\n", 2);
 	}
-	glob.error = 1;
+	g_glob.exit_code = 258;
+	g_glob.error = 1;
 }

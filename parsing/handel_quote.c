@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handel_quote.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/30 04:22:23 by amounadi          #+#    #+#             */
+/*   Updated: 2022/05/30 04:23:03 by amounadi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 int	check_quote(char *str)
@@ -9,8 +21,8 @@ int	check_quote(char *str)
 	i = 0;
 	a = 0;
 	if (!str)
-		return(0);
-	while(str[i])
+		return (0);
+	while (str[i])
 	{
 		if (!a && (str[i] == '\"' || str[i] == '\''))
 		{
@@ -24,12 +36,12 @@ int	check_quote(char *str)
 	return (a);
 }
 
-char *delete_quote(char *str)
+char	*delete_quote(char *str)
 {
 	int	quote;
 	int	in_expanded;
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	j = 0;
@@ -49,39 +61,41 @@ char *delete_quote(char *str)
 			str[j++] = str[i];
 	}
 	if (str)
-		str[j] = '\0';	
+		str[j] = '\0';
 	return (str);
 }
 
 void	*quote2_error(char *line, char *str, int a)
 {
-	if (!glob.no_init)
+	if (!g_glob.no_init)
 	{
-		ft_putstr_fd("\033[4;31m bash: unexpected EOF while looking for matching `", 2);
+		ft_putstr_fd("\033[4;31m bash: unexpected ", 2);
+		ft_putstr_fd("EOF while looking for matching `", 2);
 		ft_putchar_fd(((a == 2) * '\'' + (a == 1) * '\"'), 2);
 		ft_putstr_fd("'\nbash: syntax error: unexpected end of file\033[0m\n", 2);
 	}
-	glob.no_init = 1;
+	g_glob.no_init = 1;
 	free(line);
 	free(str);
 	return (NULL);
 }
 
-char *handel_quote(char *line)
+char	*handel_quote(char *line)
 {
-	char *str;
-	int a = 1;
+	char	*str;
+	int		a;
 
+	a = 1;
 	a = check_quote(line);
-	while (a && !glob.error)
+	while (a && !g_glob.error)
 	{
-		free(glob.herd);
-		glob.herd = NULL;
+		free(g_glob.herd);
+		g_glob.herd = NULL;
 		if (a == 1)
-			glob.herd = ft_strdup(DQUOTE);
+			g_glob.herd = ft_strdup(DQUOTE);
 		else
-			glob.herd = ft_strdup(QUOTE);
-		str = readline(glob.herd);
+			g_glob.herd = ft_strdup(QUOTE);
+		str = readline(g_glob.herd);
 		if (!str)
 			return (quote2_error(line, str, a));
 		line = ft_strjoin_freed2(line, str, 0);

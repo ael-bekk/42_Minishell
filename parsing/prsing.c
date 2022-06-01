@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prsing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 18:45:55 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 18:45:55 by ael-bekk         ###   ########.fr       */
+/*   Created: 2022/05/30 05:05:26 by amounadi          #+#    #+#             */
+/*   Updated: 2022/05/30 05:05:29 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	pars(t_cmd **cmd, char **splt)
 		ft_free(splt);
 		return (1);
 	}
-	insertData(new, splt);
+	insertdata(new, splt);
 	add_back_node(cmd, new);
-	glob.nb_cmd++;
+	g_glob.nb_cmd++;
 	ft_free(splt);
 	return (0);
 }
@@ -47,7 +47,7 @@ t_cmd	*parsing(char *line)
 		{
 			ft_free_list(&cmd);
 			ft_free(s);
-			glob.exit_code = 258;
+			g_glob.exit_code = 258;
 			return (NULL);
 		}
 	}
