@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 04:19:53 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/31 15:09:05 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:55:32 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,17 +100,13 @@ char	*expand(char *l)
 	ft_norm(&i, &left, &in_dquote);
 	while (l && l[++i])
 	{
-		if (l[i] == '\'')
-			in_dquote = 1;
-		while (l[i] && in_dquote && l[++i] && l[i] != '\'')
-			;
+		ft_norm22(&i, l, &in_dquote);
 		if (l[i] == '$' && ft_isdigit(l[i + 1]))
 			f1(&line, l, &left, &i);
 		else if (l[i] == '$' && l[i + 1] == '?')
 			f2(&line, l, &left, &i);
 		else if (l[i] == '$' && (l[i + 1] == '_' || ft_isalpha(l[i + 1])))
 			f3(&line, l, &left, &i);
-		in_dquote = 0;
 	}
 	line = ft_strjoin11(line, ft_substr(l, left, i - left));
 	free(l);

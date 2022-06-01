@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
+/*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 05:27:45 by amounadi          #+#    #+#             */
-/*   Updated: 2022/06/01 17:30:53 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:56:48 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,7 @@ int		aloccate_data(t_cmd *cmd, char **s);
 //                        quote and dquote ( " | ' )                          //
 //****************************************************************************//
 
-char	*handel_quote(char *line);
+char	*handel_quote(char *line); 
 char	*delete_quote(char *str);
 char	*handler_pipe(char *line);
 char	*check_full(char *line);
@@ -226,6 +226,7 @@ char	*expand2(char *l);
 void	f1(char **line, char *l, int *ll, int *r);
 void	f2(char **line, char *l, int *ll, int *r);
 void	f3(char **line, char *l, int *ll, int *r);
+void	ft_norm22(int *i, char *l, int *in_dquote);
 
 //****************************************************************************//
 //                              || and &&                                    //

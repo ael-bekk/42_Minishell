@@ -6,11 +6,25 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 04:20:12 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/30 21:00:55 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:55:38 by ael-bekk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	ft_norm22(int *i, char *l, int *in_dquote)
+{
+	if (l[*i] == '\"')
+		*in_dquote = -1 * !*in_dquote;
+	if (l[*i] == '\'' && !*in_dquote)
+		*in_dquote = 1;
+	if (l[*i] && *in_dquote && *in_dquote != -1)
+	{
+		while (l[++(*i)] && l[*i] != '\'')
+			;
+		*in_dquote = 0;
+	}
+}
 
 char	*find_var(char *key, t_list *env)
 {
