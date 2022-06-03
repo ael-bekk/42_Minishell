@@ -52,7 +52,7 @@ Only the following functions are allowed to be used in this project:<br>
 $ git clone https://github.com/Mounadi05/42_Minishell
 
 # Access
-$ cd Minishell42
+$ cd 42_Minishell
 
 # Compile the project
 $ make
