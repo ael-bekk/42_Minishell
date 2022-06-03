@@ -1,4 +1,4 @@
-<h1 align="center">Minishell 🐚</h1>
+<h1 align="center">Minishell 💻</h1>
 <h4 align="center">As beautiful as a shell </h4>
 
 
@@ -49,7 +49,7 @@ Only the following functions are allowed to be used in this project:<br>
 
 ```bash
 # Clone this project
-$ git clone https://github.com/anolivei/Minishell42
+$ git clone https://github.com/Mounadi05/42_Minishell
 
 # Access
 $ cd Minishell42
