@@ -6,7 +6,7 @@
 /*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 04:26:30 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/30 04:26:32 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/07/16 22:11:33 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_prompet(void)
 		g_glob.no_nl = 0;
 	}
 	printf("\033[1;32m");
-	printf("%s\033[1;34m", find_var2("PS1", g_glob.local)->value);
+	printf("%s\033[1;34m", (char *)find_var2("PS1", g_glob.local)->value);
 	home = find_var2("HOME", g_glob.env);
 	pwd = getcwd(NULL, 0);
 	if (pwd && home && ft_strnstr(pwd, home->value, ft_strlen(home->value)))

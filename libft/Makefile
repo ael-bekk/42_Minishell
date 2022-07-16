@@ -11,37 +11,32 @@ SRCS	= 	utils.c ft_strlen_double.c ft_str_double_join.c ft_free.c\
 			ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c \
 			ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c \
 			get_next_line.c get_next_line_utils.c ft_strcmp.c
-
-obj = obj
-
-OBJS	= $(addprefix $(obj)/,$(SRCS:.c=.o))
+OBJS	= $(SRCS:.c=.o)
 
 ICLS	= libft.h
 
-CC		= cc
+GCC	= gcc
 
 FLGS	= -Wall -Wextra -Werror
 
-LIB1	= ar rcs
+LIB1	= ar -rcs
 
-RM		= rm -rf
 
+RM	= rm -f
 
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-	@$(LIB1) $(NAME) $(OBJS)
+		$(LIB1) $(NAME) $(OBJS)
 
-$(obj)/%.o: ./%.c
-	@mkdir -p $(obj)
-	@echo "\033[2K [$(NAME)]: Compilation of $< \033[A"
-	@$(CC) $(FLGS) -I $(ICLS) -c $< -o $@
+.c.o:
+		$(GCC)   -c $<
 
 clean:
-	@$(RM) $(obj)
+		$(RM) $(OBJS)
 
 fclean:		clean
-	@$(RM) $(NAME)
+			$(RM) $(NAME)
 
 re:			fclean all
 

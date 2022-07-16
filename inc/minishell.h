@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 05:27:45 by amounadi          #+#    #+#             */
-/*   Updated: 2022/06/01 18:58:46 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/07/16 22:15:56 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+#include <sys/wait.h>
 
 //****************************************************************************//
 //                     Including relative header files                        //

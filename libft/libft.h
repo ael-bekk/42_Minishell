@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:15:08 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/30 20:59:10 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/07/16 23:40:28 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,15 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+
 # define TRUE 1
 # define BUFFER_SIZE 1024
+
+#ifndef OPEN_MAX
+
+#define  OPEN_MAX  1024
+
+#endif
 
 typedef struct s_list
 {

@@ -6,7 +6,7 @@
 /*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 17:32:13 by amounadi          #+#    #+#             */
-/*   Updated: 2022/06/01 17:32:14 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/07/16 22:12:30 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	handle_tilde(char *path, char *ss)
 		s = find_var2("HOME", g_glob.env);
 		if (s && chdir(s->value) == -1)
 		{
-			printf("%s: cd: %s: %s\n", g_glob.av[0], s->value, strerror(errno));
+			printf("%s: cd: %s: %s\n", g_glob.av[0], (char *)s->value, strerror(errno));
 			g_glob.exit_code = 1;
 			free(ss);
 			return (1);
@@ -42,7 +42,7 @@ int	handle_minus(char *path, char *ss)
 		s = find_var2("OLDPWD", g_glob.env);
 		if (s && chdir(s->value) == -1)
 		{
-			printf("%s: cd: %s: %s\n", g_glob.av[0], s->value, strerror(errno));
+			printf("%s: cd: %s: %s\n", g_glob.av[0], (char *)s->value, strerror(errno));
 			g_glob.exit_code = 1;
 			free(ss);
 			return (1);
