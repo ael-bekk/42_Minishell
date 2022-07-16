@@ -6,7 +6,7 @@
 /*   By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 14:44:58 by ael-bekk          #+#    #+#             */
-/*   Updated: 2022/05/26 16:58:03 by ael-bekk         ###   ########.fr       */
+/*   Updated: 2022/07/16 22:04:34 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strjoin11(char *s1, char *s2)
 	l2 = ft_strlen(s2);
 	if (!(l1 + l2))
 	{
-		(ft_free11(&s1) || ft_free11(&s2));
+		((ft_free11(&s1)) || (ft_free11(&s2)));
 		return (NULL);
 	}
 	res = (char *)malloc(l1 + l2 + 1);

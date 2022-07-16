@@ -6,7 +6,7 @@
 /*   By: amounadi < ael-bekk and amounadi >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 05:18:10 by amounadi          #+#    #+#             */
-/*   Updated: 2022/05/30 05:18:11 by amounadi         ###   ########.fr       */
+/*   Updated: 2022/07/16 22:13:00 by amounadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ int	valid_parentheses(char *s)
 			s = valid_parentheses2(s, &a, &i, &y);
 		else if (*s == ')' && y + 1 != i && ++i && s++)
 			a--;
-		else if (++i && s++)
-			;
+		else if (++i && s)
+			s++;
 	}
 	return (check_error_parentheses(a));
 }
