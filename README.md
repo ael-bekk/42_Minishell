@@ -57,6 +57,9 @@ $ cd 42_Minishell
 # Compile the project
 $ make
 
+# Compile the project in linux 
+$ make linux 
+
 # Run the project
 $ ./minishell
 
