@@ -6,7 +6,7 @@
 #    By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/30 20:55:35 by ael-bekk          #+#    #+#              #
-#    Updated: 2022/07/16 22:52:41 by amounadi         ###   ########.fr        #
+#    Updated: 2022/07/16 23:42:15 by amounadi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,12 +38,12 @@ all : $(LIBFT) $(NAME) $(SRC)
 linux : $(LIBFT) $(SRC)
 	@ gcc $(SRC) $(GFLAGS1) $(LIBFT) -o $(NAME)
 	@echo "\033[2K                                                             \033[A"
-	@echo "$(GRN)[libft]: compiled$(RESET)"
+	@echo "$(GRN)[MINISHELL]: compiled$(RESET)"
 
 $(NAME): $(LIBFT) $(SRC)
 	@$(GFLAGS) $(LIBFT) $(SRC) -o $(NAME)
 	@echo "\033[2K                                                             \033[A"
-	@echo "$(GRN)[libft]: compiled$(RESET)"
+	@echo "$(GRN)[MINISHELL]: compiled$(RESET)"
 
 $(LIBFT):
 	@make -C $(GO_TO)
@@ -54,7 +54,7 @@ clean :
 fclean : clean
 	@make fclean -C $(GO_TO)
 	@sleep 0.5
-	@echo "$(RED)[$(L_RED)libft$(RESET)$(RED)] : removed.$(RESET)"
+	@echo "$(RED)[$(L_RED)MINISHELL$(RESET)$(RED)] : removed.$(RESET)"
 
 
 re: fclean all
