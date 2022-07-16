@@ -6,7 +6,7 @@
 #    By: ael-bekk <ael-bekk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/30 20:55:35 by ael-bekk          #+#    #+#              #
-#    Updated: 2022/07/16 22:51:01 by amounadi         ###   ########.fr        #
+#    Updated: 2022/07/16 22:52:41 by amounadi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ Purple= \033[0;35m
 LIBFT = libft/libft.a
 
 NAME = minishell
-LINUX = minishell
 
 GO_TO = libft
 
