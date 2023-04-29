@@ -45,7 +45,7 @@ Only the following functions are allowed to be used in this project:<br>
 |chdir | change working directory | tputs | curses interfaces to terminfo database |
 |stat | get file status by pathname |
 
-## Starting ##
+## Starting
 
 ```bash
 # Clone this project
