@@ -3,7 +3,7 @@
 
 
 
-## About ##
+## About
 
 - Minishell is a project at school 42.
 
