@@ -14,7 +14,7 @@ a computer using interactive lines of commands in a language somewhat close to e
 With Minishell, you’ll be able to travel through time and come back to problems people faced when Windows didn’t exist.
 
 
-## Functions ##
+## Functions
 Only the following functions are allowed to be used in this project:<br>
 | Function | Description | Function | Description |
 |----------|-------------|----------|-------------|
